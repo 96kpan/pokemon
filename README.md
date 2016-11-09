@@ -19,6 +19,6 @@ All four team members make a commit that modifies this file with your name added
 
 2) Nick Forbes
 
-3)
+3) Vinit Patel
 
 4)

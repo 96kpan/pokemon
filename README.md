@@ -21,4 +21,4 @@ All four team members make a commit that modifies this file with your name added
 
 3) Vinit Patel
 
-4)
+4) Katie Pan

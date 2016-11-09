@@ -17,7 +17,7 @@ All four team members make a commit that modifies this file with your name added
 
 1) Niven Francis
 
-2) 
+2) Nick Forbes
 
 3)
 

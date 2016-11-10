@@ -50,6 +50,7 @@ public abstract class Pokemon {
 
 	//getter for our pokemon's total health left
 	public int getTotalHealthLeft(){
+		this.healthLeft = totalHealth;
 		return this.healthLeft;
 	}
 

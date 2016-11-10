@@ -1,3 +1,6 @@
+//Katie Pan
+//Test cases for Pokemon Class
+
 package test;
 
 import static org.junit.Assert.*;

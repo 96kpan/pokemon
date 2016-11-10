@@ -1,11 +1,12 @@
 // Last updated: Wed Nov 9, 8:16 pm
-// katie
+// Katie Pan
+// Abstract class Pokemon
 
 package model;
 
 import java.awt.Image;
 
-public abstract class Pokemon {
+public abstract class Pokemon implements PokemonModel{
 
 	private int level; //pokemon level
 	private int totalHealth; //pokemon total health

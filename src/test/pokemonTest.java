@@ -3,8 +3,6 @@
 
 package test;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import model.Pokemon;
@@ -34,6 +32,11 @@ public class pokemonTest {
 		
 	}
 	
+	private void assertTrue(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Test
 	//squirtle test
 	public void squirtleTest() {

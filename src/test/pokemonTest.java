@@ -6,6 +6,7 @@ package test;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -96,8 +97,13 @@ public class pokemonTest {
 	}
 	
 	public void TileTest() {
-		BufferedImage image = ImageIO.read(new File("someImage.jpeg"));
-		Tile itemTile = new ItemTile(image);
+		try {
+			BufferedImage image = ImageIO.read(new File("someImage.jpeg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//Tile itemTile = new ItemTile(image);
 		
 		
 		

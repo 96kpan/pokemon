@@ -1,15 +1,16 @@
 package model;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public abstract class Tile {
-	private Image tileImage;
+	private BufferedImage tileImage;
 	
-	public Tile(Image tileImage) {
+	public Tile(BufferedImage tileImage) {
 		this.tileImage = tileImage;
 	}
 	
-	public Image getImage() {
+	public BufferedImage getImage() {
 		return this.tileImage;
 	}
 	public abstract void playerIsOnTile(Game game);

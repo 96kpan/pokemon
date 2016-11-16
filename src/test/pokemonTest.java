@@ -3,9 +3,20 @@
 
 package test;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
 import org.junit.Test;
 
+import model.ItemTile;
+import model.MapOne;
+import model.MapTwo;
 import model.Pokemon;
+import model.PokemonMap;
+import model.Tile;
 import pokemons.Bulbasaur;
 import pokemons.Charmander;
 
@@ -75,6 +86,21 @@ public class pokemonTest {
 		assertTrue(600 == pokemon1.getTotalHealth());
 		assertTrue(true == pokemon1.getCaptured());
 		assertTrue(600 == pokemon1.getTotalHealthLeft());
+	}
+	
+	public void mapTest() {
+		PokemonMap mapOne = new MapOne();
+		PokemonMap mapTwo = new MapTwo();
+		mapOne.initMap();
+		mapTwo.initMap();
+	}
+	
+	public void TileTest() {
+		BufferedImage image = ImageIO.read(new File("someImage.jpeg"));
+		Tile itemTile = new ItemTile(image);
+		
+		
+		
 	}
 	
 	

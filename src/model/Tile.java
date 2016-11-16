@@ -9,6 +9,9 @@ public abstract class Tile {
 		this.tileImage = tileImage;
 	}
 	
+	public Image getImage() {
+		return this.tileImage;
+	}
 	public abstract void playerIsOnTile(Game game);
 	
 

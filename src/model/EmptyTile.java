@@ -1,10 +1,11 @@
 package model;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public class EmptyTile extends Tile {
 
-	public EmptyTile(Image tileImage) {
+	public EmptyTile(BufferedImage tileImage) {
 		super(tileImage);
 	}
 

@@ -11,7 +11,7 @@ public class Pokeball extends Item{
 	private int itemPrice;
 	
 	
-	Pokeball(String itemName) {
+	public Pokeball(String itemName) {
 		super("Pokeball");
 	}
 

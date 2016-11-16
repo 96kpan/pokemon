@@ -12,16 +12,16 @@ import javax.imageio.ImageIO;
 
 import org.junit.Test;
 
-<<<<<<< HEAD
+import item.Item;
+import item.Pokeball;
 import pokemons.Pokemon;
 import model.ItemTile;
 import model.MapOne;
 import model.MapTwo;
-import model.Pokemon;
 import model.PokemonMap;
+import model.PokemonTile;
 import model.Tile;
 import pokemons.Bulbasaur;
->>>>>>> map_tests
 import pokemons.Charmander;
 import pokemons.Squirtle;
 import pokemons.Bulbasaur;
@@ -93,22 +93,27 @@ public class pokemonTest {
 		assertTrue(true == pokemon1.getCaptured());
 		assertTrue(600 == pokemon1.getTotalHealthLeft());
 	}
-	
+	@Test
 	public void mapTest() {
 		PokemonMap mapOne = new MapOne();
 		PokemonMap mapTwo = new MapTwo();
 		mapOne.initMap();
 		mapTwo.initMap();
 	}
-	
+	@Test
 	public void TileTest() {
+		Item item = new Pokeball("pokeball");
+		BufferedImage image = null;
 		try {
-			BufferedImage image = ImageIO.read(new File("someImage.jpeg"));
+		 image = ImageIO.read(new File("images/Ground.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//Tile itemTile = new ItemTile(image);
+		Tile itemTile = new ItemTile(image,item);
+		assertTrue(itemTile != null);
+		Tile pokemonTile = new PokemonTile(image,new Squirtle(10, 10, "squirtle", "water", false, 1, image));
+		assertTrue(pokemonTile != null);
 		
 		
 		

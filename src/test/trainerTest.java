@@ -7,16 +7,19 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import item.Bait;
+import item.HealthPot;
 import item.Item;
+import item.Pokeball;
 import model.Trainer;
 
 public class trainerTest {
 	@Test
 	public void tester() {
 		Trainer t = new Trainer("Niven", null);
-		Item i1 = new Item("Bait");
-		Item i2 = new Item("Safari Ball");
-		Item i3 = new Item("Health pot");
+		Item i1 = new Bait("Bait");
+		Item i2 = new Pokeball("Safari Ball");
+		Item i3 = new HealthPot("Health pot");
 		
 		t.getBackpack().addItem(i1);
 		t.getBackpack().addItem(i2);

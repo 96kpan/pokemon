@@ -1,5 +1,5 @@
 package model;
-
+// A class for holding a tile with nothing in it. it's player IsOnTile method does nothing.
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 

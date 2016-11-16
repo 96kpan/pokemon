@@ -102,7 +102,7 @@ public class pokemonTest {
 	}
 	@Test
 	public void TileTest() {
-		Item item = new Pokeball("pokeball");
+		Item item = new Pokeball(1);
 		BufferedImage image = null;
 		try {
 		 image = ImageIO.read(new File("images/Ground.png"));

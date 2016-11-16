@@ -3,12 +3,17 @@ package item;
 //make it more likely to catch.
 public class Bait extends Item {
 
-	public Bait(String itemName) {
-		super(itemName);
+	public Bait(String itemName, int numOfItems) {
+		super("Bait", numOfItems);
 		
 	}
 
 	@Override
-	public void useItem() {}
+	public String toString() {
+		return "Bait";
+	}
+
+//	@Override
+//	public void useItem() {}
 
 }

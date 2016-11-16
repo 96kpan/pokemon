@@ -2,6 +2,8 @@ package model;
 
 import java.awt.Image;
 
+import item.Item;
+
 public class ItemTile extends Tile {
 	private Item itemOnTile;
 	

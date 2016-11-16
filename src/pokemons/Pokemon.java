@@ -2,7 +2,7 @@
 // Katie Pan
 // Abstract class Pokemon
 
-package model;
+package pokemons;
 
 import java.awt.Image;
 

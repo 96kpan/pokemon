@@ -5,16 +5,16 @@ package test;
 
 import org.junit.Test;
 
-import model.Pokemon;
-import pokemons.Bulbasaur;
-import pokemons.Charmander;
+import pokemons.Pokemon;
+import pokemons.firePokemon;
+import pokemons.grassPokemon;
 
 public class pokemonTest {
 
 	@Test
 	//charmander test
 	public void charmanderTest() {
-		Pokemon pokemon1 = new Charmander(5, 45, "charmander", "fire", false, 20, null);
+		Pokemon pokemon1 = new firePokemon(5, 45, "charmander", "fire", false, 20, null);
 		assertTrue(5 == pokemon1.getLevel());
 		assertTrue(45 == pokemon1.getTotalHealth());
 		assertTrue("charmander" == pokemon1.getName());
@@ -40,7 +40,7 @@ public class pokemonTest {
 	@Test
 	//squirtle test
 	public void squirtleTest() {
-		Pokemon pokemon1 = new Charmander(15, 40, "squirtle", "water", true, 18, null);
+		Pokemon pokemon1 = new firePokemon(15, 40, "squirtle", "water", true, 18, null);
 		assertTrue(15 == pokemon1.getLevel());
 		assertTrue(40 == pokemon1.getTotalHealth());
 		assertTrue("squirtle" == pokemon1.getName());
@@ -60,7 +60,7 @@ public class pokemonTest {
 	@Test
 	//squirtle test
 	public void bulbasaurTest() {
-		Pokemon pokemon1 = new Bulbasaur(65, 30, "bulbasaur", "grass", false, 58, null);
+		Pokemon pokemon1 = new grassPokemon(65, 30, "bulbasaur", "grass", false, 58, null);
 		assertTrue(65 == pokemon1.getLevel());
 		assertTrue(30 == pokemon1.getTotalHealth());
 		assertTrue("bulbasaur" == pokemon1.getName());

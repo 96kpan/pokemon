@@ -1,6 +1,6 @@
 package item;
 
-import model.Pokemon;
+import pokemons.Pokemon;
 
 //This class is for the Pokeball, which IS-A Item.
 //Pokeball has the ability to capture a pokemon.

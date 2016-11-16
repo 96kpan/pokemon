@@ -1,7 +1,7 @@
 //Katie Pan
 //interface for Pokemon Class
 
-package model;
+package pokemons;
 
 import java.awt.Image;
 

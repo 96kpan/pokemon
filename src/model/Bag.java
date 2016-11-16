@@ -32,12 +32,12 @@ public class Bag {
 	// Won't add if there's no space left in backpack
 	public void addItem(Item item) {
 		if (numItems >= MAX_ITEMS) {
-			System.out.println("Cannot add " + item.getName() + ". \n Reason: Backpack full.");
+			System.out.println("Cannot add " + item.getItemName() + ". \n Reason: Backpack full.");
 		} 
 		else {
 			items[numItems] = item;
 			numItems++;
-			System.out.println("Added " + item.getName() + " to backpack. \n Remaining slots: " + (MAX_ITEMS-numItems));
+			System.out.println("Added " + item.getItemName() + " to backpack. \n Remaining slots: " + (MAX_ITEMS-numItems));
 		}
 	}
 	
@@ -59,12 +59,12 @@ public class Bag {
 	
 	// Calls the useItem() method on the given item
 	public void useItem(Item item) {
-		for(int x = 0; x < numItems; x++) {
-			if(items[x] == item) {
-				items[x].useItem();
-				break;
-			}
-		}
+//		for(int x = 0; x < numItems; x++) {
+//			if(items[x] == item) {
+//				items[x].useItem();
+//				break;
+//			}
+//		}
 	}
 	
 	// Prints all current items in the trainer's backpack
@@ -79,7 +79,7 @@ public class Bag {
 	private String list() {
 		String temp = null;
 		for(int x = 0; x < numItems; x++) {
-			temp = items[x].getName() + " ";
+			temp = items[x].getItemName() + " ";
 		}
 		return temp;
 	}

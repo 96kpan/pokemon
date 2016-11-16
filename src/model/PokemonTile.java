@@ -1,14 +1,15 @@
 package model;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
-import pokemons.Pokemon;
+import pokemons.PokemonModel;
 
 // The type 
 public class PokemonTile extends Tile {
-	private Pokemon pokemonOnTile;
+	private PokemonModel pokemonOnTile;
 	
-	public PokemonTile(Image tileImage, Pokemon pokemonOnTile) {
+	public PokemonTile(BufferedImage tileImage, PokemonModel pokemonOnTile) {
 		super(tileImage);
 		this.pokemonOnTile = pokemonOnTile;
 	}

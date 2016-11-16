@@ -2,6 +2,8 @@ package model;
 
 import java.awt.Image;
 
+import pokemons.Pokemon;
+
 // The type 
 public class PokemonTile extends Tile {
 	private Pokemon pokemonOnTile;

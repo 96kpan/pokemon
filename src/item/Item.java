@@ -27,7 +27,12 @@ public abstract class Item {
 		return price;
 	}
 	
-	public abstract void useItem();  
+	public abstract void useItem();
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return itemName;
+	}  
 	
 }
 

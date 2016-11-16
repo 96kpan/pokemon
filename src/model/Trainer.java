@@ -6,6 +6,8 @@ package model;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import pokemons.Pokemon;
+
 public class Trainer {
 	
 	private String name;

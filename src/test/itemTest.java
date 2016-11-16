@@ -44,6 +44,19 @@ public class itemTest {
 		assertEquals(pb.capturePokemon(ch), "Captured: Charmander");
 		Charmander ch2 = new Charmander(1, 1, "Charmander", "Fire", false, 65, null);
 		assertEquals(pb.capturePokemon(ch2), "Pokemon not Captured...");
+	}
+	
+	@Test
+	public void otherItemTest(){
+		HealthPot hp = new HealthPot("HealthPot", 1);
+		assertEquals(hp.getItemName(),"HealthPot");
+		assertEquals(hp.getNumOfItems(), 1);
+		assertEquals(hp.toString(), "HealthPot");
+		Bait b = new Bait("Bait", 2);
+		assertEquals(b.getItemName(), "Bait");
+		assertEquals(b.getNumOfItems(), 2);
+		assertEquals(b.toString(), "Bait");
+
 		
 	}
 	

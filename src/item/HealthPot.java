@@ -1,5 +1,6 @@
 package item;
 
+//HealthPot Item IS-A Item
 public class HealthPot extends Item {
 
 	public HealthPot(String itemName, int numOfItem) {

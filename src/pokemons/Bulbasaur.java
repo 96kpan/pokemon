@@ -2,9 +2,9 @@ package pokemons;
 
 import java.awt.Image;
 
-public class firePokemon extends Pokemon {
+public class Bulbasaur extends Pokemon {
 
-	public firePokemon(int level, int totalHealth, String pokemonName, String pokemonType, boolean capturedOrNot,
+	public Bulbasaur(int level, int totalHealth, String pokemonName, String pokemonType, boolean capturedOrNot,
 			int runProbs, Image pokemonPic) {
 		super(level, totalHealth, pokemonName, pokemonType, capturedOrNot, runProbs, pokemonPic);
 	}

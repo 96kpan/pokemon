@@ -7,7 +7,7 @@ public abstract class Item {
 	private int numOfItems;
 	private int price;
 	
-	Item(String itemName){
+	public Item(String itemName){
 		this.itemName=itemName;
 	}
 	

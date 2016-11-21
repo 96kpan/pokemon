@@ -24,15 +24,14 @@ public class trainerTest {
 		t.getBackpack().addItem(i1);
 		t.getBackpack().addItem(i2);
 		t.getBackpack().addItem(i3);
-		t.getBackpack().printItems();
 		t.getBackpack().addItem(i1);
 		t.getBackpack().removeItem(i1);
 		t.getBackpack().useItem(i2);
-		t.getBackpack().printItems();
+		t.getBackpack().toString();
 		t.getBackpack().numItems();
 		t.getBackpack().removeItem(i2);
 		t.getBackpack().removeItem(i3);
-		t.getBackpack().printItems();
+		t.getBackpack().toString();
 		
 		assertTrue(t.addSteps(1));
 		assertFalse(t.addSteps(499));

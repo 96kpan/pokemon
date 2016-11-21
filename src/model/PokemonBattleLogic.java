@@ -1,10 +1,16 @@
 package model;
 
 public class PokemonBattleLogic {
+	
+	private Trainer player;
+	private Game game;
 
-	public static void main(String[] args) {
-		//make the battle logic
-
+	//finish pokemon Logic
+	
+	//constructor which will initialize variables
+	public PokemonBattleLogic(){
+		player = player.getInstance();
+		//game = game.getInstance();
 	}
 
 }

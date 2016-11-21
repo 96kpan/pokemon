@@ -39,9 +39,9 @@ public class Bag {
 			bag.put(itemStr, 1);
 		}
 	}
-	
+
 	// Removes given item from backpack and shifts array
-	public void removeOneItem(Item item) {
+	public void removeItem(Item item) {
 		if(bag.containsKey(item.getItemName()) && item.getNumOfItems() > 0){
 			int num = (int) bag.get(item.getItemName());
 			if(num == 1){
@@ -52,7 +52,12 @@ public class Bag {
 			}
 		}
 	}
-	
+
+	// uses given item from backpack and shifts array
+	public void useItem(Item item) {
+		this.removeItem(item);
+	}
+
 	// Prints all current items in the trainer's backpack
 	public String toString() {
 		String str = "";
@@ -68,7 +73,7 @@ public class Bag {
 		for(Object s : bag.keySet()){
 			count += ((Item) s).getNumOfItems();
 		}
-		
+
 		return count;
 	}
 }

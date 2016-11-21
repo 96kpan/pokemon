@@ -10,9 +10,11 @@ import pokemons.Pokemon;
 
 public class Trainer {
 	
-	private String name;
-	private Image trainerImage = null;
+	
+	private static String name;
+	private static Image trainerImage = null;
 	private Bag backpack;
+	private static Trainer myTrainer;
 	
 	private int steps;
 	private int MAX_STEPS = 500;
@@ -25,6 +27,15 @@ public class Trainer {
 		backpack = new Bag();
 		this.steps = 0;
 		pokemon = new ArrayList<Pokemon>();
+	}
+	
+	//singleton OODP so only one instance is used throughout the game
+	public static Trainer getInstance(){
+		if(myTrainer == null){
+			myTrainer = new Trainer(name, trainerImage);
+		}
+		
+		return myTrainer;
 	}
 	
 	// Returns this instance of the backpack

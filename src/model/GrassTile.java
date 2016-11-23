@@ -2,13 +2,10 @@ package model;
 
 import java.awt.image.BufferedImage;
 
-public class TerrainTile extends Tile {
-	private String terrainType;
+public class GrassTile extends Tile {
 
-	public TerrainTile(BufferedImage tileImage, String terrainType) {
+	public GrassTile(BufferedImage tileImage) {
 		super(tileImage);
-		this.terrainType = terrainType;
-		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -19,7 +16,7 @@ public class TerrainTile extends Tile {
 	}
 	
 	public String toString() {
-		return terrainType;
+		return "g";
 	}
 
 }

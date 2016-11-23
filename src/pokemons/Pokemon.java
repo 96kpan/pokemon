@@ -17,6 +17,8 @@ public abstract class Pokemon implements PokemonModel, Serializable{
 	private boolean captured; //captured returns true; uncaptured returns false;
 	private int runProbability;//pokemon's run probability
 	private Image pokemonPicture = null; //pokemon's picture
+	private boolean fainted;
+	private boolean ranAway;
 
 	//constructor that initializes our instance variables 
 	public Pokemon(int level, int totalHealth, String pokemonName, String pokemonType, boolean capturedOrNot, int runProbs, Image pokemonPic){
@@ -28,6 +30,17 @@ public abstract class Pokemon implements PokemonModel, Serializable{
 		this.captured = capturedOrNot;
 		this.runProbability = runProbs;
 		this.pokemonPicture = pokemonPic;
+		this.fainted = false;
+	}
+	
+	//getter for if pokemon is fainted or not
+	public boolean getFainted(){
+		return this.fainted;
+	}
+	
+	//setter for fainted or not
+	public void setFainted(boolean bool){
+		this.fainted = bool;
 	}
 
 	//getter for our pokemon level
@@ -83,6 +96,11 @@ public abstract class Pokemon implements PokemonModel, Serializable{
 	//getter for our pokemon's run probability
 	public int getRunProbability(){
 		return this.runProbability;
+	}
+	
+	//setter for pokemon's run probability(){
+	public int addRunProbability(int amount){
+		return this.runProbability+amount;
 	}
 
 	//setter for our pokemon's image

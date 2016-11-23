@@ -11,19 +11,29 @@ public class PokemonGame extends Observable implements Serializable {
 	Trainer trainer;
 	private static final int TOTAL_MOVES = 20;
 	private int movesLeft;
+	private static PokemonGame game;
 
 	public PokemonGame()  {
 		MapOne mapOne = new MapOne();
 		MapTwo mapTwo = new MapTwo();
 		// set this for whichever map we want to use
 		map = mapTwo;
-		
-		
+
+
 		trainer = new Trainer("ASH KETCHUP", null);
 		trainer.setLocation(MapOne.startPoint);
 		map.getTile(trainer.getLocation().x, trainer.getLocation().y)
-				.setHasTrainer(true);
+		.setHasTrainer(true);
 		movesLeft = TOTAL_MOVES;
+	}
+
+	//singleton OODP to only have one instance throughout the game
+	public static PokemonGame getInstance() {
+		if(game == null){
+			game = new PokemonGame();
+		}
+		
+		return game;
 	}
 
 	@Override
@@ -53,7 +63,7 @@ public class PokemonGame extends Observable implements Serializable {
 				map.getTile(currX + 1, currY).setHasTrainer(true);
 				trainer.setLocation(new Point(currX + 1, currY));
 				movesLeft--;
-				
+
 			}
 			break;
 		case North:
@@ -74,7 +84,7 @@ public class PokemonGame extends Observable implements Serializable {
 				map.getTile(currX, currY - 1).setHasTrainer(true);
 				trainer.setLocation(new Point(currX, currY - 1));
 				movesLeft--;
-				
+
 			}
 			break;
 
@@ -89,9 +99,11 @@ public class PokemonGame extends Observable implements Serializable {
 			}
 		}
 
-			break;
+		break;
 		}
 
 	}
+
+
 
 }

@@ -33,6 +33,11 @@ public class Trainer implements Serializable {
 		this.location = new Point(0,0);
 	}
 	
+	//adds pokemon into the arraylist
+	public void addPokemon(Pokemon p){
+		pokemon.add(p);
+	}
+	
 	//singleton OODP so only one instance is used throughout the game
 	public static Trainer getInstance(){
 		if(myTrainer == null){

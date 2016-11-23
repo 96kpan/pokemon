@@ -10,7 +10,12 @@ public class PokemonGame extends Observable {
 	private int movesLeft;
 
 	public PokemonGame() {
-		map = new MapOne();
+		MapOne mapOne = new MapOne();
+		MapTwo mapTwo = new MapTwo();
+		// set this for whichever map we want to use
+		map = mapTwo;
+		
+		
 		trainer = new Trainer("ASH KETCHUP", null);
 		trainer.setLocation(MapOne.startPoint);
 		map.getTile(trainer.getLocation().x, trainer.getLocation().y)

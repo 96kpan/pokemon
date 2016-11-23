@@ -4,13 +4,14 @@ package model;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+import pokemons.Pokemon;
 import pokemons.PokemonModel;
 
 // The type 
 public class PokemonTile extends Tile {
 	private PokemonModel pokemonOnTile;
 	
-	public PokemonTile(BufferedImage tileImage, PokemonModel pokemonOnTile) {
+	public PokemonTile(BufferedImage tileImage, Pokemon pokemonOnTile) {
 		super(tileImage);
 		this.pokemonOnTile = pokemonOnTile;
 	}
@@ -27,7 +28,7 @@ public class PokemonTile extends Tile {
 	// tile will have grass on it which hides the item.
 	@Override
 	public String toString() {
-		return "h";
+		return Character.toString(Character.toUpperCase(pokemonOnTile.getName().charAt(0)));
 	}
 
 }

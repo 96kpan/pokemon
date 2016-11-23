@@ -14,6 +14,8 @@ import javax.imageio.ImageIO;
 import pokemons.Blaziken;
 import pokemons.Pokemon;
 
+
+//One of the map's for the game
 public class MapOne extends PokemonMap {
 	public static final Point startPoint = new Point(9,1);
 	
@@ -24,6 +26,7 @@ public class MapOne extends PokemonMap {
 		initMap();
 	}
 
+	//initializes the map by setting up the tiles
 	@Override
 	public void initMap() {
 		setEveryTileToEmpty();
@@ -32,11 +35,12 @@ public class MapOne extends PokemonMap {
 		makeGrassRectangle(new Point(11, 1),11,10);
 		makeGrassRectangle(new Point(1,13), 11,9);
 		bottomGrassTriangle();
-		
+		placePokemon();
 		
 		
 	}
 	
+	//creates a triangle shape of grass on the map
 	private void bottomGrassTriangle() {
 		final int startRow = map.length - 1 - 6;
 		final int startColumn = map[0].length - 1 - 6;

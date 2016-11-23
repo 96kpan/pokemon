@@ -1,5 +1,8 @@
 package model;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class PokemonBattleLogic {
 	
 	private Trainer player;
@@ -11,6 +14,10 @@ public class PokemonBattleLogic {
 	public PokemonBattleLogic(){
 		player = player.getInstance();
 		//game = game.getInstance();
+		
+		
+		Queue q = new LinkedList();
+		
 	}
 
 }

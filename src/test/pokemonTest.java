@@ -140,6 +140,7 @@ public class pokemonTest {
 		game.moveTrainer(Direction.South);
 		game.moveTrainer(Direction.East);
 		game.moveTrainer(Direction.West);
+		game.toString();
 		assertTrue(game != null);
 		
 	}

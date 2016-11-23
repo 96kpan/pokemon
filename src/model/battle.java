@@ -5,7 +5,7 @@ import java.util.Random;
 import pokemons.*;
 import pokemons.Pokemon;
 
-public class BattleLogic {
+public class battle {
 
 	private Trainer player;
 	private PokemonGame game;
@@ -18,7 +18,7 @@ public class BattleLogic {
 	// finish pokemon Logic
 
 	// constructor which will initialize variables
-	public BattleLogic() {
+	public battle() {
 		player = player.getInstance();
 		game = game.getInstance();
 		pokemonRanAway = false;

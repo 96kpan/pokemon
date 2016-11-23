@@ -15,12 +15,16 @@ import org.junit.Test;
 import item.Item;
 import item.Pokeball;
 import pokemons.Pokemon;
+import model.Bag;
+import model.Direction;
 import model.ItemTile;
 import model.MapOne;
 import model.MapTwo;
+import model.PokemonGame;
 import model.PokemonMap;
 import model.PokemonTile;
 import model.Tile;
+import model.Trainer;
 import pokemons.Bulbasaur;
 import pokemons.Charmander;
 import pokemons.Squirtle;
@@ -104,20 +108,54 @@ public class pokemonTest {
 	public void TileTest() {
 		Item item = new Pokeball(1);
 		BufferedImage image = null;
-		try {
-		 image = ImageIO.read(new File("images/Ground.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//		 image = ImageIO.read(new File("images/Ground.png"));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		Tile itemTile = new ItemTile(image,item);
 		assertTrue(itemTile != null);
-		Tile pokemonTile = new PokemonTile(image,new Squirtle(10, 10, "squirtle", "water", false, 1, image));
+		Tile pokemonTile = new PokemonTile(image,new Squirtle(10, 10, "squirtle", "water", false, 1, null));
 		assertTrue(pokemonTile != null);
 		
 		
 		
 	}
+	@Test
+	public void mapOneTest() {
+		MapOne mapOne = new MapOne();
+		assertTrue(mapOne != null);
+		
+	}
+	@Test
+	public void mapTwoTest() {
+		MapTwo mapTwo = new MapTwo();
+		assertTrue(mapTwo != null);
+	}
+	@Test
+	public void gameTest() {
+		PokemonGame game = new PokemonGame();
+		game.moveTrainer(Direction.North);
+		game.moveTrainer(Direction.South);
+		game.moveTrainer(Direction.East);
+		game.moveTrainer(Direction.West);
+		assertTrue(game != null);
+		
+	}
+	@Test
+	public void bagTest() {
+		Trainer trainer = new Trainer("damn",null);
+		Bag trainerBag = trainer.getBackpack();
+		assertTrue(trainer.getName().equals("damn"));
+		assertTrue(trainerBag.numItems() == 0);
+		trainerBag.addItem(new Pokeball(1));
+		trainerBag.removeItem(new Pokeball(1));
+		trainerBag.toString();
+		trainerBag.addItem(new Pokeball(1));
+	}
+	
+	
 	
 	
 

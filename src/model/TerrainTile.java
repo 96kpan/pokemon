@@ -1,8 +1,9 @@
 package model;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class TerrainTile extends Tile {
+public class TerrainTile extends Tile implements Serializable {
 	private String terrainType;
 
 	public TerrainTile(BufferedImage tileImage, String terrainType) {
@@ -14,7 +15,7 @@ public class TerrainTile extends Tile {
 	}
 
 	@Override
-	public void playerIsOnTile(Game game) {
+	public void playerIsOnTile(PokemonGame game) {
 		// TODO Auto-generated method stub
 		
 	}

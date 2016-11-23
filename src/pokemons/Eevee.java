@@ -1,8 +1,9 @@
 package pokemons;
 
 import java.awt.Image;
+import java.io.Serializable;
 
-public class Eevee extends Pokemon {
+public class Eevee extends Pokemon implements Serializable {
 
 	public Eevee(int level, int totalHealth, String pokemonName, String pokemonType, boolean capturedOrNot,
 			int runProbs, Image pokemonPic) {

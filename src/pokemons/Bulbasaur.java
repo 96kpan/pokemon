@@ -1,8 +1,9 @@
 package pokemons;
 
 import java.awt.Image;
+import java.io.Serializable;
 
-public class Bulbasaur extends Pokemon {
+public class Bulbasaur extends Pokemon implements Serializable {
 
 	public Bulbasaur(int level, int totalHealth, String pokemonName, String pokemonType, boolean capturedOrNot,
 			int runProbs, Image pokemonPic) {

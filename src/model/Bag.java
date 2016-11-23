@@ -14,11 +14,12 @@
 
 package model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import item.Item;
 
-public class Bag {
+public class Bag implements Serializable {
 	private int numItems;
 	private HashMap bag;
 

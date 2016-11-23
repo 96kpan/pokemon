@@ -5,8 +5,9 @@
 package pokemons;
 
 import java.awt.Image;
+import java.io.Serializable;
 
-public abstract class Pokemon implements PokemonModel{
+public abstract class Pokemon implements PokemonModel, Serializable{
 
 	private int level; //pokemon level
 	private int totalHealth; //pokemon total health

@@ -1,8 +1,9 @@
 package model;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class GrassTile extends Tile {
+public class GrassTile extends Tile implements Serializable {
 
 	public GrassTile(BufferedImage tileImage) {
 		super(tileImage);
@@ -10,7 +11,7 @@ public class GrassTile extends Tile {
 	}
 
 	@Override
-	public void playerIsOnTile(Game game) {
+	public void playerIsOnTile(PokemonGame game) {
 		// TODO Auto-generated method stub
 		
 	}

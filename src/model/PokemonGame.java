@@ -1,15 +1,18 @@
 package model;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.Observable;
 
-public class PokemonGame extends Observable {
+import javax.swing.JOptionPane;
+
+public class PokemonGame extends Observable implements Serializable {
 	PokemonMap map;
 	Trainer trainer;
-	private static final int TOTAL_MOVES = 500;
+	private static final int TOTAL_MOVES = 20;
 	private int movesLeft;
 
-	public PokemonGame() {
+	public PokemonGame()  {
 		MapOne mapOne = new MapOne();
 		MapTwo mapTwo = new MapTwo();
 		// set this for whichever map we want to use
@@ -36,9 +39,9 @@ public class PokemonGame extends Observable {
 
 	private void moveTrainerInDirection(Direction direction) {
 		if (movesLeft < 0) {
-			// end game.
+			JOptionPane.showMessageDialog(null, "Game over you have reachrd the max number of steps");
+			System.exit(0);
 		}
-		System.out.println("Original loc " + trainer.getLocation());
 		int currX = trainer.getLocation().x;
 		int currY = trainer.getLocation().y;
 		switch (direction) {
@@ -65,15 +68,11 @@ public class PokemonGame extends Observable {
 			break;
 
 		case West:
-			System.out.println(currY -1 );
 			if (currY - 1 >= 0 && map.getTile(currX, currY - 1).canMove) {
 				map.getTile(trainer.getLocation().x, trainer.getLocation().y)
 				.setHasTrainer(false);
-				System.out.println("here");
 				map.getTile(currX, currY - 1).setHasTrainer(true);
 				trainer.setLocation(new Point(currX, currY - 1));
-				System.out.println("curr row: " + trainer.getLocation().x + 
-						"Curr col " + trainer.getLocation().y);
 				movesLeft--;
 				
 			}

@@ -3,7 +3,7 @@ package model;
 public class PokemonBattleLogic {
 	
 	private Trainer player;
-	private Game game;
+	private PokemonGame game;
 
 	//finish pokemon Logic
 	

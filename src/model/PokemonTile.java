@@ -3,12 +3,13 @@ package model;
 // with the given pokemon.
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 import pokemons.Pokemon;
 import pokemons.PokemonModel;
 
 // The type 
-public class PokemonTile extends Tile {
+public class PokemonTile extends Tile implements Serializable {
 	private PokemonModel pokemonOnTile;
 	
 	public PokemonTile(BufferedImage tileImage, Pokemon pokemonOnTile) {
@@ -18,7 +19,7 @@ public class PokemonTile extends Tile {
 	
 
 	@Override
-	public void playerIsOnTile(Game game) {
+	public void playerIsOnTile(PokemonGame game) {
 		//Game.launchBattle(Pokemon pokemonToBattle);
 		
 	}

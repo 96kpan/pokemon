@@ -5,11 +5,12 @@ package model;
 
 import java.awt.Image;
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import pokemons.Pokemon;
 
-public class Trainer {
+public class Trainer implements Serializable {
 	
 	
 	private static String name;

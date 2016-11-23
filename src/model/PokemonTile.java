@@ -1,5 +1,6 @@
 package model;
-
+// A tile for holding a pokemon this tile will initiate a battle if it is landed on
+// with the given pokemon.
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 

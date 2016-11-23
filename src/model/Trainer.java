@@ -4,6 +4,7 @@
 package model;
 
 import java.awt.Image;
+import java.awt.Point;
 import java.util.ArrayList;
 
 import pokemons.Pokemon;
@@ -18,6 +19,7 @@ public class Trainer {
 	
 	private int steps;
 	private int MAX_STEPS = 500;
+	private Point location;
 	
 	private ArrayList<Pokemon> pokemon;
 	
@@ -27,6 +29,7 @@ public class Trainer {
 		backpack = new Bag();
 		this.steps = 0;
 		pokemon = new ArrayList<Pokemon>();
+		this.location = new Point(0,0);
 	}
 	
 	//singleton OODP so only one instance is used throughout the game
@@ -36,6 +39,14 @@ public class Trainer {
 		}
 		
 		return myTrainer;
+	}
+	
+	public void setLocation(Point location) {
+		this.location = location;
+	}
+	
+	public Point getLocation() {
+		return this.location;
 	}
 	
 	// Returns this instance of the backpack

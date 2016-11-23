@@ -31,12 +31,21 @@ public abstract class PokemonMap {
 		}
 	}
 	
+	public Tile getTile(int row, int column) {
+		return map[row][column];
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder mapRep = new StringBuilder();
 		for(int i = 0; i < map.length; i++) {
 			for(int j = 0; j < map[i].length; j++) {
-				mapRep.append("[" + map[i][j].toString() + "] ");
+				if(map[i][j].getHasTrainer()) {
+					mapRep.append("[T] ");
+				}
+				else {
+					mapRep.append("[" + map[i][j].toString() + "] ");
+				}
 			}
 			mapRep.append("\n");
 		}

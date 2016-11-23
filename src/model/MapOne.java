@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -13,7 +15,7 @@ import pokemons.Blaziken;
 import pokemons.Pokemon;
 
 public class MapOne extends PokemonMap {
-	// A place holder image for now will use next time.
+	public static final Point startPoint = new Point(9,1);
 	
 	
 	public MapOne() {
@@ -44,6 +46,8 @@ public class MapOne extends PokemonMap {
 			}
 		}
 	}
+
+	
 	
 	
 

@@ -8,6 +8,7 @@ public class TerrainTile extends Tile {
 	public TerrainTile(BufferedImage tileImage, String terrainType) {
 		super(tileImage);
 		this.terrainType = terrainType;
+		super.canMove = false;
 		
 		// TODO Auto-generated constructor stub
 	}

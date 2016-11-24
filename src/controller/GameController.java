@@ -22,6 +22,7 @@ import view.PokemonTextView;
 public class GameController extends JFrame {
 	private PokemonGame theGame;
 	private MapOne firstMap;
+
 	private PokemonMap currentMap;
 	private PokemonTextView textView;
 	private BattleView battleView;

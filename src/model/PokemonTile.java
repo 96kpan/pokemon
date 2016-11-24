@@ -10,17 +10,19 @@ import pokemons.PokemonModel;
 
 // The type 
 public class PokemonTile extends Tile implements Serializable {
-	private PokemonModel pokemonOnTile;
+	//private PokemonModel pokemonOnTile;
 	
 	public PokemonTile(BufferedImage tileImage, Pokemon pokemonOnTile) {
 		super(tileImage);
-		this.pokemonOnTile = pokemonOnTile;
+		//this.pokemonOnTile = pokemonOnTile;
 	}
 	
 
 	@Override
 	public void playerIsOnTile(PokemonGame game) {
 		//Game.launchBattle(Pokemon pokemonToBattle);
+		System.out.println("Here1");
+		game.launchBattle();
 		
 	}
 
@@ -29,7 +31,8 @@ public class PokemonTile extends Tile implements Serializable {
 	// tile will have grass on it which hides the item.
 	@Override
 	public String toString() {
-		return Character.toString(Character.toUpperCase(pokemonOnTile.getName().charAt(0)));
+		//return Character.toString(Character.toUpperCase(pokemonOnTile.getName().charAt(0)));
+		return Character.toString('P');
 	}
 
 }

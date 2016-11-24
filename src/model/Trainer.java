@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import pokemons.Pikachu;
 import pokemons.Pokemon;
 
 public class Trainer implements Serializable {
@@ -30,12 +31,17 @@ public class Trainer implements Serializable {
 		backpack = new Bag();
 		this.steps = 0;
 		pokemon = new ArrayList<Pokemon>();
+		pokemon.add(new Pikachu()); //starter pokemon
 		this.location = new Point(0,0);
 	}
 	
 	//adds pokemon into the arraylist
 	public void addPokemon(Pokemon p){
 		pokemon.add(p);
+	}
+	
+	public ArrayList<Pokemon> getPokemons(){
+		return this.pokemon;
 	}
 	
 	//singleton OODP so only one instance is used throughout the game
@@ -62,7 +68,7 @@ public class Trainer implements Serializable {
 	
 	// Adds steps to the steps global variable
 	public boolean addSteps(int add) {
-		steps += add;
+		steps += 1;
 		if(steps >= MAX_STEPS) {
 			System.out.println("Trainer has walked maximum number of steps");
 			return false;

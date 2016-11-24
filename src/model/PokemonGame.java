@@ -6,6 +6,10 @@ import java.util.Observable;
 
 import javax.swing.JOptionPane;
 
+import pokemons.Pokemon;
+import pokemons.PokemonModel;
+import view.BattleView;
+
 public class PokemonGame extends Observable implements Serializable {
 	PokemonMap map;
 	Trainer trainer;
@@ -102,6 +106,13 @@ public class PokemonGame extends Observable implements Serializable {
 		break;
 		}
 
+	}
+
+	public void launchBattle() {
+		System.out.println("Here");
+		Battle newBattle = new Battle();
+		BattleView view = new BattleView(newBattle);
+		
 	}
 
 

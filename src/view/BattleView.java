@@ -1,12 +1,15 @@
 package view;
 
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.Timer;
 
 import model.Battle;
 
@@ -19,6 +22,7 @@ public class BattleView extends JPanel {
 	private JButton runButton;
 	private JButton pokeballButton;
 	private Battle theBattle;
+	private Timer timer;
 
 	public BattleView(Battle battle) {
 		this.theBattle = battle;
@@ -69,9 +73,9 @@ public class BattleView extends JPanel {
 
 		this.add(buttonPanel);
 
-		messageText = new JTextArea("What will " + this.theBattle.getMyPokemon().getName() + " do?");
-		messageText.setLocation(100, 425);
-		messageText.setSize(200, 50);
+		messageText = new JTextArea("	What will " + this.theBattle.getMyPokemon().getName() + " do?");
+		messageText.setLocation(0, 400);
+		messageText.setSize(400, 100);
 		this.add(messageText);
 	}
 
@@ -88,9 +92,11 @@ public class BattleView extends JPanel {
 	public void update() {
 		battlePokemonText.setText(this.theBattle.battlePokemonToString());
 		myPokemonText.setText(this.theBattle.choosenPokemonToString());
+		
 		if(this.theBattle.battleOver()){
 			this.setVisible(false);
 		}
+	
 		repaint();
 		revalidate();
 	}
@@ -109,6 +115,23 @@ public class BattleView extends JPanel {
 			} else if (buttonClicked.getText().equals("POKEBALL")) {
 				theBattle.throwPokeball();
 			}
+			
+//			if(!theBattle.battleOver() && theBattle.getCaughtPokemon()){
+//				messageText.setText("	Unsuccessful. Try again");
+//			}
+//			
+//			if(theBattle.battleOver()){
+//				if(theBattle.getPokemonRanAway()){
+//					messageText.setText("	Pokemon ran away");
+//				}
+//				else{
+//					messageText.setText("	Successful");
+//				}
+//				
+//				
+//				
+//			}
+		
 			update();
 		}
 	}

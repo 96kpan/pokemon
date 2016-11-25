@@ -15,6 +15,7 @@ public class Battle {
 	private boolean pokemonRanAway;
 	private boolean playerRanAway;
 	private boolean battleOver;
+	private boolean caughtPokemon;
 
 	// constructor which will initialize variables
 	public Battle() {
@@ -25,6 +26,7 @@ public class Battle {
 		pokemonRanAway = false;
 		playerRanAway = false;
 		battleOver = false;
+		caughtPokemon = false;
 	}
 
 	// get random pokemon
@@ -119,7 +121,7 @@ public class Battle {
 	public void throwPokeball() {
 		if (battlePokemon.getTotalHealth() <= 50 && battlePokemon.getRunProbability() <= 50) {
 			player.addPokemon(battlePokemon);
-			battleOver = true;
+			caughtPokemon = true;
 		} else {
 			battlePokemon.addRunProbability(10);
 
@@ -146,19 +148,31 @@ public class Battle {
 
 	// sees if the battle is over or not
 	public boolean battleOver() {
-		if (this.playerRanAway || this.pokemonRanAway || this.battleOver) {
+		if (this.playerRanAway || this.pokemonRanAway || this.battleOver || this.caughtPokemon) {
 			return true;
 		}
 
 		return false;
 	}
+	
+	public boolean getPlayerRanAway(){
+		return this.playerRanAway;
+	}
 
+	public boolean getPokemonRanAway(){
+		return this.pokemonRanAway;
+	}
+	
+	public boolean getCaughtPokemon(){
+		return this.caughtPokemon;
+	}
+	
 	public String battlePokemonToString() {
-		return this.battlePokemon.getName() + "\n HP:" + this.battlePokemon.getTotalHealthLeft();
+		return this.battlePokemon.getName() + "\n HP: " + this.battlePokemon.getTotalHealthLeft();
 	}
 
 	public String choosenPokemonToString() {
-		return this.chosenPokemon.getName() + "\n HP:" + this.chosenPokemon.getTotalHealthLeft();
+		return this.chosenPokemon.getName() + "\n HP: " + this.chosenPokemon.getTotalHealthLeft();
 	}
 
 }

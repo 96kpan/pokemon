@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Random;
 
 import pokemons.*;
 import pokemons.Pokemon;
 
-public class Battle {
+public class Battle implements Serializable{
 
 	private Trainer player;
 	private PokemonGame game;

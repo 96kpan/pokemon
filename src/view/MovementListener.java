@@ -32,6 +32,8 @@ public class MovementListener implements KeyListener {
 		} else if (e.getKeyCode() == 40) {
 			theGame.moveTrainer(Direction.South);
 		}
+		
+		
 	}
 
 	@Override

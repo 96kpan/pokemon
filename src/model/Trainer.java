@@ -85,21 +85,4 @@ public class Trainer implements Serializable {
 	public String getName() {
 		return this.name;
 	}
-	
-	// TODO: implement next 4 actions with game
-	public void throwBall() {
-		return;
-	}
-	
-	public void throwRock() {
-		return;
-	}
-	
-	public void throwBait() {
-		return;
-	}
-	
-	public void run() {
-		return;
-	}
 }

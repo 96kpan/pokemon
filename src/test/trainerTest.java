@@ -38,9 +38,9 @@ public class trainerTest {
 		assertEquals(500, t.stepCount());
 		assertEquals("Niven", t.getName());
 		
-		t.throwBait();
-		t.throwBall();
-		t.throwRock();
-		t.run();
+//		t.throwBait();
+//		t.throwBall();
+//		t.throwRock();
+//		t.run();
 	}
 }

@@ -5,6 +5,8 @@ import java.awt.ComponentOrientation;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -13,7 +15,7 @@ import javax.swing.Timer;
 
 import model.Battle;
 
-public class BattleView extends JPanel {
+public class BattleView extends JPanel implements Serializable{
 	private JTextArea battlePokemonText;
 	private JTextArea myPokemonText;
 	private JTextArea messageText;
@@ -22,15 +24,14 @@ public class BattleView extends JPanel {
 	private JButton runButton;
 	private JButton pokeballButton;
 	private Battle theBattle;
-	private Timer timer;
-
+	
 	public BattleView(Battle battle) {
 		this.theBattle = battle;
 		initButtons();
 		initTextView();
 		initBattleText();
 	}
-
+	
 	private void initBattleText() {
 		battlePokemonText = new JTextArea(this.theBattle.battlePokemonToString());
 		battlePokemonText.setSize(100, 100);
@@ -80,12 +81,13 @@ public class BattleView extends JPanel {
 	}
 
 	private void initTextView() {
-		setSize(750, 500);
-		setLocation(0, 0);
-		this.setBackground(Color.WHITE);
-		this.setLayout(null);
+		setSize(7150, 500);
+		setLocation(100, 0);
+		this.setBackground(Color.CYAN);
 		battlePokemonText = new JTextArea(this.theBattle.battlePokemonToString());
 		myPokemonText = new JTextArea(this.theBattle.choosenPokemonToString());
+		System.out.println("what");
+		this.setVisible(true);
 		this.setFocusable(true);
 	}
 

@@ -28,16 +28,16 @@ public class GameController extends JFrame {
 	private BattleView battleView;
 
 	public GameController() {
-		 firstMap = new MapOne();
-		 currentMap = firstMap;
-		 theGame = setUpGame(theGame);
-		 setUpFrame();
-		
-		 this.setTitle("Pokemon Safari Zone");
-		 battleView = new BattleView(new Battle());
-		 this.add(battleView);
-		 battleView.setVisible(true);
-		 //theGame.addObserver(textView);
+		firstMap = new MapOne();
+		currentMap = firstMap;
+		theGame = setUpGame(theGame);
+		setUpFrame();
+
+		this.setTitle("Pokemon Safari Zone");
+		textView = new PokemonTextView(theGame);
+		this.add(textView);
+		textView.setVisible(true);
+		theGame.addObserver(textView);
 	}
 
 	// if you want to see the battle scene text view, just copy

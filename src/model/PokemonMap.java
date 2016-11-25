@@ -33,6 +33,7 @@ public abstract class PokemonMap implements Serializable {
 	public static final int MAP_HEIGHT = 23;
 	public static final int MAP_WIDTH = 23;
 	protected Tile[][] map;
+	public ArrayList<Point> pokemonLocations; 
 	//protected transient BufferedImage placeholder;
 	
 	public PokemonMap() {
@@ -156,6 +157,7 @@ public abstract class PokemonMap implements Serializable {
 	
 	//places pokemon on the map
 	public void placePokemon() {
+		//pokemonLocations = new ArrayList();
 		ArrayList<Pokemon> pokemonToPlace = new ArrayList<Pokemon>();
 		Blaziken blaziken = new Blaziken(50, 50, "blaziken", "fire", false, 1, null);
 		Bulbasaur bulbasaur = new Bulbasaur(50, 50, "bulbasaur", "green", false, 2, null);
@@ -190,6 +192,7 @@ public abstract class PokemonMap implements Serializable {
 			int rowToPlace = rand.nextInt(PokemonMap.MAP_HEIGHT);
 			int colToPlace = rand.nextInt(PokemonMap.MAP_WIDTH);
 			if(map[rowToPlace][colToPlace].toString().equals("g")) {
+				//pokemonLocations.add(new Point(rowToPlace, colToPlace));
 				map[rowToPlace][colToPlace] = new PokemonTile(null,
 						pokemonToPlace.get(value));
 				pokemonToPlace.remove(pokemonToPlace.get(value));
@@ -197,11 +200,13 @@ public abstract class PokemonMap implements Serializable {
 			}
 					
 		}
-		
-		
-		
+	
 	}
 	
+//	public ArrayList getPokemonLocations(){
+//		return this.pokemonLocations;
+//	}
+//	
 	//intializes the map
 	public abstract void initMap();
 	

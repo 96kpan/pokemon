@@ -21,9 +21,13 @@ public class PokemonTile extends Tile implements Serializable {
 	@Override
 	public void playerIsOnTile(PokemonGame game) {
 		//Game.launchBattle(Pokemon pokemonToBattle);
-		System.out.println("Here1");
 		game.launchBattle();
 		
+	}
+	
+	@Override
+	public boolean getHasPokemon() {
+		return true;
 	}
 
 	// Here we return h for a hidden tile. This is the type of tile that is

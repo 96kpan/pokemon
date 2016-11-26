@@ -15,6 +15,7 @@ local.properties
 .project
 .settings/*
 .loadpath
+/Pokemon_Saved_Data
 
 # External tool builders
 .externalToolBuilders/

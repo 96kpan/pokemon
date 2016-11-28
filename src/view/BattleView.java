@@ -97,6 +97,7 @@ public class BattleView extends JPanel {
 
 	private class ButtonListener implements ActionListener {
 
+		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			JButton buttonClicked = (JButton) arg0.getSource();

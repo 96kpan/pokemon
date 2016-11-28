@@ -1,21 +1,16 @@
 package view;
 
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.Timer;
 
 import model.Battle;
 
-public class BattleView extends JPanel implements Serializable{
+public class BattleView extends JPanel {
 	private JTextArea battlePokemonText;
 	private JTextArea myPokemonText;
 	private JTextArea messageText;
@@ -24,14 +19,14 @@ public class BattleView extends JPanel implements Serializable{
 	private JButton runButton;
 	private JButton pokeballButton;
 	private Battle theBattle;
-	
+
 	public BattleView(Battle battle) {
 		this.theBattle = battle;
 		initButtons();
 		initTextView();
 		initBattleText();
 	}
-	
+
 	private void initBattleText() {
 		battlePokemonText = new JTextArea(this.theBattle.battlePokemonToString());
 		battlePokemonText.setSize(100, 100);
@@ -74,31 +69,28 @@ public class BattleView extends JPanel implements Serializable{
 
 		this.add(buttonPanel);
 
-		messageText = new JTextArea("	What will " + this.theBattle.getMyPokemon().getName() + " do?");
-		messageText.setLocation(0, 400);
-		messageText.setSize(400, 100);
+		messageText = new JTextArea("What will " + this.theBattle.getMyPokemon().getName() + " do?");
+		messageText.setLocation(100, 425);
+		messageText.setSize(200, 50);
 		this.add(messageText);
 	}
 
 	private void initTextView() {
-		setSize(7150, 500);
-		setLocation(100, 0);
-		this.setBackground(Color.CYAN);
+		setSize(750, 500);
+		setLocation(0, 0);
+		this.setBackground(Color.WHITE);
+		this.setLayout(null);
 		battlePokemonText = new JTextArea(this.theBattle.battlePokemonToString());
 		myPokemonText = new JTextArea(this.theBattle.choosenPokemonToString());
-		System.out.println("what");
-		this.setVisible(true);
 		this.setFocusable(true);
 	}
 
 	public void update() {
 		battlePokemonText.setText(this.theBattle.battlePokemonToString());
 		myPokemonText.setText(this.theBattle.choosenPokemonToString());
-		
 		if(this.theBattle.battleOver()){
 			this.setVisible(false);
 		}
-	
 		repaint();
 		revalidate();
 	}
@@ -117,23 +109,6 @@ public class BattleView extends JPanel implements Serializable{
 			} else if (buttonClicked.getText().equals("POKEBALL")) {
 				theBattle.throwPokeball();
 			}
-			
-//			if(!theBattle.battleOver() && theBattle.getCaughtPokemon()){
-//				messageText.setText("	Unsuccessful. Try again");
-//			}
-//			
-//			if(theBattle.battleOver()){
-//				if(theBattle.getPokemonRanAway()){
-//					messageText.setText("	Pokemon ran away");
-//				}
-//				else{
-//					messageText.setText("	Successful");
-//				}
-//				
-//				
-//				
-//			}
-		
 			update();
 		}
 	}

@@ -19,5 +19,6 @@ public class Bulbasaur extends Pokemon implements Serializable {
 		super(level, totalHealth, pokemonName, pokemonType, capturedOrNot, runProbs, pokemonPic);
 	}
 
+	
 
 }

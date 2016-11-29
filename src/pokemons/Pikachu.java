@@ -19,6 +19,7 @@ public class Pikachu extends Pokemon implements Serializable {
 	
 	public Pikachu(){		
 		this(thisLevel, thisHealth, "Pikachu", "Electric", false, thisRunProbs, thisPic.getSubimage(0, 10*32 , 32, 32));
+		insertImage();
 		
 	}
 	

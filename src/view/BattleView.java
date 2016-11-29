@@ -116,18 +116,22 @@ public class BattleView extends JPanel {
 		buttonPanel.setLocation(340, 365);
 
 		rockButton = new JButton("ROCK");
+		rockButton.setFont(font);
 		ButtonListener fightListener = new ButtonListener();
 		rockButton.addActionListener(fightListener);
 
 		baitButton = new JButton("BAIT");
+		baitButton.setFont(font);
 		ButtonListener baitListener = new ButtonListener();
 		baitButton.addActionListener(baitListener);
 
 		runButton = new JButton("RUN");
+		runButton.setFont(font);
 		ButtonListener runListener = new ButtonListener();
 		runButton.addActionListener(runListener);
 
 		pokeballButton = new JButton("POKEBALL");
+		pokeballButton.setFont(font);
 		ButtonListener pokeballListener = new ButtonListener();
 		pokeballButton.addActionListener(pokeballListener);
 
@@ -138,9 +142,10 @@ public class BattleView extends JPanel {
 
 		this.add(buttonPanel);
 
-		messageText = new JTextArea("What will " + this.theBattle.getMyPokemon().getName() + " do?");
-		messageText.setLocation(100, 425);
-		messageText.setSize(200, 50);
+		messageText = new JTextArea("What will\n" + this.theBattle.getMyPokemon().getName() + " do?");
+		messageText.setLocation(40, 400);
+		messageText.setSize(400, 50);
+		messageText.setFont(font);
 		this.add(messageText);
 	}
 
@@ -155,8 +160,8 @@ public class BattleView extends JPanel {
 	}
 
 	public void update() {
-		battlePokemonText.setText(this.theBattle.battlePokemonToString());
-		myPokemonText.setText(this.theBattle.choosenPokemonToString());
+		battlePokemonHP.setText(this.theBattle.getHP());
+		chosenPokemonHP.setText(this.theBattle.chosenHP());
 		if(this.theBattle.battleOver()){
 			this.setVisible(false);
 		}

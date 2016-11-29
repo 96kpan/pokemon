@@ -112,8 +112,8 @@ public class BattleView extends JPanel {
 	private void initButtons() {
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(2, 2));
-		buttonPanel.setSize(400, 100);
-		buttonPanel.setLocation(350, 400);
+		buttonPanel.setSize(380, 115);
+		buttonPanel.setLocation(340, 365);
 
 		rockButton = new JButton("ROCK");
 		ButtonListener fightListener = new ButtonListener();

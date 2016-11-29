@@ -1,7 +1,11 @@
 package pokemons;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+
+import javax.imageio.ImageIO;
 
 public class Blaziken extends Pokemon implements Serializable {
 	
@@ -17,6 +21,16 @@ public class Blaziken extends Pokemon implements Serializable {
 	public Blaziken(int level, int totalHealth, String pokemonName, String pokemonType, boolean capturedOrNot,
 			int runProbs, Image pokemonPic) {
 		super(level, totalHealth, pokemonName, pokemonType, capturedOrNot, runProbs, pokemonPic);
+		insertImage();
+	}
+	
+	private void insertImage() {
+		try {
+			thisPic = ImageIO.read(new File("images" + File.separator + "pokemon.png"));
+		} catch (IOException e) {
+			System.out.println("Can't find image");
+		}
+		
 	}
 
 

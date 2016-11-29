@@ -1,12 +1,16 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -20,6 +24,8 @@ import model.Battle;
 
 public class BattleView extends JPanel {
 	private JTextArea battlePokemonText;
+	private JTextArea battlePokemonHP;
+	private JTextArea chosenPokemonHP;
 	private JTextArea myPokemonText;
 	private JTextArea messageText;
 	private JButton rockButton;
@@ -30,8 +36,21 @@ public class BattleView extends JPanel {
 
 	private Image background;
 	private Image pokemon;
+	private Font font;
 
 	public BattleView(Battle battle) {
+		
+		try {
+			font = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("fonts" + File.separator + "Pokemon GB.ttf"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		font = font.deriveFont(18F); 
+		
 		loadImages();
 		this.theBattle = battle;
 		initButtons();
@@ -61,17 +80,29 @@ public class BattleView extends JPanel {
 			System.out.println("Could not find 'pokemon.png'");
 		}
 	}
-
+	
 	private void initBattleText() {
-		battlePokemonText = new JTextArea(this.theBattle.battlePokemonToString());
-		battlePokemonText.setSize(100, 100);
-		battlePokemonText.setLocation(100, 50);
+		battlePokemonText = new JTextArea(this.theBattle.getName());
+		battlePokemonText.setSize(200, 30);
+		battlePokemonText.setLocation(60, 65);
+		battlePokemonText.setFont(font);
 		this.add(battlePokemonText);
 		
-		myPokemonText = new JTextArea(this.theBattle.choosenPokemonToString());
-		myPokemonText.setSize(100, 100);
-		myPokemonText.setLocation(600, 300);
+		battlePokemonHP = new JTextArea(this.theBattle.getHP());
+		battlePokemonHP.setSize(150, 14);
+		battlePokemonHP.setLocation(160, 101);
+		this.add(battlePokemonHP);
+		
+		myPokemonText = new JTextArea(this.theBattle.chosenName());
+		myPokemonText.setSize(200, 30);
+		myPokemonText.setLocation(440, 250);
+		myPokemonText.setFont(font);
 		this.add(myPokemonText);
+		
+		chosenPokemonHP = new JTextArea(this.theBattle.chosenHP());
+		chosenPokemonHP.setSize(150, 14);
+		chosenPokemonHP.setLocation(540, 302);
+		this.add(chosenPokemonHP);
 		
 	}
 

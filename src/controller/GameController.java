@@ -2,15 +2,22 @@
 
 package controller;
 
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import model.MapOne;
 import model.PokemonGame;
@@ -26,6 +33,7 @@ public class GameController extends JFrame {
 	private PokemonMap currentMap;
 	private PokemonTextView textView;
 	private BattleView battleView;
+	
 
 	public GameController() {
 		 firstMap = new MapOne();

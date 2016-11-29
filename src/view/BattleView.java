@@ -1,10 +1,18 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -20,11 +28,38 @@ public class BattleView extends JPanel {
 	private JButton pokeballButton;
 	private Battle theBattle;
 
+	private Image background;
+	private Image pokemon;
+
 	public BattleView(Battle battle) {
+		loadImages();
 		this.theBattle = battle;
 		initButtons();
 		initTextView();
 		initBattleText();
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		Image scaledImage = background.getScaledInstance(750,500,Image.SCALE_SMOOTH);
+		g.drawImage(scaledImage, 0, 0, null);
+	}
+	
+	private void loadImages() {
+		try {
+			background = ImageIO.read(new File("images" + File.separator
+					+ "battle.png"));
+		} catch (IOException e) {
+			System.out.println("Could not find 'battle.png'");
+		}
+		try {
+			pokemon = ImageIO.read(new File("images" + File.separator
+					+ "pokemon.png"));
+
+		} catch (IOException e) {
+			System.out.println("Could not find 'pokemon.png'");
+		}
 	}
 
 	private void initBattleText() {

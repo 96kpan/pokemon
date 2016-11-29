@@ -16,7 +16,7 @@ public class Pikachu extends Pokemon implements Serializable {
 	static BufferedImage thisPic = null; //NIVEN INSERT IMAGE HERE
 	
 	public Pikachu(){		
-		this(thisLevel, thisHealth, "Pikachu", "Electric", false, thisRunProbs, insertImage().getSubimage(0, 9*32 , 32, 32));
+		this(thisLevel, thisHealth, "Pikachu", "Electric", false, thisRunProbs, insertImage());
 	}
 	
 	private static BufferedImage insertImage() {
@@ -25,7 +25,7 @@ public class Pikachu extends Pokemon implements Serializable {
 		} catch (IOException e) {
 			System.out.println("Can't find image");
 		}
-		return thisPic;
+		return thisPic.getSubimage(0, 9*32 , 32, 32);
 	}
 
 	public Pikachu(int level, int totalHealth, String pokemonName, String pokemonType, boolean capturedOrNot,

@@ -63,7 +63,10 @@ public class BattleView extends JPanel {
 		super.paintComponent(g);
 		Image scaledImage = background.getScaledInstance(750,500,Image.SCALE_SMOOTH);
 		g.drawImage(scaledImage, 0, 0, null);
-		g.drawImage(theBattle.getMyPokemon().getImage(), 0, 0, 32, 32, null);
+		scaledImage = theBattle.getMyPokemon().getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+		g.drawImage(scaledImage, 150, 220, null);
+		scaledImage = theBattle.getRandomPokemon().getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+		g.drawImage(scaledImage, 500, 100, null);
 	}
 	
 	private void loadImages() {
@@ -104,11 +107,6 @@ public class BattleView extends JPanel {
 		chosenPokemonHP.setSize(150, 14);
 		chosenPokemonHP.setLocation(540, 302);
 		this.add(chosenPokemonHP);
-		
-		//insert image
-		
-		
-		
 	}
 
 	private void initButtons() {

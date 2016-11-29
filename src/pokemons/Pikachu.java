@@ -15,10 +15,8 @@ public class Pikachu extends Pokemon implements Serializable {
 	static int thisRunProbs = (int) (Math.random() * 50);
 	static BufferedImage thisPic = null; //NIVEN INSERT IMAGE HERE
 	
-	
-	
 	public Pikachu(){		
-		this(thisLevel, thisHealth, "Pikachu", "Electric", false, thisRunProbs, insertImage().getSubimage(0, 10*32 , 32, 32));
+		this(thisLevel, thisHealth, "Pikachu", "Electric", false, thisRunProbs, insertImage().getSubimage(0, 9*32 , 32, 32));
 	}
 	
 	private static BufferedImage insertImage() {

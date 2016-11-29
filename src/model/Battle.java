@@ -175,5 +175,20 @@ public class Battle implements Serializable{
 	public String choosenPokemonToString() {
 		return this.chosenPokemon.getName() + "\n HP: " + this.chosenPokemon.getTotalHealthLeft();
 	}
-
+	
+	public String getName() {
+		return this.battlePokemon.getName();
+	}
+	
+	public String getHP() {
+		return "" + this.battlePokemon.getTotalHealthLeft();
+	}
+	
+	public String chosenName() {
+		return this.chosenPokemon.getName();
+	}
+	
+	public String chosenHP() {
+		return "" + this.chosenPokemon.getTotalHealthLeft();
+	}
 }

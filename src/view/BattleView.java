@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import model.Battle;
+import model.Trainer;
 
 public class BattleView extends JPanel {
 	private JTextArea battlePokemonText;
@@ -63,7 +64,7 @@ public class BattleView extends JPanel {
 		super.paintComponent(g);
 		Image scaledImage = background.getScaledInstance(750,500,Image.SCALE_SMOOTH);
 		g.drawImage(scaledImage, 0, 0, null);
-		scaledImage = theBattle.getMyPokemon().getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+		scaledImage = Trainer.getInstance().getBackOfTrainer().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
 		g.drawImage(scaledImage, 150, 220, null);
 		scaledImage = theBattle.getRandomPokemon().getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
 		g.drawImage(scaledImage, 500, 100, null);

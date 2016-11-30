@@ -27,7 +27,7 @@ public class PokemonGame extends Observable implements Serializable {
 		map = mapTwo;
 
 
-		trainer = new Trainer("ASH KETCHUP", null);
+		trainer = new Trainer("ASH KETCHUP");
 		trainer.setLocation(MapOne.startPoint);
 		map.getTile(trainer.getLocation().x, trainer.getLocation().y)
 		.setHasTrainer(true);

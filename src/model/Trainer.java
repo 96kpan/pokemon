@@ -5,8 +5,13 @@ package model;
 
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import pokemons.Pikachu;
 import pokemons.Pokemon;
@@ -15,7 +20,8 @@ public class Trainer implements Serializable {
 	
 	
 	private static String name;
-	private static Image trainerImage = null;
+	private BufferedImage trainerImage = null;
+	private static BufferedImage trainer_sheet;
 	private Bag backpack;
 	private static Trainer myTrainer;
 	
@@ -25,14 +31,27 @@ public class Trainer implements Serializable {
 	
 	private ArrayList<Pokemon> pokemon;
 	
-	public Trainer(String name, Image img) {
+	public Trainer(String name) {
 		this.name = name;
-		this.trainerImage = img;
+		this.trainerImage = insertImage();
 		backpack = new Bag();
 		this.steps = 0;
 		pokemon = new ArrayList<Pokemon>();
 		pokemon.add(new Pikachu()); //starter pokemon
 		this.location = new Point(0,0);
+	}
+	
+	private static BufferedImage insertImage() {
+		try {
+			trainer_sheet = ImageIO.read(new File("images" + File.separator + "trainer.png"));
+		} catch (IOException e) {
+			System.out.println("Can't find image");
+		}
+		return trainer_sheet.getSubimage(0, 0*32 , 32, 32);
+	}
+	
+	public BufferedImage getBackOfTrainer() {
+		return trainer_sheet.getSubimage(0, 1*32, 32, 32);
 	}
 	
 	//adds pokemon into the arraylist
@@ -47,7 +66,7 @@ public class Trainer implements Serializable {
 	//singleton OODP so only one instance is used throughout the game
 	public static Trainer getInstance(){
 		if(myTrainer == null){
-			myTrainer = new Trainer(name, trainerImage);
+			myTrainer = new Trainer(name);
 		}
 		
 		return myTrainer;

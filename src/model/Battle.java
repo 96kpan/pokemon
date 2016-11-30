@@ -144,7 +144,10 @@ public class Battle implements Serializable{
 
 	// player run away
 	public void runAway() {
-		playerRanAway = true;
+		int randGen = (int) (Math.random() * 100) + 1; 
+		if (randGen <  battlePokemon.getRunProbability()){
+			playerRanAway = true;
+		}
 	}
 
 	// sees if the battle is over or not

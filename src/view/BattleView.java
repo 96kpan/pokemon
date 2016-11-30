@@ -143,7 +143,7 @@ public class BattleView extends JPanel {
 
 		this.add(buttonPanel);
 
-		messageText = new JTextArea("What will\n" + this.theBattle.getMyPokemon().getName() + " do?");
+		messageText = new JTextArea("What will\n" + this.theBattle.getMyTrainer().getName() + " do?");
 		messageText.setLocation(40, 400);
 		messageText.setSize(400, 50);
 		messageText.setFont(font);
@@ -156,7 +156,7 @@ public class BattleView extends JPanel {
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
 		battlePokemonText = new JTextArea(this.theBattle.battlePokemonToString());
-		myPokemonText = new JTextArea(this.theBattle.choosenPokemonToString());
+		myPokemonText = new JTextArea(this.theBattle.myTrainerToString());
 		this.setFocusable(true);
 	}
 

@@ -24,6 +24,7 @@ public class Trainer implements Serializable {
 	private static BufferedImage trainer_sheet;
 	private Bag backpack;
 	private static Trainer myTrainer;
+	private int totalHPLeft;
 	
 	private int steps;
 	private int MAX_STEPS = 500;
@@ -39,6 +40,7 @@ public class Trainer implements Serializable {
 		pokemon = new ArrayList<Pokemon>();
 		pokemon.add(new Pikachu()); //starter pokemon
 		this.location = new Point(0,0);
+		totalHPLeft = 1000;
 	}
 	
 	private static BufferedImage insertImage() {
@@ -104,4 +106,10 @@ public class Trainer implements Serializable {
 	public String getName() {
 		return this.name;
 	}
+
+	public int getTotalHealthLeft() {
+		return totalHPLeft;
+	}
+	
+	
 }

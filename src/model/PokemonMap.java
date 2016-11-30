@@ -170,53 +170,7 @@ public abstract class PokemonMap implements Serializable {
 		}
 	}
 	
-	//places pokemon on the map
-	public void placePokemon() {
-		//pokemonLocations = new ArrayList();
-		ArrayList<Pokemon> pokemonToPlace = new ArrayList<Pokemon>();
-		Blaziken blaziken = new Blaziken(50, 50, "blaziken", "fire", false, 1, null);
-		Bulbasaur bulbasaur = new Bulbasaur(50, 50, "bulbasaur", "green", false, 2, null);
-		Charmander charmander = new Charmander(50,50,"charmander","fire",false,1,null);
-		Eevee eevee = new Eevee(50, 50, "eevee", "wind", false, 1, null);
-		Garchomp garchomp = new Garchomp(50,50,"garchomp", "fighting", false, 1, null);
-		Gengar gengar = new Gengar(50,50, "gengar", "ghost", false, 1, null);
-		Jigglypuff jigglypuff = new Jigglypuff(50,50,"jigglypuff","normal", false,1,null);
-		Lugia lugia = new Lugia(50,50,"lugia","specal",false,1,null);
-		Mewtwo mewtwo = new Mewtwo(50, 50, "mewtwo", "special", false, 1, null);
-		Pikachu pikachu = new Pikachu(50,50,"pikachu","lightening",false,3,null);
-		Squirtle squirtle = new Squirtle(50,50,"squirtle","water",false,2,null);
-		
-		
-		pokemonToPlace.add(blaziken);
-		pokemonToPlace.add(bulbasaur);
-		pokemonToPlace.add(charmander);
-		pokemonToPlace.add(eevee);
-		pokemonToPlace.add(garchomp);
-		pokemonToPlace.add(gengar);
-		pokemonToPlace.add(jigglypuff);
-		pokemonToPlace.add(lugia);
-		pokemonToPlace.add(mewtwo);
-		pokemonToPlace.add(pikachu);
-		pokemonToPlace.add(squirtle);
 
-
-		
-		while(pokemonToPlace.size() > 0) {
-			Random rand = new Random(); 
-			int value = rand.nextInt(pokemonToPlace.size()); 
-			int rowToPlace = rand.nextInt(PokemonMap.MAP_HEIGHT);
-			int colToPlace = rand.nextInt(PokemonMap.MAP_WIDTH);
-			if(map[rowToPlace][colToPlace].toString().equals("g")) {
-				//pokemonLocations.add(new Point(rowToPlace, colToPlace));
-				map[rowToPlace][colToPlace] = new PokemonTile(null,
-						pokemonToPlace.get(value));
-				pokemonToPlace.remove(pokemonToPlace.get(value));
-				
-			}
-					
-		}
-	
-	}
 	
 //	public ArrayList getPokemonLocations(){
 //		return this.pokemonLocations;

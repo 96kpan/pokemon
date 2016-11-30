@@ -180,18 +180,28 @@ public class BattleView extends JPanel {
 			JButton buttonClicked = (JButton) arg0.getSource();
 			if (buttonClicked.getText().equals("ROCK")) {
 				theBattle.throwRock();
+				if(!theBattle.battleOver()){
+					JOptionPane.showMessageDialog(null, "You have weakened the pokemon");
+				}
 			} else if (buttonClicked.getText().equals("BAIT")) {
 				theBattle.throwBait();
+				if(!theBattle.battleOver()){
+					JOptionPane.showMessageDialog(null, "The pokemon is lured in");
+				}
 			} else if (buttonClicked.getText().equals("RUN")) {
 				theBattle.runAway();
+				if(!theBattle.battleOver()){
+					JOptionPane.showMessageDialog(null, "Couldn't get away this time");
+				}
 			} else if (buttonClicked.getText().equals("POKEBALL")) {
 				theBattle.throwPokeball();
+				if(!theBattle.battleOver()){
+					JOptionPane.showMessageDialog(null, "Thrwowing pokeball...... not this time!");
+				}
 			}
 			
 			
-			if(!theBattle.battleOver()){
-				JOptionPane.showMessageDialog(null, "It's not very effective...");
-			}
+			
 			update();
 		}
 	}

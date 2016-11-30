@@ -2,6 +2,7 @@ package model;
 
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.util.Random;
 
 public class GrassTile extends Tile implements Serializable {
 
@@ -12,7 +13,11 @@ public class GrassTile extends Tile implements Serializable {
 
 	@Override
 	public void playerIsOnTile(PokemonGame game) {
-		// TODO Auto-generated method stub
+		Random rand = new Random();
+		int  randomNum = rand.nextInt(100);
+		if(randomNum < 10) {
+			game.launchBattle();
+		}
 		
 	}
 	

@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import pokemons.*;
 import pokemons.Pokemon;
 
@@ -11,23 +13,22 @@ public class Battle implements Serializable{
 	private Trainer player;
 	private PokemonGame game;
 	private Pokemon battlePokemon;
-	private Trainer myTrainer;
 	private static final int ROCK_HEALTH = 50;
-	private boolean pokemonRanAway;
-	private boolean playerRanAway;
 	private boolean battleOver;
 	private boolean caughtPokemon;
+	int pokemonCatchProbability;
+	Random rand;
 
 	// constructor which will initialize variables
 	public Battle() {
 		player = player.getInstance();
 		game = game.getInstance();
+		rand = new Random();
 		randomPokemon();
-		myTrainer = player; // choose the trainer
-		pokemonRanAway = false;
-		playerRanAway = false;
 		battleOver = false;
-		caughtPokemon = false;
+		
+		
+		
 	}
 
 	// get random pokemon
@@ -95,40 +96,45 @@ public class Battle implements Serializable{
 	public Pokemon getRandomPokemon() {
 		return battlePokemon;
 	}
-
-	// getter for trainer
-	public Trainer getMyTrainer() {
-		return this.myTrainer;
+	
+	public void pokemonShouldRun() {
+		int  randomNum = rand.nextInt(200);
+		if(randomNum < battlePokemon.getRunProbability()) {
+			battleOver = true;
+			JOptionPane.showMessageDialog(null, "The pokemon got away");
+		}
+		
+		
 	}
+
 
 	// throw rock, each rock throw is -50 hp
 	public void throwRock() {
 
 		if (battlePokemon.getTotalHealth() <= 50) {
-			battlePokemon.setFainted(true);
 			battleOver = true;
 		} else {
 			battlePokemon.setTotalHealth(battlePokemon.getTotalHealth() - ROCK_HEALTH);
 			battlePokemon.addRunProbability(10);
-
-			if (battlePokemon.getRunProbability() > 90) {
-				pokemonRanAway = true;
-			}
 		}
 	}
 
 	// throw pokeball, will only catch pokemon if the pokemon's health is less
 	// than 75
 	public void throwPokeball() {
-		if (battlePokemon.getTotalHealth() <= 50 && battlePokemon.getRunProbability() <= 50) {
+		int randNum = rand.nextInt(150);
+		int catchProbability = battlePokemon.getTotalHealth() + battlePokemon.getRunProbability();
+		if (catchProbability < randNum) {
 			player.addPokemon(battlePokemon);
-			caughtPokemon = true;
+			JOptionPane.showMessageDialog(null, "You got the pokemon.... Awesome!");
+			battleOver = true;
+			
 		} else {
 			battlePokemon.addRunProbability(10);
+			System.out.println("Run prob: " + battlePokemon.getRunProbability());
+			System.out.println("rand " + randNum);
 
-			if (battlePokemon.getRunProbability() > 90) {
-				pokemonRanAway = true;
-			}
+			pokemonShouldRun();
 		}
 	}
 
@@ -137,35 +143,28 @@ public class Battle implements Serializable{
 	public void throwBait() {
 		battlePokemon.addRunProbability(-10);
 
-		if (battlePokemon.getRunProbability() > 90) {
-			pokemonRanAway = true;
-		}
+		pokemonShouldRun();
 	}
 
 	// player run away
 	public void runAway() {
 		int randGen = (int) (Math.random() * 100) + 1; 
 		if (randGen <  battlePokemon.getRunProbability()){
-			playerRanAway = true;
+			battleOver = true;
 		}
 	}
 
 	// sees if the battle is over or not
 	public boolean battleOver() {
-		if (this.playerRanAway || this.pokemonRanAway || this.battleOver || this.caughtPokemon) {
-			return true;
-		}
-
-		return false;
+		pokemonShouldRun();
+		return battleOver;
 	}
 	
-	public boolean getPlayerRanAway(){
-		return this.playerRanAway;
+	public Trainer getMyTrainer() {
+		return this.player;
 	}
+	
 
-	public boolean getPokemonRanAway(){
-		return this.pokemonRanAway;
-	}
 	
 	public boolean getCaughtPokemon(){
 		return this.caughtPokemon;
@@ -176,7 +175,7 @@ public class Battle implements Serializable{
 	}
 
 	public String myTrainerToString() {
-		return this.myTrainer.getName() + "\n HP: " + this.myTrainer.getTotalHealthLeft();
+		return this.player.getName() + "\n HP: " + this.player.getTotalHealthLeft();
 	}
 	
 	public String getName() {
@@ -188,10 +187,10 @@ public class Battle implements Serializable{
 	}
 	
 	public String chosenName() {
-		return this.myTrainer.getName();
+		return this.player.getName();
 	}
 	
 	public String chosenHP() {
-		return "" + this.myTrainer.getTotalHealthLeft();
+		return "" + this.player.getTotalHealthLeft();
 	}
 }

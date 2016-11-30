@@ -35,7 +35,7 @@ public class MapTwo extends PokemonMap implements Serializable {
 		makeGrassRectangle(new Point(11, 1),10,10);
 		makeFireRectangle(new Point(1,13), 10,9);
 		bottomFireTriangle();
-		placePokemon();
+		//placePokemon();
 	}
 	
 	//creates a triangle shape of fire on the map

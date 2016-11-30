@@ -36,7 +36,7 @@ public class MapOne extends PokemonMap implements Serializable {
 		makeGrassRectangle(new Point(11, 1),11,10);
 		makeGrassRectangle(new Point(1,13), 11,9);
 		bottomGrassTriangle();
-		placePokemon();
+		//placePokemon();
 		
 		
 	}

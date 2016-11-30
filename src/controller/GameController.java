@@ -47,52 +47,24 @@ public class GameController extends JFrame implements Observer {
 	
 
 	public GameController() {
-
 		firstMap = new MapOne();
 		currentMap = firstMap;
 		theGame = new PokemonGame();
-		setUpLayeredFrame();
-
-//		 firstMap = new MapOne();
-//		 currentMap = firstMap;
-//		 theGame = setUpGame(theGame);
-//		 setUpFrame();
-//		
-//		 this.setTitle("Pokemon Safari Zone");
-//		 battleView = new BattleView(new Battle());
-//		 this.add(battleView);
-//		 battleView.setVisible(true);
-//		 //theGame.addObserver(textView);
-		
-		firstMap = new MapOne();
-		currentMap = firstMap;
-
-		theGame = new PokemonGame();
-
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1000, 1000);
 		this.setLocation(0, 0);
 		this.setTitle("Pokemon Safari Zone");
-
-		textView = new PokemonTextView(theGame);
-		layeredPane.add(textView,0);
-		textView.setVisible(true);
-		theGame.addObserver(textView);
+		setUpLayeredFrame();
 		theGame.addObserver(this);
-
-//		textView = new PokemonTextView(theGame);
-//		this.add(textView);
-//		textView.setVisible(true);
-//		theGame.addObserver(textView);
 		graphicViewMapTwo = new GraphicViewMapTwo(theGame);
-		this.add(graphicViewMapTwo);
+		layeredPane.add(graphicViewMapTwo,0);
 		graphicViewMapTwo.setVisible(true);
 		theGame.addObserver(graphicViewMapTwo);
 
 	}
 
 
-	}
+	
 
 //	firstMap = new MapOne();
 //	currentMap = firstMap;
@@ -184,17 +156,29 @@ public class GameController extends JFrame implements Observer {
 		return theGame;
 
 	}
+	
+	private void showBattle() {
+		Battle battle = new Battle();
+		battleView = new BattleView(battle);
+		layeredPane.add(battleView);
+		layeredPane.setLayer(battleView,1);
+		battleView.setVisible(true);
+		graphicViewMapTwo.setFocusable(false);
+	}
+	
 
 	@Override
 	public void update(Observable o, Object arg) {
 		if(theGame.shouldLaunchBattle) {
-			Battle battle = new Battle();
-			battleView = new BattleView(battle);
-			layeredPane.add(battleView);
-			layeredPane.setLayer(battleView,1);
-			battleView.setVisible(true);
+			showBattle();
+			theGame.shouldLaunchBattle = false;
+			graphicViewMapTwo.setFocusable(true);
+			graphicViewMapTwo.setVisible(true);
+			
 			
 		}
+		
+		
 		
 	}
 

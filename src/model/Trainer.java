@@ -45,7 +45,7 @@ public class Trainer implements Serializable {
 	
 	private static BufferedImage insertImage() {
 		try {
-			trainer_sheet = ImageIO.read(new File("images" + File.separator + "trainer.png"));
+			trainer_sheet = ImageIO.read(new File("images" + File.separator + "trainerSprite.png"));
 		} catch (IOException e) {
 			System.out.println("Can't find image");
 		}

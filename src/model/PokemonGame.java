@@ -16,7 +16,7 @@ public class PokemonGame extends Observable implements Serializable {
 	Battle newBattle;
 	BattleView view;
 	public boolean shouldLaunchBattle;
-	private static final int TOTAL_MOVES = 20;
+	private static final int TOTAL_MOVES = 500;
 	private int movesLeft;
 	private static PokemonGame game;
 

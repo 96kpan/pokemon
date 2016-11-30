@@ -55,7 +55,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	
 	private void initJPanel() {
 		setLayout(null);
-		setSize(750, 750);
+		setSize(1000, 1000);
 		setLocation(0, 0);
 		this.setBackground(Color.WHITE);
 		this.setFocusable(true);
@@ -64,14 +64,12 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		
 	}
 	
-	private Random rand = new Random();
-	private int random;
 	
 	public void paintComponent(Graphics g) {
 		for(int i = 0; i < 23 ; i++) {
 			for(int j = 0; j < 23; j++) {
 				Tile curTile = theGame.getMap().getTile(i, j);
-				random = rand.nextInt((2-0)+1)+0;
+				
 				// grass
 				if(curTile.toString().equals("g")){
 					tile = terrain_sheet.getSubimage(0*size, 0*size, size, size);
@@ -100,15 +98,17 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 					g.drawImage(water, j * 32, i * 32, null);
 				}
 				
+				// grass
+				if(curTile.getHasPokemon()){
+					g.drawImage(grass, j * 32, i * 32, null);
+				}
+				
 				// trainer
 				if(curTile.getHasTrainer()){
 					g.drawImage(trainer,j * 32, i * 32, null);
 				}
 				
-				// grass
-				if(curTile.getHasPokemon()){
-					g.drawImage(grass, j * 32, i * 32, null);
-				}
+			
 
 				
 			}

@@ -22,7 +22,6 @@ import model.MapOne;
 import model.MapTwo;
 import model.PokemonGame;
 import model.PokemonMap;
-import model.PokemonTile;
 import model.Tile;
 import model.Trainer;
 import pokemons.Bulbasaur;
@@ -116,8 +115,8 @@ public class pokemonTest {
 //		}
 		Tile itemTile = new ItemTile(image,item);
 		assertTrue(itemTile != null);
-		Tile pokemonTile = new PokemonTile(image,new Squirtle(10, 10, "squirtle", "water", false, 1, null));
-		assertTrue(pokemonTile != null);
+		//Tile pokemonTile = new Pokemon(image,new Squirtle(10, 10, "squirtle", "water", false, 1, null));
+		//assertTrue(pokemonTile != null);
 		
 		
 		

@@ -30,7 +30,7 @@ public class Trainer implements Serializable {
 	private int MAX_STEPS = 500;
 	private Point location;
 	
-	private ArrayList<Pokemon> pokemon;
+	private static ArrayList<Pokemon> pokemon;
 	
 	public Trainer(String name) {
 		this.name = name;
@@ -38,7 +38,7 @@ public class Trainer implements Serializable {
 		backpack = new Bag();
 		this.steps = 0;
 		pokemon = new ArrayList<Pokemon>();
-		pokemon.add(new Pikachu()); //starter pokemon
+		
 		this.location = new Point(0,0);
 		totalHPLeft = 1000;
 	}
@@ -59,6 +59,7 @@ public class Trainer implements Serializable {
 	//adds pokemon into the arraylist
 	public void addPokemon(Pokemon p){
 		pokemon.add(p);
+		System.out.println("here " + pokemon.size());
 	}
 	
 	public ArrayList<Pokemon> getPokemons(){
@@ -99,7 +100,8 @@ public class Trainer implements Serializable {
 	
 	// Returns number of steps
 	public int stepCount() {
-		return steps;
+		steps++;
+		return this.MAX_STEPS-this.steps;
 	}
 	
 	// Returns name of trainer
@@ -110,6 +112,11 @@ public class Trainer implements Serializable {
 	public int getTotalHealthLeft() {
 		return totalHPLeft;
 	}
+
+//	public String getStepsLeft() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 	
 }

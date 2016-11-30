@@ -165,6 +165,7 @@ public class BattleView extends JPanel {
 		battlePokemonHP.setText(this.theBattle.getHP());
 		chosenPokemonHP.setText(this.theBattle.chosenHP());
 		if(this.theBattle.battleOver()){
+			
 			JOptionPane.showMessageDialog(null, "Battle over");
 			this.setVisible(false);
 		}

@@ -12,7 +12,7 @@ import view.BattleView;
 
 public class PokemonGame extends Observable implements Serializable {
 	PokemonMap map;
-	Trainer trainer;
+	public Trainer trainer;
 	Battle newBattle;
 	BattleView view;
 	public boolean shouldLaunchBattle;
@@ -58,10 +58,17 @@ public class PokemonGame extends Observable implements Serializable {
 		this.setChanged();
 		this.notifyObservers();
 	}
+	
+	//general information
+	public String toStringNoOfSteps(){
+		String s = "No of Steps taken " + this.trainer.stepCount();
+		
+		return s;
+	}
 
 	private void moveTrainerInDirection(Direction direction) {
 		if (movesLeft < 0) {
-			JOptionPane.showMessageDialog(null, "Game over you have reachrd the max number of steps");
+			JOptionPane.showMessageDialog(null, "Game over you have reached the max number of steps");
 			System.exit(0);
 		}
 		int currX = trainer.getLocation().x;

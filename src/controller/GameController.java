@@ -49,7 +49,7 @@ public class GameController extends JFrame implements Observer {
 		this.setLocation(0, 0);
 		this.setTitle("Pokemon Safari Zone");
 		textView = new PokemonTextView(theGame);
-		layeredPane.add(textView,1);
+		layeredPane.add(textView,0);
 		textView.setVisible(true);
 		theGame.addObserver(textView);
 		theGame.addObserver(this);
@@ -149,14 +149,13 @@ public class GameController extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		//System.out.println("here");
 		if(theGame.shouldLaunchBattle) {
-			battleView = new BattleView(new Battle());
+			Battle battle = new Battle();
+			battleView = new BattleView(battle);
 			layeredPane.add(battleView);
-			
-			layeredPane.setLayer(battleView,1000);
+			layeredPane.setLayer(battleView,1);
 			battleView.setVisible(true);
-			theGame.shouldLaunchBattle = false;
+			
 		}
 		
 	}

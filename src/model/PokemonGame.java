@@ -112,7 +112,6 @@ public class PokemonGame extends Observable implements Serializable {
 	}
 
 	public void launchBattle() {
-		System.out.println("called launchBattle");
 		shouldLaunchBattle = true;
 	}
 

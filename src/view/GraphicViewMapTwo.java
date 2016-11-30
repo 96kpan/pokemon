@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -25,6 +26,10 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private BufferedImage grass;
 	private BufferedImage trainer;
 	private BufferedImage tree;
+	
+	private BufferedImage terrain_sheet;
+	private final int size = 32;
+	private BufferedImage tile;
 
 
 	public GraphicViewMapTwo(PokemonGame game) {
@@ -35,6 +40,8 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		grass = ImageIO.read(new File("images/grass.png"));
 		trainer = ImageIO.read(new File("images/trainer.png"));
 		tree = ImageIO.read(new File("images/tree.png"));
+		
+		terrain_sheet = ImageIO.read(new File("images/terrain.png"));
 
 		}
 		catch(IOException e) {
@@ -57,28 +64,47 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		
 	}
 	
+	private Random rand = new Random();
+	private int random;
+	
 	public void paintComponent(Graphics g) {
 		for(int i = 0; i < 23 ; i++) {
 			for(int j = 0; j < 23; j++) {
 				Tile curTile = theGame.getMap().getTile(i, j);
+				random = rand.nextInt((2-0)+1)+0;
+				// grass
 				if(curTile.toString().equals("g")){
-					g.drawImage(grass, j * 32, i * 32, null);
+					tile = terrain_sheet.getSubimage(random*size, 0*size, size, size);
+					g.drawImage(tile, j * 32, i * 32, null);
 				}
+				
+				// fire
 				if(curTile.toString().equals("f")){
 					g.drawImage(fire, j * 32, i * 32, null);
 				}
+				
+				// ground
 				if(curTile.toString().equals("e")){
 					g.drawImage(emptyGround, j * 32, i * 32, null);
 				}
+				
+				// tree
 				if(curTile.toString().equals("t")){
-					g.drawImage(tree, j * 32, i * 32, null);
+					tile = terrain_sheet.getSubimage(random*size, 2*size, size, size);
+					g.drawImage(tile, j * 32, i * 32, null);
 				}
+				
+				// water
 				if(curTile.toString().equals("w")){
 					g.drawImage(water, j * 32, i * 32, null);
 				}
+				
+				// trainer
 				if(curTile.getHasTrainer()){
 					g.drawImage(trainer,j * 32, i * 32, null);
 				}
+				
+				// grass
 				if(curTile.getHasPokemon()){
 					g.drawImage(grass, j * 32, i * 32, null);
 				}

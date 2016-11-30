@@ -74,7 +74,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				random = rand.nextInt((2-0)+1)+0;
 				// grass
 				if(curTile.toString().equals("g")){
-					tile = terrain_sheet.getSubimage(random*size, 0*size, size, size);
+					tile = terrain_sheet.getSubimage(0*size, 0*size, size, size);
 					g.drawImage(tile, j * 32, i * 32, null);
 				}
 				
@@ -85,13 +85,13 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				
 				// ground
 				if(curTile.toString().equals("e")){
-					tile = terrain_sheet.getSubimage(random*size, 4*size, size, size);
+					tile = terrain_sheet.getSubimage(0*size, 4*size, size, size);
 					g.drawImage(tile, j * 32, i * 32, null);
 				}
 				
 				// tree
 				if(curTile.toString().equals("t")){
-					tile = terrain_sheet.getSubimage(random*size, 2*size, size, size);
+					tile = terrain_sheet.getSubimage(0*size, 2*size, size, size);
 					g.drawImage(tile, j * 32, i * 32, null);
 				}
 				

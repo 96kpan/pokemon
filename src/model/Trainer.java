@@ -59,7 +59,6 @@ public class Trainer implements Serializable {
 	//adds pokemon into the arraylist
 	public void addPokemon(Pokemon p){
 		pokemon.add(p);
-		System.out.println("here " + pokemon.size());
 	}
 	
 	public ArrayList<Pokemon> getPokemons(){

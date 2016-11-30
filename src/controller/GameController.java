@@ -2,15 +2,22 @@
 
 package controller;
 
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import model.MapOne;
 import model.PokemonGame;
@@ -26,18 +33,19 @@ public class GameController extends JFrame {
 	private PokemonMap currentMap;
 	private PokemonTextView textView;
 	private BattleView battleView;
+	
 
 	public GameController() {
-		firstMap = new MapOne();
-		currentMap = firstMap;
-		theGame = setUpGame(theGame);
-		setUpFrame();
-
-		this.setTitle("Pokemon Safari Zone");
-		textView = new PokemonTextView(theGame);
-		this.add(textView);
-		textView.setVisible(true);
-		theGame.addObserver(textView);
+		 firstMap = new MapOne();
+		 currentMap = firstMap;
+		 theGame = setUpGame(theGame);
+		 setUpFrame();
+		
+		 this.setTitle("Pokemon Safari Zone");
+		 battleView = new BattleView(new Battle());
+		 this.add(battleView);
+		 battleView.setVisible(true);
+		 //theGame.addObserver(textView);
 	}
 
 	// if you want to see the battle scene text view, just copy

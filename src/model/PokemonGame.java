@@ -24,7 +24,7 @@ public class PokemonGame extends Observable implements Serializable {
 		MapOne mapOne = new MapOne();
 		MapTwo mapTwo = new MapTwo();
 		// set this for whichever map we want to use
-		map = mapTwo;
+		map = mapOne;
 
 
 		trainer = new Trainer("ASH KETCHUP");
@@ -42,6 +42,11 @@ public class PokemonGame extends Observable implements Serializable {
 		}
 
 		return game;
+	}
+	
+	//returns the Game's Map
+	public PokemonMap getMap() {
+		return this.map;
 	}
 
 	@Override

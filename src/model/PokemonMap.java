@@ -36,14 +36,29 @@ public abstract class PokemonMap implements Serializable {
 	public ArrayList<Point> pokemonLocations; 
 	//protected transient BufferedImage placeholder;
 	
+	private BufferedImage fire;
+	private BufferedImage water;
+	private BufferedImage emptyGround;
+	private BufferedImage grass;
+	private BufferedImage trainer;
+	private BufferedImage tree;
+
+	
+	
 	public PokemonMap() {
 		map = new Tile[MAP_HEIGHT][MAP_WIDTH];
-//		try {
-//			//placeholder = ImageIO.read(new File("images/dog.jpeg"));
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			fire = ImageIO.read(new File("images/fire.png"));
+			water = ImageIO.read(new File("images/water.png"));
+			emptyGround = ImageIO.read(new File("images/emptyGround.png"));
+			grass = ImageIO.read(new File("images/grass.png"));
+			trainer = ImageIO.read(new File("images/trainer.png"));
+			tree = ImageIO.read(new File("images/tree.png"));
+			}
+			catch(IOException e) {
+			e.printStackTrace();
+
+			}
 	}
 	
 	public Tile getTile(int row, int column) {
@@ -74,7 +89,7 @@ public abstract class PokemonMap implements Serializable {
 	public void setEveryTileToEmpty() {
 		for(int i = 0; i < map.length; i++) {
 			for(int j = 0; j < map[i].length; j++) {
-				map[i][j] = new EmptyTile(null);
+				map[i][j] = new EmptyTile(emptyGround);
 			}
 		}
 	}
@@ -102,22 +117,22 @@ public abstract class PokemonMap implements Serializable {
 	
 	//makes the entrance on the map
 	private void makeEntrance() {
-		map[8][0] = new EmptyTile(null);
-		map[9][0] = new EmptyTile(null);
-		map[10][0] = new EmptyTile(null);
+		map[8][0] = new EmptyTile(emptyGround);
+		map[9][0] = new EmptyTile(emptyGround);
+		map[10][0] = new EmptyTile(emptyGround);
 	}
 	
 	//fills a row with tree tiles
 	private void fillRowWithTrees(int rowToFill) {
 		for(int i = 0; i < map.length; i++) {
-			map[rowToFill][i] = new TerrainTile(null,"t");
+			map[rowToFill][i] = new TerrainTile(tree,"t");
 		}
 	}
 	
 	//fills a colum with trees
 	private void fillColumnWithTrees(int columnToFill) {
 		for(int i = 0; i < map.length; i++) {
-			map[i][columnToFill] = new TerrainTile(null,"t");
+			map[i][columnToFill] = new TerrainTile(tree,"t");
 		}
 	}
 	
@@ -125,14 +140,14 @@ public abstract class PokemonMap implements Serializable {
 	//fills a row with fire
 	private void fillRowWithFire(int rowToFill) {
 		for(int i = 0; i < map.length; i++) {
-			map[rowToFill][i] = new TerrainTile(null,"f");
+			map[rowToFill][i] = new TerrainTile(fire,"f");
 		}
 	}
 	
 	//fills a colum wit fire
 	private void fillColumnWithFire(int columnToFill) {
 		for(int i = 0; i < map.length; i++) {
-			map[i][columnToFill] = new TerrainTile(null,"f");
+			map[i][columnToFill] = new TerrainTile(fire,"f");
 		}
 	}
 	
@@ -141,7 +156,7 @@ public abstract class PokemonMap implements Serializable {
 	public void makeGrassRectangle(Point start, int width, int height) {
 		for(int i = start.x; i < width + start.x; i++ ) {
 			for(int j = start.y; j < height + start.y; j++) {
-				map[i][j] = new GrassTile(null);
+				map[i][j] = new GrassTile(grass);
 			}
 		}
 	}
@@ -150,7 +165,7 @@ public abstract class PokemonMap implements Serializable {
 	public void makeFireRectangle(Point start, int width, int height) {
 		for(int i = start.x; i < width + start.x; i++ ) {
 			for(int j = start.y; j < height + start.y; j++) {
-				map[i][j] = new TerrainTile(null,"f");
+				map[i][j] = new TerrainTile(fire,"f");
 			}
 		}
 	}

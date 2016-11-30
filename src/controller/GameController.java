@@ -20,32 +20,55 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import model.MapOne;
+import model.MapTwo;
 import model.PokemonGame;
 import model.PokemonMap;
 import view.BattleView;
+import view.GraphicViewMapTwo;
 import model.Battle;
 import view.PokemonTextView;
 
 public class GameController extends JFrame {
 	private PokemonGame theGame;
 	private MapOne firstMap;
+	private MapTwo secondMap;
+
 
 	private PokemonMap currentMap;
 	private PokemonTextView textView;
 	private BattleView battleView;
+	private GraphicViewMapTwo graphicViewMapTwo;
 	
 
 	public GameController() {
-		 firstMap = new MapOne();
-		 currentMap = firstMap;
-		 theGame = setUpGame(theGame);
-		 setUpFrame();
+//		 firstMap = new MapOne();
+//		 currentMap = firstMap;
+//		 theGame = setUpGame(theGame);
+//		 setUpFrame();
+//		
+//		 this.setTitle("Pokemon Safari Zone");
+//		 battleView = new BattleView(new Battle());
+//		 this.add(battleView);
+//		 battleView.setVisible(true);
+//		 //theGame.addObserver(textView);
 		
-		 this.setTitle("Pokemon Safari Zone");
-		 battleView = new BattleView(new Battle());
-		 this.add(battleView);
-		 battleView.setVisible(true);
-		 //theGame.addObserver(textView);
+		firstMap = new MapOne();
+		currentMap = firstMap;
+
+		theGame = new PokemonGame();
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(1000, 1000);
+		this.setLocation(0, 0);
+		this.setTitle("Pokemon Safari Zone");
+//		textView = new PokemonTextView(theGame);
+//		this.add(textView);
+//		textView.setVisible(true);
+//		theGame.addObserver(textView);
+		graphicViewMapTwo = new GraphicViewMapTwo(theGame);
+		this.add(graphicViewMapTwo);
+		graphicViewMapTwo.setVisible(true);
+		theGame.addObserver(graphicViewMapTwo);
+
 	}
 
 	// if you want to see the battle scene text view, just copy

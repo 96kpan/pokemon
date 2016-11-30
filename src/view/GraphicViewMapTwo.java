@@ -81,7 +81,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		System.out.println(theGame.trainer.getPokemons().size());
 		
 		for(int i = 0; i < theGame.trainer.getPokemons().size(); i++){
-			g.drawImage(theGame.trainer.getPokemons().get(i).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH), 750, 250+(50 * i), null);
+			g.drawImage(theGame.trainer.getPokemons().get(i).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH), 770, 250+(50 * i), null);
 			
 		}
 		

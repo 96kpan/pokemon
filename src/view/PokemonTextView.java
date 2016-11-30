@@ -53,7 +53,6 @@ public class PokemonTextView extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		textArea.setText(theGame.toString());
-		
 		repaint();
 		revalidate();
 		

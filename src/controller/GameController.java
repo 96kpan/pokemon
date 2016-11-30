@@ -13,11 +13,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import model.MapOne;
 import model.PokemonGame;
@@ -26,9 +29,10 @@ import view.BattleView;
 import model.Battle;
 import view.PokemonTextView;
 
-public class GameController extends JFrame {
+public class GameController extends JFrame implements Observer {
 	private PokemonGame theGame;
 	private MapOne firstMap;
+	private JLayeredPane layeredPane;
 
 	private PokemonMap currentMap;
 	private PokemonTextView textView;
@@ -36,36 +40,59 @@ public class GameController extends JFrame {
 	
 
 	public GameController() {
-		 firstMap = new MapOne();
-		 currentMap = firstMap;
-		 theGame = setUpGame(theGame);
-		 setUpFrame();
-		
-		 this.setTitle("Pokemon Safari Zone");
-		 battleView = new BattleView(new Battle());
-		 this.add(battleView);
-		 battleView.setVisible(true);
-		 //theGame.addObserver(textView);
+		firstMap = new MapOne();
+		currentMap = firstMap;
+		theGame = new PokemonGame();
+		setUpLayeredFrame();
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(1000, 1000);
+		this.setLocation(0, 0);
+		this.setTitle("Pokemon Safari Zone");
+		textView = new PokemonTextView(theGame);
+		layeredPane.add(textView,1);
+		textView.setVisible(true);
+		theGame.addObserver(textView);
+		theGame.addObserver(this);
+
 	}
 
-	// if you want to see the battle scene text view, just copy
-	// this code into the constructor
-
-	// firstMap = new MapOne();
-	// currentMap = firstMap;
-	// theGame = setUpGame(theGame);
-	// setUpFrame();
-	//
-	// this.setTitle("Pokemon Safari Zone");
-	// battleView = new BattleView(new Battle());
-	// this.add(battleView);
-	// battleView.setVisible(true);
-	// //theGame.addObserver(textView);
+//	firstMap = new MapOne();
+//	currentMap = firstMap;
+//	theGame = new PokemonGame();
+//	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//	this.setSize(1000, 1000);
+//	this.setLocation(0, 0);
+//	this.setTitle("Pokemon Safari Zone");
+//	textView = new PokemonTextView(theGame);
+//	this.add(textView);
+//	textView.setVisible(true);
+//	theGame.addObserver(textView);
+	
+	
+//	 firstMap = new MapOne();
+//	 currentMap = firstMap;
+//	 theGame = setUpGame(theGame);
+//	 setUpFrame();
+//	 theGame.addObserver(this);
+//	
+//	 this.setTitle("Pokemon Safari Zone");
+//	 battleView = new BattleView(new Battle());
+//	 this.add(battleView);
+//	 battleView.setVisible(true);
 
 	public static void main(String[] args) {
 		GameController gameController = new GameController();
 		gameController.setVisible(true);
 
+	}
+	
+	private void setUpLayeredFrame() {
+		this.layeredPane = new JLayeredPane();
+		layeredPane.setLocation(0,0);
+		layeredPane.setSize(1000, 1000);
+		layeredPane.setVisible(true);
+		this.add(layeredPane);
+		
 	}
 
 	private void setUpFrame() {
@@ -118,6 +145,20 @@ public class GameController extends JFrame {
 		}
 		return theGame;
 
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		//System.out.println("here");
+		if(theGame.shouldLaunchBattle) {
+			battleView = new BattleView(new Battle());
+			layeredPane.add(battleView);
+			
+			layeredPane.setLayer(battleView,1000);
+			battleView.setVisible(true);
+			theGame.shouldLaunchBattle = false;
+		}
+		
 	}
 
 }

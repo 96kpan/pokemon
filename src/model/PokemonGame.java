@@ -15,7 +15,7 @@ public class PokemonGame extends Observable implements Serializable {
 	Trainer trainer;
 	Battle newBattle;
 	BattleView view;
-	private boolean inBattle;
+	public boolean shouldLaunchBattle;
 	private static final int TOTAL_MOVES = 20;
 	private int movesLeft;
 	private static PokemonGame game;
@@ -32,7 +32,6 @@ public class PokemonGame extends Observable implements Serializable {
 		map.getTile(trainer.getLocation().x, trainer.getLocation().y)
 		.setHasTrainer(true);
 		movesLeft = TOTAL_MOVES;
-		inBattle = false;
 	}
 
 	//singleton OODP to only have one instance throughout the game
@@ -108,12 +107,13 @@ public class PokemonGame extends Observable implements Serializable {
 		}
 		break;
 		}
+		map.getTile(trainer.getLocation().x, trainer.getLocation().y).playerIsOnTile(this);
 
 	}
 
 	public void launchBattle() {
-		newBattle = new Battle();
-		view = new BattleView(newBattle);	
+		System.out.println("called launchBattle");
+		shouldLaunchBattle = true;
 	}
 
 

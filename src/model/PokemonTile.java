@@ -20,7 +20,7 @@ public class PokemonTile extends Tile implements Serializable {
 
 	@Override
 	public void playerIsOnTile(PokemonGame game) {
-		//Game.launchBattle(Pokemon pokemonToBattle);
+		System.out.println("player is on tile");
 		game.launchBattle();
 		
 	}

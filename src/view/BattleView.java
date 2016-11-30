@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import model.Battle;
+import model.Trainer;
 
 public class BattleView extends JPanel {
 	private JTextArea battlePokemonText;
@@ -63,7 +64,7 @@ public class BattleView extends JPanel {
 		super.paintComponent(g);
 		Image scaledImage = background.getScaledInstance(750,500,Image.SCALE_SMOOTH);
 		g.drawImage(scaledImage, 0, 0, null);
-		scaledImage = theBattle.getMyPokemon().getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+		scaledImage = Trainer.getInstance().getBackOfTrainer().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
 		g.drawImage(scaledImage, 150, 220, null);
 		scaledImage = theBattle.getRandomPokemon().getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
 		g.drawImage(scaledImage, 500, 100, null);
@@ -142,7 +143,7 @@ public class BattleView extends JPanel {
 
 		this.add(buttonPanel);
 
-		messageText = new JTextArea("What will\n" + this.theBattle.getMyPokemon().getName() + " do?");
+		messageText = new JTextArea("What will\n" + this.theBattle.getMyTrainer().getName() + " do?");
 		messageText.setLocation(40, 400);
 		messageText.setSize(400, 50);
 		messageText.setFont(font);
@@ -155,7 +156,7 @@ public class BattleView extends JPanel {
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
 		battlePokemonText = new JTextArea(this.theBattle.battlePokemonToString());
-		myPokemonText = new JTextArea(this.theBattle.choosenPokemonToString());
+		myPokemonText = new JTextArea(this.theBattle.myTrainerToString());
 		this.setFocusable(true);
 	}
 

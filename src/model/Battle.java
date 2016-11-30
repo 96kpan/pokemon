@@ -11,7 +11,7 @@ public class Battle implements Serializable{
 	private Trainer player;
 	private PokemonGame game;
 	private Pokemon battlePokemon;
-	private Pokemon chosenPokemon;
+	private Trainer myTrainer;
 	private static final int ROCK_HEALTH = 50;
 	private boolean pokemonRanAway;
 	private boolean playerRanAway;
@@ -23,7 +23,7 @@ public class Battle implements Serializable{
 		player = player.getInstance();
 		game = game.getInstance();
 		randomPokemon();
-		chosenPokemon = player.getPokemons().get(0); // choose which pokemon
+		myTrainer = player; // choose the trainer
 		pokemonRanAway = false;
 		playerRanAway = false;
 		battleOver = false;
@@ -96,9 +96,9 @@ public class Battle implements Serializable{
 		return battlePokemon;
 	}
 
-	// getter for random pokemon
-	public Pokemon getMyPokemon() {
-		return this.chosenPokemon;
+	// getter for trainer
+	public Trainer getMyTrainer() {
+		return this.myTrainer;
 	}
 
 	// throw rock, each rock throw is -50 hp
@@ -172,8 +172,8 @@ public class Battle implements Serializable{
 		return this.battlePokemon.getName() + "\n HP: " + this.battlePokemon.getTotalHealthLeft();
 	}
 
-	public String choosenPokemonToString() {
-		return this.chosenPokemon.getName() + "\n HP: " + this.chosenPokemon.getTotalHealthLeft();
+	public String myTrainerToString() {
+		return this.myTrainer.getName() + "\n HP: " + this.myTrainer.getTotalHealthLeft();
 	}
 	
 	public String getName() {
@@ -185,10 +185,10 @@ public class Battle implements Serializable{
 	}
 	
 	public String chosenName() {
-		return this.chosenPokemon.getName();
+		return this.myTrainer.getName();
 	}
 	
 	public String chosenHP() {
-		return "" + this.chosenPokemon.getTotalHealthLeft();
+		return "" + this.myTrainer.getTotalHealthLeft();
 	}
 }

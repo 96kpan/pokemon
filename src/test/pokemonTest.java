@@ -146,7 +146,7 @@ public class pokemonTest {
 	}
 	@Test
 	public void bagTest() {
-		Trainer trainer = new Trainer("damn",null);
+		Trainer trainer = new Trainer("damn");
 		Bag trainerBag = trainer.getBackpack();
 		assertTrue(trainer.getName().equals("damn"));
 		assertTrue(trainerBag.numItems() == 0);

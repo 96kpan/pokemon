@@ -85,7 +85,8 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				
 				// ground
 				if(curTile.toString().equals("e")){
-					g.drawImage(emptyGround, j * 32, i * 32, null);
+					tile = terrain_sheet.getSubimage(random*size, 4*size, size, size);
+					g.drawImage(tile, j * 32, i * 32, null);
 				}
 				
 				// tree

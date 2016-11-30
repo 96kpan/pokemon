@@ -16,7 +16,7 @@ import model.Trainer;
 public class trainerTest {
 	@Test
 	public void tester() {
-		Trainer t = new Trainer("Niven", null);
+		Trainer t = new Trainer("Niven");
 		Item i1 = new Bait("Bait", 1);
 		Item i2 = new Pokeball(2);
 		Item i3 = new HealthPot("HealthPot", 2);

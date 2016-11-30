@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -164,6 +165,7 @@ public class BattleView extends JPanel {
 		battlePokemonHP.setText(this.theBattle.getHP());
 		chosenPokemonHP.setText(this.theBattle.chosenHP());
 		if(this.theBattle.battleOver()){
+			JOptionPane.showMessageDialog(null, "It's super effective!");
 			this.setVisible(false);
 		}
 		repaint();
@@ -184,6 +186,11 @@ public class BattleView extends JPanel {
 				theBattle.runAway();
 			} else if (buttonClicked.getText().equals("POKEBALL")) {
 				theBattle.throwPokeball();
+			}
+			
+			
+			if(!theBattle.battleOver()){
+				JOptionPane.showMessageDialog(null, "It's not very effective...");
 			}
 			update();
 		}

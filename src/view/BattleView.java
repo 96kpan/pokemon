@@ -22,7 +22,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import model.Battle;
+import model.PokemonBattle;
 import model.Trainer;
+import model.TrainerBattle;
 
 public class BattleView extends JPanel {
 	private JTextArea battlePokemonText;
@@ -34,6 +36,7 @@ public class BattleView extends JPanel {
 	private JButton baitButton;
 	private JButton runButton;
 	private JButton pokeballButton;
+	private JButton strengthenButton;
 	private Battle theBattle;
 
 	private Image background;
@@ -67,7 +70,7 @@ public class BattleView extends JPanel {
 		g.drawImage(scaledImage, 0, 0, null);
 		scaledImage = Trainer.getInstance().getBackOfTrainer().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
 		g.drawImage(scaledImage, 150, 220, null);
-		scaledImage = theBattle.getRandomPokemon().getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+		scaledImage = (theBattle).getRandomPokemon().getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
 		g.drawImage(scaledImage, 500, 100, null);
 	}
 	
@@ -136,11 +139,18 @@ public class BattleView extends JPanel {
 		pokeballButton.setFont(font);
 		ButtonListener pokeballListener = new ButtonListener();
 		pokeballButton.addActionListener(pokeballListener);
+		
+		//for pokemon battle only
+//		strengthenButton = new JButton("STRENGTHEN");
+//		strengthenButton.setFont(font);
+//		ButtonListener strengthenListener = new ButtonListener();
+//		strengthenButton.addActionListener(strengthenListener);
 
 		buttonPanel.add(rockButton);
 		buttonPanel.add(baitButton);
 		buttonPanel.add(runButton);
 		buttonPanel.add(pokeballButton);
+		buttonPanel.add(strengthenButton); //for pokemon battle only
 
 		this.add(buttonPanel);
 
@@ -180,7 +190,7 @@ public class BattleView extends JPanel {
 		public void actionPerformed(ActionEvent arg0) {
 			JButton buttonClicked = (JButton) arg0.getSource();
 			if (buttonClicked.getText().equals("ROCK")) {
-				theBattle.throwRock();
+				theBattle.attack();
 				if(!theBattle.battleOver()){
 					JOptionPane.showMessageDialog(null, "You have weakened the pokemon");
 				}
@@ -195,9 +205,14 @@ public class BattleView extends JPanel {
 					JOptionPane.showMessageDialog(null, "Couldn't get away this time");
 				}
 			} else if (buttonClicked.getText().equals("POKEBALL")) {
-				theBattle.throwPokeball();
+				((TrainerBattle) theBattle).throwPokeball();
 				if(!theBattle.battleOver()){
 					JOptionPane.showMessageDialog(null, "Thrwowing pokeball...... not this time!");
+				}
+			} else if(buttonClicked.getText().equals("STRENGTHEN")){
+				((PokemonBattle) theBattle).strengthen();
+				if(!theBattle.battleOver()){
+					JOptionPane.showMessageDialog(null, "Strengthen was not effective enough");
 				}
 			}
 			

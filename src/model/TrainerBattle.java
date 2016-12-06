@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import pokemons.*;
 import pokemons.Pokemon;
 
+//trainer battle is a battle you'd encounter in the fields
 public class TrainerBattle extends Battle implements Serializable{
 
 	private Trainer player;

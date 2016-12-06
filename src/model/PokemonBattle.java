@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import pokemons.Pokemon;
 
+//pokemon battle is the gym leader battle
 public class PokemonBattle extends Battle implements Serializable {
 
 	private Pokemon battlePokemon = null;

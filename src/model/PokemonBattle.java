@@ -7,13 +7,15 @@ import pokemons.Pokemon;
 public class PokemonBattle extends Battle implements Serializable {
 
 	private Pokemon battlePokemon = null;
-	private Pokemon otherTrainerPokemon = null;
-	private Trainer otherTrainer = null;
+	private Pokemon gymTrainerPokemon = null;
+	private Trainer gymTrainer = null;
 
 	private boolean ranAway;
 
+	//pokemon battle with gym leaders
 	public PokemonBattle() {
 		super();
+		
 		battlePokemon = this.getMyTrainer().getPokemons().get(0); // automatically
 																	// set to
 																	// the first
@@ -22,8 +24,8 @@ public class PokemonBattle extends Battle implements Serializable {
 		battlePokemon.setTotalHealth(300); // automatically set the pokemon's HP
 											// to 300 HP
 
-		otherTrainerPokemon = null; // set the other trainers pokemon. idk how
-									// bruh
+		gymTrainerPokemon = getBattlePokemon(); //gets random Pokemon
+		gymTrainerPokemon.setTotalHealth(600); //overrides original health to 600
 
 		ranAway = false;
 	}
@@ -32,7 +34,7 @@ public class PokemonBattle extends Battle implements Serializable {
 	//this method must be overriden since battle over is different between the two types
 	//of the battles in the pokemon game
 	public boolean battleOver() {
-		if (ranAway || !this.battlePokemon.getFainted() || !this.otherTrainerPokemon.getFainted())
+		if (ranAway || !this.battlePokemon.getFainted() || !this.gymTrainerPokemon.getFainted())
 			return true;
 		return false;
 	}

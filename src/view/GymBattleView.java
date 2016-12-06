@@ -26,7 +26,7 @@ import model.PokemonBattle;
 import model.Trainer;
 import model.TrainerBattle;
 
-public class BattleView extends JPanel {
+public class GymBattleView extends JPanel {
 	private JTextArea battlePokemonText;
 	private JTextArea battlePokemonHP;
 	private JTextArea chosenPokemonHP;
@@ -35,15 +35,15 @@ public class BattleView extends JPanel {
 	private JButton rockButton;
 	private JButton baitButton;
 	private JButton runButton;
-	private JButton pokeballButton;
-	//private JButton strengthenButton;
+//	private JButton pokeballButton;
+	private JButton strengthenButton;
 	private Battle theBattle;
 
 	private Image background;
 	private Image pokemon;
 	private Font font;
 
-	public BattleView(Battle battle) {
+	public GymBattleView(Battle battle) {
 		
 		try {
 			font = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("fonts" + File.separator + "Pokemon GB.ttf"));
@@ -135,22 +135,23 @@ public class BattleView extends JPanel {
 		ButtonListener runListener = new ButtonListener();
 		runButton.addActionListener(runListener);
 
-		pokeballButton = new JButton("POKEBALL");
-		pokeballButton.setFont(font);
-		ButtonListener pokeballListener = new ButtonListener();
-		pokeballButton.addActionListener(pokeballListener);
+//		for battleview only
+//		pokeballButton = new JButton("POKEBALL");
+//		pokeballButton.setFont(font);
+//		ButtonListener pokeballListener = new ButtonListener();
+//		pokeballButton.addActionListener(pokeballListener);
 		
-		//for pokemon battle only
-//		strengthenButton = new JButton("STRENGTHEN");
-//		strengthenButton.setFont(font);
-//		ButtonListener strengthenListener = new ButtonListener();
-//		strengthenButton.addActionListener(strengthenListener);
+//		for pokemon battle only
+		strengthenButton = new JButton("STRENGTHEN");
+		strengthenButton.setFont(font);
+		ButtonListener strengthenListener = new ButtonListener();
+		strengthenButton.addActionListener(strengthenListener);
 
 		buttonPanel.add(rockButton);
 		buttonPanel.add(baitButton);
 		buttonPanel.add(runButton);
-		buttonPanel.add(pokeballButton);
-//		buttonPanel.add(strengthenButton); //for pokemon battle only
+//		buttonPanel.add(pokeballButton);
+		buttonPanel.add(strengthenButton); //for pokemon battle only
 
 		this.add(buttonPanel);
 
@@ -204,16 +205,16 @@ public class BattleView extends JPanel {
 				if(!theBattle.battleOver()){
 					JOptionPane.showMessageDialog(null, "Couldn't get away this time");
 				}
-			} else if (buttonClicked.getText().equals("POKEBALL")) {
-				((TrainerBattle) theBattle).throwPokeball();
-				if(!theBattle.battleOver()){
-					JOptionPane.showMessageDialog(null, "Thrwowing pokeball...... not this time!");
-				}
-//			} else if(buttonClicked.getText().equals("STRENGTHEN")){
-//				((PokemonBattle) theBattle).strengthen();
+//			} else if (buttonClicked.getText().equals("POKEBALL")) {
+//				((TrainerBattle) theBattle).throwPokeball();
 //				if(!theBattle.battleOver()){
-//					JOptionPane.showMessageDialog(null, "Strengthen was not effective enough");
+//					JOptionPane.showMessageDialog(null, "Thrwowing pokeball...... not this time!");
 //				}
+			} else if(buttonClicked.getText().equals("STRENGTHEN")){
+				((PokemonBattle) theBattle).strengthen();
+				if(!theBattle.battleOver()){
+					JOptionPane.showMessageDialog(null, "Strengthen was not effective enough");
+				}
 			}
 			
 			

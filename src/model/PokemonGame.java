@@ -3,9 +3,14 @@ package model;
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.Observable;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import item.Axe;
+import item.Bait;
+import item.HealthPot;
+import item.Pokeball;
 import pokemons.Pokemon;
 import pokemons.PokemonModel;
 import view.BattleView;
@@ -125,6 +130,27 @@ public class PokemonGame extends Observable implements Serializable {
 
 	public void launchBattle() {
 		shouldLaunchBattle = true;
+	}
+
+	public void acquireItem() {
+		Random rand = new Random();
+		int  randNum = rand.nextInt(100) + 1;
+		if(randNum == 1) {
+			if(this.map.getClass() == MapOne.class) {
+				trainer.getBackpack().addItem(new Axe(1));
+			}
+			
+		}
+		else if(randNum > 1 && randNum <= 21) {
+			trainer.getBackpack().addItem(new HealthPot("Health pot", 1));
+		}
+		else if(randNum > 21 && randNum <= 41) {
+			trainer.getBackpack().addItem(new Pokeball(1));
+		}
+		else {
+			trainer.getBackpack().addItem(new Bait("Bait",1));
+		}
+		
 	}
 
 

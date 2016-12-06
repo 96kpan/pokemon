@@ -24,7 +24,7 @@ public abstract class Battle implements Serializable{
 		player = player.getInstance();
 		game = game.getInstance();
 		rand = new Random();
-//		randomPokemon();
+		randomPokemon();
 		battleOver = false;
 		
 		

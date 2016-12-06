@@ -5,6 +5,8 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 import pokemons.*;
 import pokemons.Pokemon;
 
@@ -111,11 +113,12 @@ public class TrainerBattle extends Battle implements Serializable{
 
 
 	// throw rock, each rock throw is -50 hp
-	public void throwRock() {
+	public void attack() {
 
 		if (battlePokemon.getTotalHealth() <= 50) {
 			battleOver = true;
 		} else {
+			System.out.println("threw rock");
 			battlePokemon.setTotalHealth(battlePokemon.getTotalHealth() - ROCK_HEALTH);
 			battlePokemon.addRunProbability(10);
 		}

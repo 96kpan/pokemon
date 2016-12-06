@@ -14,7 +14,7 @@ public class PokemonBattle extends Battle implements Serializable {
 
 	public PokemonBattle() {
 		super();
-		//battlePokemon = this.getMyTrainer().getPokemons().get(0); // automatically
+		battlePokemon = this.getMyTrainer().getPokemons().get(0); // automatically
 																	// set to
 																	// the first
 																	// pokemon

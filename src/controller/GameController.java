@@ -51,8 +51,9 @@ public class GameController extends JFrame implements Observer {
 		currentMap = firstMap;
 		theGame = new PokemonGame();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1000, 1000);
-		this.setLocation(0, 0);
+		theGame = setUpGame(theGame);
+		setUpFrame();
+		theGame.addObserver(this);
 		this.setTitle("Pokemon Safari Zone");
 		setUpLayeredFrame();
 		theGame.addObserver(this);

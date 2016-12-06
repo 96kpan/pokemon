@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class TerrainTile extends Tile implements Serializable {
 	private String terrainType;
 
-	public TerrainTile(BufferedImage tileImage, String terrainType) {
+	public TerrainTile( BufferedImage tileImage, String terrainType) {
 		super(tileImage);
 		this.terrainType = terrainType;
 		super.canMove = false;

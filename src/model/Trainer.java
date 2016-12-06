@@ -20,8 +20,8 @@ public class Trainer implements Serializable {
 	
 	
 	private static String name;
-	private BufferedImage trainerImage = null;
-	private static BufferedImage trainer_sheet;
+	private transient BufferedImage trainerImage = null;
+	private static transient BufferedImage trainer_sheet;
 	private Bag backpack;
 	private static Trainer myTrainer;
 	private int totalHPLeft;

@@ -36,12 +36,12 @@ public abstract class PokemonMap implements Serializable {
 	public ArrayList<Point> pokemonLocations; 
 	//protected transient BufferedImage placeholder;
 	
-	private BufferedImage fire;
-	private BufferedImage water;
-	private BufferedImage emptyGround;
-	private BufferedImage grass;
-	private BufferedImage trainer;
-	private BufferedImage tree;
+	private transient BufferedImage fire;
+	private transient BufferedImage water;
+	private transient BufferedImage emptyGround;
+	private transient BufferedImage grass;
+	private transient BufferedImage trainer;
+	private transient BufferedImage tree;
 
 	
 	

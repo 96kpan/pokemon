@@ -13,7 +13,7 @@ public class Blaziken extends Pokemon implements Serializable {
 	static int thisLevel = (int) (Math.random() * 10);
 	static int thisHealth = (int) (Math.random() * 200)+100;
 	static int thisRunProbs = (int) (Math.random() * 50);
-	static BufferedImage thisPic = null; //NIVEN INSERT IMAGE HERE
+	static  transient BufferedImage thisPic = null; //NIVEN INSERT IMAGE HERE
 	
 	public Blaziken(){
 		this(thisLevel, thisHealth, "Blaziken", "Fire", false, thisRunProbs, insertImage());

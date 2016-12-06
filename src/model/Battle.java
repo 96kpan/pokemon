@@ -99,7 +99,7 @@ public class Battle implements Serializable{
 	
 	public void pokemonShouldRun() {
 		int  randomNum = rand.nextInt(200);
-		if(randomNum < battlePokemon.getRunProbability()) {
+		if(randomNum + 50 < battlePokemon.getRunProbability()) {
 			battleOver = true;
 			JOptionPane.showMessageDialog(null, "The pokemon got away");
 		}

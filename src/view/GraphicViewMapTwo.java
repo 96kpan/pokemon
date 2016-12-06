@@ -25,12 +25,12 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private PokemonGame theGame;
 	private JTextArea messageText;
 	private JTextArea myPokemons;
-	private BufferedImage fire;
-	private BufferedImage water;
-	private BufferedImage emptyGround;
-	private BufferedImage grass;
-	private BufferedImage trainer;
-	private BufferedImage tree;
+	private transient BufferedImage fire;
+	private transient BufferedImage water;
+	private transient BufferedImage emptyGround;
+	private transient BufferedImage grass;
+	private transient BufferedImage trainer;
+	private transient BufferedImage tree;
 
 	private BufferedImage terrain_sheet;
 	private final int size = 32;

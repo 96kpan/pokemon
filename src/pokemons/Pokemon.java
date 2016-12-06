@@ -16,7 +16,7 @@ public abstract class Pokemon implements PokemonModel, Serializable{
 	private String type; //pokemon's type
 	private boolean captured; //captured returns true; uncaptured returns false;
 	private int runProbability;//pokemon's run probability
-	private Image pokemonPicture = null; //pokemon's picture
+	private transient Image pokemonPicture = null; //pokemon's picture
 	private boolean fainted;
 	private boolean ranAway;
 

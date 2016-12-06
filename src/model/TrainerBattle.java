@@ -103,7 +103,7 @@ public class TrainerBattle extends Battle implements Serializable{
 		int  randomNum = rand.nextInt(200);
 		if(randomNum < battlePokemon.getRunProbability()) {
 			battleOver = true;
-			JOptionPane.showMessageDialog(null, "The pokemon got away");
+			//JOptionPane.showMessageDialog(null, "The pokemon got away");
 		}
 		
 		
@@ -151,7 +151,7 @@ public class TrainerBattle extends Battle implements Serializable{
 	// player run away
 	public void runAway() {
 		int randGen = (int) (Math.random() * 100) + 1; 
-		if (randGen <  battlePokemon.getRunProbability()){
+		if (randGen <  50){
 			battleOver = true;
 		}
 	}

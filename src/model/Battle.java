@@ -133,6 +133,7 @@ public abstract class Battle implements Serializable{
 
 	// player run away
 	public void runAway() {
+		System.out.println("trying to run away");
 		battleOver = true;
 	}
 

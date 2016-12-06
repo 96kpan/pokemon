@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import model.Battle;
-import model.PokemonBattle;
+//import model.PokemonBattle;
 import model.Trainer;
 import model.TrainerBattle;
 
@@ -150,7 +150,7 @@ public class BattleView extends JPanel {
 		buttonPanel.add(baitButton);
 		buttonPanel.add(runButton);
 		buttonPanel.add(pokeballButton);
-		buttonPanel.add(strengthenButton); //for pokemon battle only
+		//buttonPanel.add(strengthenButton); //for pokemon battle only
 
 		this.add(buttonPanel);
 
@@ -175,7 +175,6 @@ public class BattleView extends JPanel {
 		battlePokemonHP.setText(this.theBattle.getHP());
 		chosenPokemonHP.setText(this.theBattle.chosenHP());
 		if(this.theBattle.battleOver()){
-			
 			JOptionPane.showMessageDialog(null, "Battle over");
 			this.setVisible(false);
 		}
@@ -184,11 +183,11 @@ public class BattleView extends JPanel {
 	}
 
 	private class ButtonListener implements ActionListener {
-
-		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			
 			JButton buttonClicked = (JButton) arg0.getSource();
+			System.out.println(buttonClicked.getText());
 			if (buttonClicked.getText().equals("ROCK")) {
 				theBattle.attack();
 				if(!theBattle.battleOver()){
@@ -200,24 +199,25 @@ public class BattleView extends JPanel {
 					JOptionPane.showMessageDialog(null, "The pokemon is lured in");
 				}
 			} else if (buttonClicked.getText().equals("RUN")) {
+				System.out.println("In run view");
 				theBattle.runAway();
 				if(!theBattle.battleOver()){
 					JOptionPane.showMessageDialog(null, "Couldn't get away this time");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "You got away");
 				}
 			} else if (buttonClicked.getText().equals("POKEBALL")) {
 				((TrainerBattle) theBattle).throwPokeball();
 				if(!theBattle.battleOver()){
 					JOptionPane.showMessageDialog(null, "Thrwowing pokeball...... not this time!");
 				}
-			} else if(buttonClicked.getText().equals("STRENGTHEN")){
-				((PokemonBattle) theBattle).strengthen();
-				if(!theBattle.battleOver()){
-					JOptionPane.showMessageDialog(null, "Strengthen was not effective enough");
-				}
-			}
-			
-			
-			
+			} //else if(buttonClicked.getText().equals("STRENGTHEN")){
+//				((PokemonBattle) theBattle).strengthen();
+//				if(!theBattle.battleOver()){
+//					JOptionPane.showMessageDialog(null, "Strengthen was not effective enough");
+//				}
+//			}
 			update();
 		}
 	}

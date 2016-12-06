@@ -24,6 +24,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import model.MapOne;
 import model.MapTwo;
+import model.PokemonBattle;
 import model.PokemonGame;
 import model.PokemonMap;
 import view.BattleView;
@@ -159,7 +160,7 @@ public class GameController extends JFrame implements Observer {
 	}
 	
 	private void showBattle() {
-		Battle battle = new Battle();
+		Battle battle = new PokemonBattle();
 		battleView = new BattleView(battle);
 		layeredPane.add(battleView);
 		layeredPane.setLayer(battleView,1);

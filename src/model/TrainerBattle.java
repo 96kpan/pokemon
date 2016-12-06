@@ -8,11 +8,12 @@ import javax.swing.JOptionPane;
 import pokemons.*;
 import pokemons.Pokemon;
 
-public abstract class Battle implements Serializable{
+public class TrainerBattle extends Battle implements Serializable{
 
 	private Trainer player;
 	private PokemonGame game;
 	private Pokemon battlePokemon;
+	private static final int ROCK_HEALTH = 50;
 	private boolean battleOver;
 	private boolean caughtPokemon;
 	
@@ -20,19 +21,16 @@ public abstract class Battle implements Serializable{
 	Random rand;
 
 	// constructor which will initialize variables
-	public Battle() {
+	public TrainerBattle() {
+		super();
 		player = player.getInstance();
 		game = game.getInstance();
 		rand = new Random();
-//		randomPokemon();
+		randomPokemon();
 		battleOver = false;
 		
 		
 		
-	}
-	
-	public Pokemon getBattlePokemon(){
-		return this.battlePokemon;
 	}
 
 	// get random pokemon
@@ -103,7 +101,7 @@ public abstract class Battle implements Serializable{
 	
 	public void pokemonShouldRun() {
 		int  randomNum = rand.nextInt(200);
-		if(randomNum + 50 < battlePokemon.getRunProbability()) {
+		if(randomNum < battlePokemon.getRunProbability()) {
 			battleOver = true;
 			JOptionPane.showMessageDialog(null, "The pokemon got away");
 		}
@@ -113,13 +111,32 @@ public abstract class Battle implements Serializable{
 
 
 	// throw rock, each rock throw is -50 hp
-	public void attack() {
+	public void throwRock() {
 
 		if (battlePokemon.getTotalHealth() <= 50) {
 			battleOver = true;
 		} else {
-			battlePokemon.setTotalHealth(battlePokemon.getTotalHealth() - 50);
+			battlePokemon.setTotalHealth(battlePokemon.getTotalHealth() - ROCK_HEALTH);
 			battlePokemon.addRunProbability(10);
+		}
+	}
+
+	// throw pokeball, will only catch pokemon if the pokemon's health is less
+	// than 75
+	public void throwPokeball() {
+		int randNum = rand.nextInt(150);
+		int catchProbability = battlePokemon.getTotalHealth() + battlePokemon.getRunProbability();
+		if (catchProbability < randNum) {
+			player.addPokemon(battlePokemon);
+			JOptionPane.showMessageDialog(null, "You got the pokemon.... Awesome!");
+			battleOver = true;
+			
+		} else {
+			battlePokemon.addRunProbability(10);
+			System.out.println("Run prob: " + battlePokemon.getRunProbability());
+			System.out.println("rand " + randNum);
+
+			pokemonShouldRun();
 		}
 	}
 
@@ -133,17 +150,23 @@ public abstract class Battle implements Serializable{
 
 	// player run away
 	public void runAway() {
-		battleOver = true;
+		int randGen = (int) (Math.random() * 100) + 1; 
+		if (randGen <  battlePokemon.getRunProbability()){
+			battleOver = true;
+		}
 	}
 
 	// sees if the battle is over or not
-	//abstract class since this needs to be changed depending on
-	//the battle situation
-	public abstract boolean battleOver();
+	public boolean battleOver() {
+		pokemonShouldRun();
+		return battleOver;
+	}
 	
 	public Trainer getMyTrainer() {
 		return this.player;
 	}
+	
+
 	
 	public boolean getCaughtPokemon(){
 		return this.caughtPokemon;

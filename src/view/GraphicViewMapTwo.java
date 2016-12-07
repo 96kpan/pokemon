@@ -82,11 +82,6 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		myPokemons.setSize(190, 25);
 		this.add(myPokemons);
 
-		this.itemCounts = new JLabel("<html><body>Backpack: <br>" + theGame.trainer.getBackpack().toString());
-		itemCounts.setLocation(750, 300);
-		itemCounts.setSize(200, 200);
-		this.add(itemCounts);
-
 		JButton healthpotButton = new JButton("Add Health");
 		healthpotButton.setLocation(750, 550);
 		healthpotButton.setSize(190, 25);

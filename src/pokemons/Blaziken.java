@@ -27,6 +27,10 @@ public class Blaziken extends Pokemon implements Serializable {
 		}
 		return thisPic.getSubimage(0, 0*32 , 32, 32);
 	}
+	
+	public String toString() {
+		return "Blazikien HP: " + this.thisHealth;
+	}
 
 	public Blaziken(int level, int totalHealth, String pokemonName, String pokemonType, boolean capturedOrNot,
 			int runProbs, Image pokemonPic) {

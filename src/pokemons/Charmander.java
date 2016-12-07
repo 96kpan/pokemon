@@ -24,6 +24,10 @@ public class Charmander extends Pokemon implements Serializable {
 		super(level, totalHealth, pokemonName, pokemonType, capturedOrNot, runProbs, pokemonPic);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String toString() {
+		return "Charmander HP: " + this.thisHealth;
+	}
 
 	private static BufferedImage insertImage() {
 		try {

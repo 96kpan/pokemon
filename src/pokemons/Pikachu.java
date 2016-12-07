@@ -27,6 +27,10 @@ public class Pikachu extends Pokemon implements Serializable {
 		}
 		return thisPic.getSubimage(0, 9*32 , 32, 32);
 	}
+	
+	public String toString() {
+		return "Pikachu HP: " + this.thisHealth;
+	}
 
 	public Pikachu(int level, int totalHealth, String pokemonName, String pokemonType, boolean capturedOrNot,
 			int runProbs, Image pokemonPic) {

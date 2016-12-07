@@ -23,6 +23,10 @@ public class Mewtwo extends Pokemon implements Serializable {
 			int runProbs, Image pokemonPic) {
 		super(level, totalHealth, pokemonName, pokemonType, capturedOrNot, runProbs, pokemonPic);
 	}
+	
+	public String toString() {
+		return "Mewtwo HP: " + this.thisHealth;
+	}
 
 	private static BufferedImage insertImage() {
 		try {

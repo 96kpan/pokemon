@@ -48,6 +48,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private transient Image[] trainer_right;
 	
 	JButton statsButton;
+	JButton pokemonCaught;
 
 	private BufferedImage terrain_sheet;
 	private final int size = 32;
@@ -121,17 +122,23 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		statsButton.addActionListener(statsListener);
 		statsButton.setVisible(true);
 		this.add(statsButton);
+		
+		
+		pokemonCaught = new JButton("Pokemon I've caught");
+		pokemonCaught.setLocation(750, 350);
+		pokemonCaught.setSize(190, 25);
+		CaughtListener caughtListener = new CaughtListener();
+		pokemonCaught.addActionListener(caughtListener);
+		pokemonCaught.setVisible(true);
+		pokemonCaught.setFocusable(false);
+		this.add(pokemonCaught);
+		
 
 
 	}
 
 	public void paintComponent(Graphics g) {
 
-		for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
-			g.drawImage(theGame.trainer.getPokemons().get(i).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH),
-					770+ (50 * i), 250, null);
-
-		}
 
 		for (int i = 0; i < 23; i++) {
 			for (int j = 0; j < 23; j++) {
@@ -176,7 +183,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 
 				// trainer
 				if (curTile.getHasTrainer()) {
-					g.drawImage(Trainer.getInstance().getImage(), j * 32, i * 32, null);
+					g.drawImage(theGame.trainer.getImage(), j * 32, i * 32, null);
 				}
 
 			}
@@ -247,6 +254,15 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			JOptionPane.showMessageDialog(null,theGame.trainer.getBackpack().toString());
 			statsButton.setFocusable(false);
 			return;
+		}
+	}
+	
+	private class CaughtListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(null,theGame.trainer.getPokemons().toString());
+			pokemonCaught.setFocusable(false);
+			
 		}
 	}
 }

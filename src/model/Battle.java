@@ -21,7 +21,7 @@ public abstract class Battle implements Serializable{
 
 	// constructor which will initialize variables
 	public Battle(PokemonGame theGame) {
-		player = player.getInstance();
+		player = theGame.trainer;
 		game = theGame;
 		rand = new Random();
 		randomPokemon();

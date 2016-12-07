@@ -35,7 +35,7 @@ public class PokemonGame extends Observable implements Serializable {
 		trainer.setLocation(MapOne.startPoint);
 		map.getTile(trainer.getLocation().x, trainer.getLocation().y)
 		.setHasTrainer(true);
-		movesLeft = TOTAL_MOVES;
+		this.movesLeft = TOTAL_MOVES;
 	}
 
 	//singleton OODP to only have one instance throughout the game
@@ -65,7 +65,7 @@ public class PokemonGame extends Observable implements Serializable {
 
 	//general information
 	public String toStringNoOfSteps(){
-		String s = "No of Steps taken " + this.trainer.stepCount();
+		String s = "No of Steps taken " + this.movesLeft;
 
 		return s;
 	}

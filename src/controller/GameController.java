@@ -216,7 +216,7 @@ public class GameController extends JFrame implements Observer {
 	}
 	
 	private void showBattle() {
-		battle = new TrainerBattle();
+		battle = new TrainerBattle(theGame);
 		battleView = new BattleView(battle);
 		layeredPane.add(battleView);
 		layeredPane.setLayer(battleView,1);

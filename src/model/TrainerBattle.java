@@ -26,10 +26,10 @@ public class TrainerBattle extends Battle implements Serializable{
 	Random rand;
 
 	// constructor which will initialize variables
-	public TrainerBattle() {
+	public TrainerBattle(PokemonGame theGame) {
 		super();
 		player = player.getInstance();
-		game = game.getInstance();
+		game = theGame;
 		rand = new Random();
 		randomPokemon();
 		battleOver = false;

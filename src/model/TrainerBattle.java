@@ -20,6 +20,7 @@ public class TrainerBattle extends Battle implements Serializable{
 	private static final int ROCK_HEALTH = 50;
 	private boolean battleOver;
 	private boolean caughtPokemon;
+	private boolean isOccuring;
 	
 	int pokemonCatchProbability;
 	Random rand;
@@ -32,6 +33,7 @@ public class TrainerBattle extends Battle implements Serializable{
 		rand = new Random();
 		randomPokemon();
 		battleOver = false;
+		isOccuring = true;
 		
 	}
 

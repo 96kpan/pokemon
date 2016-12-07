@@ -35,6 +35,10 @@ import model.PokemonBattle;
 import model.PokemonGame;
 import model.PokemonMap;
 import model.TrainerBattle;
+import songplayer.AudioFilePlayer;
+import songplayer.EndOfSongEvent;
+import songplayer.EndOfSongListener;
+import songplayer.SongPlayer;
 import view.BattleView;
 import view.GraphicViewMapTwo;
 import model.Battle;
@@ -53,9 +57,12 @@ public class GameController extends JFrame implements Observer {
 	private PokemonTextView textView;
 	private BattleView battleView;
 	private GraphicViewMapTwo graphicViewMapTwo;
+	AudioFilePlayer player;
+	Battle battle;
 	
 
 	public GameController() {
+		player = new AudioFilePlayer("./songfiles/Walking.mp3");
 		firstMap = new MapOne();
 		currentMap = firstMap;
 		theGame = new PokemonGame(1);
@@ -70,6 +77,7 @@ public class GameController extends JFrame implements Observer {
 		layeredPane.add(graphicViewMapTwo,0);
 		graphicViewMapTwo.setVisible(true);
 		theGame.addObserver(graphicViewMapTwo);
+		player.start();
 	}
 
 	
@@ -101,6 +109,7 @@ public class GameController extends JFrame implements Observer {
 	public static void main(String[] args) {
 		GameController gameController = new GameController();
 		gameController.setVisible(true);
+	
 
 	}
 	
@@ -132,6 +141,9 @@ public class GameController extends JFrame implements Observer {
 		});
 	}
 
+	
+	
+	
 	private void saveGameState(PokemonGame theGame) {
 		try {
 			FileOutputStream bytesToDisk = new FileOutputStream("Pokemon_Saved_Data");
@@ -197,22 +209,29 @@ public class GameController extends JFrame implements Observer {
 	}
 	
 	private void showBattle() {
-		Battle battle = new TrainerBattle();
+		battle = new TrainerBattle();
 		battleView = new BattleView(battle);
 		layeredPane.add(battleView);
 		layeredPane.setLayer(battleView,1);
 		battleView.setVisible(true);
 		graphicViewMapTwo.setFocusable(false);
+		graphicViewMapTwo.setEnabled(false);
+		
+	
+		
+		
 	}
 	
 
 	@Override
 	public void update(Observable o, Object arg) {
 		if(theGame.shouldLaunchBattle) {
+			
 			showBattle();
 			theGame.shouldLaunchBattle = false;
 			graphicViewMapTwo.setFocusable(true);
 			graphicViewMapTwo.setVisible(true);
+			
 			
 			
 		}
@@ -220,5 +239,10 @@ public class GameController extends JFrame implements Observer {
 		
 		
 	}
+	
+	
+	
+	
+	
 
 }

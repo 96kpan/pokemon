@@ -12,6 +12,7 @@ public class PokemonBattle extends Battle implements Serializable {
 	private Trainer gymTrainer = null;
 
 	private boolean ranAway;
+	
 
 	//pokemon battle with gym leaders
 	public PokemonBattle() {
@@ -29,6 +30,7 @@ public class PokemonBattle extends Battle implements Serializable {
 		gymTrainerPokemon.setTotalHealth(600); //overrides original health to 600
 
 		ranAway = false;
+		
 	}
 
 	@Override

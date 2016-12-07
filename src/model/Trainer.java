@@ -110,7 +110,7 @@ public class Trainer implements Serializable {
 	
 	// Adds steps to the steps global variable
 	public boolean addSteps(int add) {
-		steps += add;
+		steps += 1;
 		if(steps >= MAX_STEPS) {
 			System.out.println("Trainer has walked maximum number of steps");
 			return false;

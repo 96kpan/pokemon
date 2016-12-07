@@ -159,46 +159,7 @@ public class PokemonGame extends Observable implements Serializable {
 		}
 		
 		//Win Condition 1: Finite steps condition
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
-		System.out.println("steps left : " + this.game.trainer.stepCount());
+		System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");
 		if(this.winCondition == 0){
 			if(game.trainer.stepCount() == 0){
 				System.out.println("game.trainer.getBackpack().getNumOfPokeballs() " + game.trainer.getBackpack().getNumOfPokeballs());

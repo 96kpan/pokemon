@@ -1291,4 +1291,35 @@ public class itemTest {
 		int y = b.numItems();
 
 	}
+	@Test
+	public void testAttack() {
+		Battle b = new PokemonBattle();
+		b.attack();
+		b.attack();
+		b.attack();
+		b.attack();
+		b.attack();
+		b.attack();
+		b.attack();
+		b.attack();
+		
+
+	}
+	
+	public void testAttack2() {
+		Battle b = new TrainerBattle();
+		b.attack();
+		b.attack();
+		b.attack();
+		b.attack();
+		b.attack();
+		b.attack();
+		b.attack();
+		b.attack();
+		
+
+	}
+	
+	
+	
 }

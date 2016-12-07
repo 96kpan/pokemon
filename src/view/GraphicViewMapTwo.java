@@ -164,27 +164,29 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		public void actionPerformed(ActionEvent arg0) {
 			String text = arg0.getActionCommand();
 			if (text.equals("Add Health")) {
-				if (theGame.trainer.getBackpack().getCountOfItems("Health Pots") == 0) {
-					JOptionPane.showMessageDialog(null, "Do not have any more Health Potions");
-					return;
-				} else {
-					JRadioButton[] rb = new JRadioButton[theGame.trainer.getPokemons().size()];
-					JPanel p = new JPanel(new GridLayout(3, 5));
-					for (int x = 0; x < theGame.trainer.getPokemons().size(); x++) {
-						rb[x] = new JRadioButton("" + theGame.trainer.getPokemons().get(x).getName());
-						p.add(rb[x]);
-					}
-					JOptionPane.showMessageDialog(null, p);
 
-					for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
-						if (rb[i].isSelected()) {
-							// find pokemon
+				JRadioButton[] rb = new JRadioButton[theGame.trainer.getPokemons().size()];
+				JPanel p = new JPanel(new GridLayout(3, 5));
+				for (int x = 0; x < theGame.trainer.getPokemons().size(); x++) {
+					rb[x] = new JRadioButton("" + theGame.trainer.getPokemons().get(x).getName());
+					p.add(rb[x]);
+				}
+				JOptionPane.showMessageDialog(null, p);
+
+				for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
+					if (rb[i].isSelected()) {
+						// find pokemon
+						if(theGame.trainer.getBackpack().getCountOfItems("Health Pots") > 0){
+							theGame.trainer.getBackpack().removeItem("Health Pots");
 							theGame.trainer.getPokemons().get(i)
 									.setTotalHealth(theGame.trainer.getPokemons().get(i).getTotalHealth() + 50);
-							theGame.trainer.getBackpack().removeItem("Health Pots");
 							
-
+							return;
+						}else{
+							JOptionPane.showMessageDialog(null, "No more");
 						}
+						
+
 					}
 				}
 

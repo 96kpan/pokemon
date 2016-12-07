@@ -69,6 +69,8 @@ public class Bag implements Serializable {
 	
 	public int getCountOfItems(String s){
 		if(this.bag.containsKey(s)){
+			System.out.println(s);
+			System.out.println("Contains " + bag.get(s));
 			return (int) bag.get(s);
 		}
 		return 0; 

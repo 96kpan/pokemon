@@ -127,7 +127,7 @@ public class TrainerBattle extends Battle implements Serializable{
 	// throw pokeball, will only catch pokemon if the pokemon's health is less
 	// than 75
 	public void throwPokeball() {
-		game.trainer.getBackpack().removeItem(new Pokeball(1));
+		game.trainer.getBackpack().removeItem("Pokeball");
 		int randNum = rand.nextInt(150);
 		int catchProbability = battlePokemon.getTotalHealth() + battlePokemon.getRunProbability();
 		if (catchProbability < randNum) {

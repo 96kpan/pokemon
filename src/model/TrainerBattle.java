@@ -30,8 +30,6 @@ public class TrainerBattle extends Battle implements Serializable{
 		randomPokemon();
 		battleOver = false;
 		
-		
-		
 	}
 
 	// get random pokemon

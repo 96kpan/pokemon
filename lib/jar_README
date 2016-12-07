@@ -1,0 +1,3 @@
+Once added to eclipse project folder
+Right-click on each jar --> go to build path --> add to build path
+A "Referenced Libraries" folder will automatically be created and these 3 jars will be added

@@ -157,7 +157,7 @@ public class BattleView extends JPanel {
 		super.paintComponent(g);
 		Image scaledImage = background.getScaledInstance(750, 500, Image.SCALE_SMOOTH);
 		g.drawImage(scaledImage, 0, 0, null);
-		scaledImage = Trainer.getInstance().getBackOfTrainer().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+		scaledImage = theGame.trainer.getBackOfTrainer().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
 		g.drawImage(scaledImage, 150, 220, null);
 		if (begin) {
 			scaledImage = (theBattle).getRandomPokemon().getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH);

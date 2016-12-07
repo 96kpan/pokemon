@@ -161,7 +161,7 @@ public class GameController extends JFrame implements Observer {
 				FileInputStream rawBytes = new FileInputStream("Pokemon_Saved_Data");
 				ObjectInputStream inFile = new ObjectInputStream(rawBytes);
 				theGame = (PokemonGame) inFile.readObject();
-				System.out.println(theGame.toString());
+				JOptionPane.showMessageDialog(null, "Your player has been camouflaged by a Staryu move around to escape!");
 				inFile.close();
 			} catch (Exception e) {
 				System.out.println("Reading objects failed");

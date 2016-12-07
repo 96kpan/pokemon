@@ -19,18 +19,17 @@ import pokemons.Pokemon;
 public class Trainer implements Serializable {
 	
 	
-	private static String name;
+	private String name;
 	private transient BufferedImage trainerImage = null;
 	private static transient BufferedImage trainer_sheet;
 	private Bag backpack;
-	private static Trainer myTrainer;
 	private int totalHPLeft;
-	private static int steps;
+	private int steps;
 	private int MAX_STEPS = 500;
 	private Point location;
 	private Direction d;
 	
-	private static ArrayList<Pokemon> pokemon;
+	private ArrayList<Pokemon> pokemon;
 	
 	public Trainer(String name) {
 		this.name = name;
@@ -87,13 +86,7 @@ public class Trainer implements Serializable {
 	}
 	
 	//singleton OODP so only one instance is used throughout the game
-	public static Trainer getInstance(){
-		if(myTrainer == null){
-			myTrainer = new Trainer(name);
-		}
-		
-		return myTrainer;
-	}
+	
 	
 	public void setLocation(Point location) {
 		this.location = location;

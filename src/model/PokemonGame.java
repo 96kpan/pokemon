@@ -16,7 +16,7 @@ import pokemons.PokemonModel;
 import view.BattleView;
 
 public class PokemonGame extends Observable implements Serializable {
-	PokemonMap map;
+	static PokemonMap map;
 	public Trainer trainer;
 	Battle newBattle;
 	BattleView view;
@@ -40,6 +40,10 @@ public class PokemonGame extends Observable implements Serializable {
 
 	//singleton OODP to only have one instance throughout the game
 	public static PokemonGame getInstance() {
+		if(game == null){
+			game = new PokemonGame(map);
+		}
+
 		return game;
 	}
 

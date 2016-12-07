@@ -16,6 +16,7 @@ import java.util.Observer;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -171,11 +172,14 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		public void actionPerformed(ActionEvent arg0) {
 			String text = arg0.getActionCommand();
 			if (text.equals("Add Health")) {
+				
+				ButtonGroup bg1 = new ButtonGroup();
 
 				JRadioButton[] rb = new JRadioButton[theGame.trainer.getPokemons().size()];
 				JPanel p = new JPanel(new GridLayout(3, 5));
 				for (int x = 0; x < theGame.trainer.getPokemons().size(); x++) {
 					rb[x] = new JRadioButton("" + theGame.trainer.getPokemons().get(x).getName());
+					bg1.add(rb[x]);
 					p.add(rb[x]);
 				}
 				JOptionPane.showMessageDialog(null, p);

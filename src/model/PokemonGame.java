@@ -16,7 +16,7 @@ import pokemons.PokemonModel;
 import view.BattleView;
 
 public class PokemonGame extends Observable implements Serializable {
-	PokemonMap map;
+	static PokemonMap map;
 	public Trainer trainer;
 	Battle newBattle;
 	BattleView view;
@@ -28,19 +28,9 @@ public class PokemonGame extends Observable implements Serializable {
 	private static PokemonGame game;
 
 
-	public PokemonGame(int num)  {
-		MapOne mapOne = new MapOne();
-		MapTwo mapTwo = new MapTwo();
-
-		// set this for whichever map we want to use
-		if(num == 0) {
-			map = mapOne;
-		}
-		else {
-			map = mapTwo;
-		}
-
-
+	public PokemonGame(PokemonMap m)  {
+		map = m;
+	
 		trainer = new Trainer("ASH KETCHUP");
 		trainer.setLocation(MapOne.startPoint);
 		map.getTile(trainer.getLocation().x, trainer.getLocation().y)
@@ -51,7 +41,7 @@ public class PokemonGame extends Observable implements Serializable {
 	//singleton OODP to only have one instance throughout the game
 	public static PokemonGame getInstance() {
 		if(game == null){
-			game = new PokemonGame(whichMap);
+			game = new PokemonGame(map);
 		}
 
 		return game;

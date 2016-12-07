@@ -2,7 +2,10 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,7 +16,10 @@ import java.util.Observer;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 import model.*;
@@ -31,7 +37,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private transient BufferedImage emptyGround;
 	private transient BufferedImage grass;
 	private transient BufferedImage tree;
-	
+
 	private BufferedImage terrain_sheet;
 	private final int size = 32;
 	private BufferedImage tile;
@@ -59,36 +65,45 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		setLayout(null);
 		setSize(1000, 1000);
 		setLocation(0, 0);
-		//this.setBackground(Color.WHITE);
+		// this.setBackground(Color.WHITE);
 		this.setFocusable(true);
 		this.addKeyListener(new MovementListener(theGame));
-		
+
 		messageText = new JTextArea("No of Steps taken 500");
-		messageText.setLocation(750,100);
+		messageText.setLocation(750, 100);
 		messageText.setSize(150, 25);
 		this.add(messageText);
-		
-		this.myPokemons = new JTextArea(theGame.trainer.getName() + "'s Pokemon");	
-		myPokemons.setLocation(750,200);
+
+		this.myPokemons = new JTextArea(theGame.trainer.getName() + "'s Pokemon");
+		myPokemons.setLocation(750, 200);
 		myPokemons.setSize(190, 25);
 		this.add(myPokemons);
-		
+
 		this.itemCounts = new JTextArea("Backpack: \n" + theGame.trainer.getBackpack().toString());
-		itemCounts.setLocation(750,300);
-		itemCounts.setSize(200,200);
+		itemCounts.setLocation(750, 300);
+		itemCounts.setSize(200, 200);
 		this.add(itemCounts);
+
+		JButton healthpotButton = new JButton("Add Health");
+		healthpotButton.setLocation(750, 550);
+		healthpotButton.setSize(190, 25);
+		ButtonListener hpListener = new ButtonListener();
+		healthpotButton.addActionListener(hpListener);
+		healthpotButton.setVisible(true);
+		this.add(healthpotButton);
+
 	}
 
 	public void paintComponent(Graphics g) {
-		
+
 		System.out.println(theGame.trainer.getPokemons().size());
-		
-		for(int i = 0; i < theGame.trainer.getPokemons().size(); i++){
-			g.drawImage(theGame.trainer.getPokemons().get(i).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH), 770, 250+(50 * i), null);
-			
+
+		for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
+			g.drawImage(theGame.trainer.getPokemons().get(i).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH),
+					770, 250 + (50 * i), null);
+
 		}
-		
-		
+
 		for (int i = 0; i < 23; i++) {
 			for (int j = 0; j < 23; j++) {
 				Tile curTile = theGame.getMap().getTile(i, j);
@@ -142,5 +157,38 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		this.itemCounts.setText("Backpack: \n" + theGame.trainer.getBackpack().toString());
 		this.repaint();
 		revalidate();
+	}
+
+	private class ButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			String text = arg0.getActionCommand();
+			if (text.equals("Add Health")) {
+				if (theGame.trainer.getBackpack().getCountOfItems("Health Pots") == 0) {
+					JOptionPane.showMessageDialog(null, "Do not have any more Health Potions");
+					return;
+				} else {
+					JRadioButton[] rb = new JRadioButton[theGame.trainer.getPokemons().size()];
+					JPanel p = new JPanel(new GridLayout(3, 5));
+					for (int x = 0; x < theGame.trainer.getPokemons().size(); x++) {
+						rb[x] = new JRadioButton("" + theGame.trainer.getPokemons().get(x).getName());
+						p.add(rb[x]);
+					}
+					JOptionPane.showMessageDialog(null, p);
+
+					for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
+						if (rb[i].isSelected()) {
+							// find pokemon
+							theGame.trainer.getPokemons().get(i)
+									.setTotalHealth(theGame.trainer.getPokemons().get(i).getTotalHealth() + 50);
+							theGame.trainer.getBackpack().removeItem("Health Pots");
+							
+
+						}
+					}
+				}
+
+			}
+		}
 	}
 }

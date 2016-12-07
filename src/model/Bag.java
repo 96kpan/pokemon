@@ -55,21 +55,28 @@ public class Bag implements Serializable {
 	
 
 	// Removes given item from backpack and shifts array
-	public void removeItem(Item item) {
-		if(bag.containsKey(item.getItemName()) && item.getNumOfItems() > 0){
-			int num = (int) bag.get(item.getItemName());
+	public void removeItem(String s) {
+		if(bag.containsKey(s) && getCountOfItems(s) > 0){
+			int num = (int) bag.get(s);
 			if(num == 0){
-				JOptionPane.showMessageDialog(null, "You are out of" + item.toString());
+				JOptionPane.showMessageDialog(null, "You are out of" + s);
 			}
 			else{
-				bag.put(item.getItemName(), num-1);
+				bag.put(s, num-1);
 			}
 		}
+	}
+	
+	public int getCountOfItems(String s){
+		if(this.bag.containsKey(s)){
+			return (int) bag.get(s);
+		}
+		return 0; 
 	}
 
 	// uses given item from backpack and shifts array
 	public void useItem(Item item) {
-		this.removeItem(item);
+		this.removeItem(item.getItemName());
 	}
 
 	// Prints all current items in the trainer's backpack

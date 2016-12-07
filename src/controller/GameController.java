@@ -175,6 +175,7 @@ public class GameController extends JFrame implements Observer {
 				bg.add(rb[x]);
 				p.add(rb[x]);
 			}
+			rb[0].setSelected(true);
 			JOptionPane.showMessageDialog(null, p);
 			if(rb[0].isSelected()){
 				this.theGame.whichMap = 1;
@@ -190,6 +191,7 @@ public class GameController extends JFrame implements Observer {
 			rb2[0] = new JRadioButton("Win Condition 1: Finite steps condition");
 			bg2.add(rb2[0]);
 			p2.add(rb2[0]);
+			rb2[0].setSelected(true);
 			rb2[1] = new JRadioButton("Win Condition 2: Finite balls condition");
 			bg2.add(rb2[1]);
 			p2.add(rb2[1]);

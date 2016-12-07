@@ -91,7 +91,7 @@ public class itemTest {
 	public void TbattleTest() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -114,7 +114,7 @@ public class itemTest {
 	public void TbattleTest1() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -137,7 +137,7 @@ public class itemTest {
 	public void TbattleTest2() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -160,7 +160,7 @@ public class itemTest {
 	public void TbattleTest3() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -188,7 +188,7 @@ public class itemTest {
 	public void TbattleTest5() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -211,7 +211,7 @@ public class itemTest {
 	public void TbattleTest6() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -234,7 +234,7 @@ public class itemTest {
 	public void TbattleTest7() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -257,7 +257,7 @@ public class itemTest {
 	public void TbattleTest8() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -280,7 +280,7 @@ public class itemTest {
 	public void TbattleTest9() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -303,7 +303,7 @@ public class itemTest {
 	public void TbattleTest10() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -326,7 +326,7 @@ public class itemTest {
 	public void TbattleTest11() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -384,7 +384,7 @@ public class itemTest {
 	public void TbattleTest12() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -460,7 +460,7 @@ public class itemTest {
 	public void TbattleTest13() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -539,7 +539,7 @@ public class itemTest {
 	public void TbattleTest14() {
 		//
 
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -602,8 +602,7 @@ public class itemTest {
 	@Test
 	public void TbattleTest15() {
 		//
-
-		TrainerBattle b = new TrainerBattle();
+		TrainerBattle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		((TrainerBattle) b).attack();
 		((TrainerBattle) b).battlePokemonToString();
 		((TrainerBattle) b).chosenHP();
@@ -1307,7 +1306,7 @@ public class itemTest {
 	}
 	
 	public void testAttack2() {
-		Battle b = new TrainerBattle();
+		Battle b = new TrainerBattle(new PokemonGame(new MapOne()));
 		b.attack();
 		b.attack();
 		b.attack();

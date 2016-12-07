@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import model.Battle;
+import model.PokemonGame;
 //import model.PokemonBattle;
 import model.Trainer;
 import model.TrainerBattle;
@@ -42,6 +43,7 @@ public class BattleView extends JPanel {
 	private Image background;
 	private Image pokemon;
 	private Font font;
+	private PokemonGame theGame;
 
 	public BattleView(Battle battle) {
 		
@@ -61,6 +63,7 @@ public class BattleView extends JPanel {
 		initButtons();
 		initTextView();
 		initBattleText();
+		theGame = PokemonGame.getInstance();
 	}
 	
 	@Override
@@ -195,6 +198,7 @@ public class BattleView extends JPanel {
 				}
 			} else if (buttonClicked.getText().equals("BAIT")) {
 				theBattle.throwBait();
+				//theGame.trainer.getBackOfTrainer()
 				if(!theBattle.battleOver()){
 					JOptionPane.showMessageDialog(null, "The pokemon is lured in");
 				}
@@ -209,6 +213,7 @@ public class BattleView extends JPanel {
 				}
 			} else if (buttonClicked.getText().equals("POKEBALL")) {
 				((TrainerBattle) theBattle).throwPokeball();
+				
 				if(!theBattle.battleOver()){
 					JOptionPane.showMessageDialog(null, "Thrwowing pokeball...... not this time!");
 				}

@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
+import item.Pokeball;
 import pokemons.*;
 import pokemons.Pokemon;
 
@@ -127,6 +128,7 @@ public class TrainerBattle extends Battle implements Serializable{
 	// throw pokeball, will only catch pokemon if the pokemon's health is less
 	// than 75
 	public void throwPokeball() {
+		game.trainer.getBackpack().removeItem(new Pokeball(1));
 		int randNum = rand.nextInt(150);
 		int catchProbability = battlePokemon.getTotalHealth() + battlePokemon.getRunProbability();
 		if (catchProbability < randNum) {

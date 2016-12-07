@@ -25,7 +25,6 @@ public class Trainer implements Serializable {
 	private Bag backpack;
 	private static Trainer myTrainer;
 	private int totalHPLeft;
-	
 	private int steps;
 	private int MAX_STEPS = 500;
 	private Point location;
@@ -50,6 +49,21 @@ public class Trainer implements Serializable {
 			System.out.println("Can't find image");
 		}
 		return trainer_sheet.getSubimage(0, 0*32 , 32, 32);
+	}
+	
+	public BufferedImage getImage() {
+		return trainerImage;
+	}
+	
+	public void setImage(Direction d) {
+		if(d == Direction.North)
+			trainerImage = trainer_sheet.getSubimage(0, 1*32, 32, 32);
+		if(d == Direction.South)
+			trainerImage = trainer_sheet.getSubimage(0, 0*32, 32, 32);
+		if(d == Direction.East)
+			trainerImage = trainer_sheet.getSubimage(0, 2*32, 32, 32);
+		if(d == Direction.West)
+			trainerImage = trainer_sheet.getSubimage(0, 3*32, 32, 32);
 	}
 	
 	public BufferedImage getBackOfTrainer() {

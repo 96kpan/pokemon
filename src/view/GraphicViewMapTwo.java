@@ -29,9 +29,8 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private transient BufferedImage water;
 	private transient BufferedImage emptyGround;
 	private transient BufferedImage grass;
-	private transient BufferedImage trainer;
 	private transient BufferedImage tree;
-
+	
 	private BufferedImage terrain_sheet;
 	private final int size = 32;
 	private BufferedImage tile;
@@ -42,7 +41,6 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			water = ImageIO.read(new File("images/water.png"));
 			emptyGround = ImageIO.read(new File("images/emptyGround.png"));
 			grass = ImageIO.read(new File("images/grass.png"));
-			trainer = ImageIO.read(new File("images/trainer.png"));
 			tree = ImageIO.read(new File("images/tree.png"));
 
 			terrain_sheet = ImageIO.read(new File("images/terrain.png"));
@@ -125,7 +123,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 
 				// trainer
 				if (curTile.getHasTrainer()) {
-					g.drawImage(trainer, j * 32, i * 32, null);
+					g.drawImage(Trainer.getInstance().getImage(), j * 32, i * 32, null);
 				}
 
 			}

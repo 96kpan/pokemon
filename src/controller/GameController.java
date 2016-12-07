@@ -2,6 +2,7 @@
 
 package controller;
 
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -24,6 +25,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.Timer;
 
 import model.MapOne;
@@ -35,6 +38,7 @@ import model.TrainerBattle;
 import view.BattleView;
 import view.GraphicViewMapTwo;
 import model.Battle;
+import model.EmptyTile;
 import view.PokemonTextView;
 
 public class GameController extends JFrame implements Observer {
@@ -55,14 +59,15 @@ public class GameController extends JFrame implements Observer {
 	public GameController() {
 		firstMap = new MapOne();
 		currentMap = firstMap;
-		theGame = new PokemonGame();
+		theGame = null;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		theGame = setUpGame(theGame);
+		setUpGame();
 		setUpFrame();
 		theGame.addObserver(this);
 		this.setTitle("Pokemon Safari Zone");
 		setUpLayeredFrame();
 		theGame.addObserver(this);
+		System.out.println("aaaaaa" + theGame);
 		graphicViewMapTwo = new GraphicViewMapTwo(theGame);
 		layeredPane.add(graphicViewMapTwo,0);
 		graphicViewMapTwo.setVisible(true);
@@ -141,24 +146,42 @@ public class GameController extends JFrame implements Observer {
 		}
 	}
 
-	private PokemonGame setUpGame(PokemonGame theGame) {
+	private void setUpGame() {
 		int result = JOptionPane.showConfirmDialog(this,
 				"Start with previous saved state?\n" + "No means all new objects");
 		if (result == JOptionPane.YES_OPTION) {
 			try {
+				System.out.println("reading game");
 				FileInputStream rawBytes = new FileInputStream("Pokemon_Saved_Data");
 				ObjectInputStream inFile = new ObjectInputStream(rawBytes);
-				theGame = (PokemonGame) inFile.readObject();
+				this.theGame = (PokemonGame) inFile.readObject();
+				System.out.println();
 				inFile.close();
 			} catch (Exception e) {
 				System.out.println("Reading objects failed");
 			}
 		} else if (result == JOptionPane.NO_OPTION) {
-			theGame = new PokemonGame();
+			
+			
+			JRadioButton[] rb = new JRadioButton[2];
+			JPanel p = new JPanel(new GridLayout(2, 1));
+			for (int x = 0; x < 2; x++) {
+				rb[x] = new JRadioButton("Map " + (x+1));
+				p.add(rb[x]);
+			}
+			JOptionPane.showMessageDialog(null, p);
+			
+			if(rb[0].isSelected()){
+				System.out.println("here");
+				this.theGame = new PokemonGame(new MapOne());
+			}else{
+				this.theGame = new PokemonGame(new MapTwo());
+			}	
+			
 		} else {
 			System.exit(0);
 		}
-		return theGame;
+		
 
 	}
 	
@@ -176,6 +199,8 @@ public class GameController extends JFrame implements Observer {
 	public void update(Observable o, Object arg) {
 		if(theGame.shouldLaunchBattle) {
 			showBattle();
+			this.theGame.getMap().map[9][1] = new EmptyTile(null);
+			//System.out.println(this.theGame.toString());
 			theGame.shouldLaunchBattle = false;
 			graphicViewMapTwo.setFocusable(true);
 			graphicViewMapTwo.setVisible(true);

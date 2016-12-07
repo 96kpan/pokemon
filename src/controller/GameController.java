@@ -31,6 +31,7 @@ import model.MapTwo;
 import model.PokemonBattle;
 import model.PokemonGame;
 import model.PokemonMap;
+import model.TrainerBattle;
 import view.BattleView;
 import view.GraphicViewMapTwo;
 import model.Battle;
@@ -162,7 +163,7 @@ public class GameController extends JFrame implements Observer {
 	}
 	
 	private void showBattle() {
-		Battle battle = new PokemonBattle();
+		Battle battle = new TrainerBattle();
 		battleView = new BattleView(battle);
 		layeredPane.add(battleView);
 		layeredPane.setLayer(battleView,1);

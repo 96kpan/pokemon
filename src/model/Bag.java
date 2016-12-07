@@ -17,7 +17,13 @@ package model;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
+
+import item.Axe;
+import item.Bait;
+import item.HealthPot;
 import item.Item;
+import item.Pokeball;
 
 public class Bag implements Serializable {
 	private int numItems;
@@ -26,6 +32,12 @@ public class Bag implements Serializable {
 	// Creates a new bag with nothing in the backpack
 	public Bag() {
 		bag = new HashMap<String, Integer>();
+		for(int i = 0; i < 31; i++) {
+			this.addItem(new Pokeball(1));
+		}
+		this.addItem(new HealthPot("Health Pot", 1));
+		this.addItem(new Bait("Bait", 1));
+		this.addItem(new Axe(1));
 	}
 
 	// Adds item passed through parameters to the backpack
@@ -37,16 +49,17 @@ public class Bag implements Serializable {
 			bag.put(itemStr, num +1);
 		}
 		else{
-			bag.put(itemStr, 1);
+			bag.put(itemStr, 0);
 		}
 	}
+	
 
 	// Removes given item from backpack and shifts array
 	public void removeItem(Item item) {
 		if(bag.containsKey(item.getItemName()) && item.getNumOfItems() > 0){
 			int num = (int) bag.get(item.getItemName());
-			if(num == 1){
-				bag.remove(item.getItemName());
+			if(num == 0){
+				JOptionPane.showMessageDialog(null, "You are out of" + item.toString());
 			}
 			else{
 				bag.put(item.getItemName(), num-1);
@@ -63,7 +76,7 @@ public class Bag implements Serializable {
 	public String toString() {
 		String str = "";
 		for(Object s : bag.keySet()){
-			str += ((Item) s).getItemName() + " " + ((Item) s).getNumOfItems();
+			str += s + "s " + bag.get(s) + "\n";
 		}
 		return str;
 	}

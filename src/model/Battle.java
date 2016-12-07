@@ -24,7 +24,7 @@ public abstract class Battle implements Serializable{
 		player = player.getInstance();
 		game = game.getInstance();
 		rand = new Random();
-//		randomPokemon();
+		randomPokemon();
 		battleOver = false;
 		
 		
@@ -133,6 +133,7 @@ public abstract class Battle implements Serializable{
 
 	// player run away
 	public void runAway() {
+		System.out.println("trying to run away");
 		battleOver = true;
 	}
 

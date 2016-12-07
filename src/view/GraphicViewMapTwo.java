@@ -25,6 +25,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private PokemonGame theGame;
 	private JTextArea messageText;
 	private JTextArea myPokemons;
+	private JTextArea itemCounts;
 	private transient BufferedImage fire;
 	private transient BufferedImage water;
 	private transient BufferedImage emptyGround;
@@ -67,11 +68,15 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		messageText.setSize(150, 25);
 		this.add(messageText);
 		
-		this.myPokemons = new JTextArea(theGame.trainer.getName() + "'s Pokemons");	
+		this.myPokemons = new JTextArea(theGame.trainer.getName() + "'s Pokemon");	
 		myPokemons.setLocation(750,200);
 		myPokemons.setSize(190, 25);
 		this.add(myPokemons);
 		
+		this.itemCounts = new JTextArea("Backpack: \n" + theGame.trainer.getBackpack().toString());
+		itemCounts.setLocation(750,300);
+		itemCounts.setSize(200,200);
+		this.add(itemCounts);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -134,6 +139,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		this.messageText.setText(theGame.toStringNoOfSteps());
+		this.itemCounts.setText("Backpack: \n" + theGame.trainer.getBackpack().toString());
 		this.repaint();
 		revalidate();
 	}

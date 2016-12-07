@@ -162,7 +162,6 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		this.messageText.setText(theGame.toStringNoOfSteps());
-		this.itemCounts.setText("<html><body>Backpack: <br>" + theGame.trainer.getBackpack().toString());
 		if(this.theGame.isGameOver()){
 			JOptionPane.showMessageDialog(null, "Game over");
 			return;

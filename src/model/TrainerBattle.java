@@ -148,6 +148,12 @@ public class TrainerBattle extends Battle implements Serializable{
 	// throw bait
 	// run probability lowers
 	public void throwBait() {
+		if(game.trainer.getBackpack().getCountOfItems("Bait") == 0){
+			JOptionPane.showMessageDialog(null, "No more");
+			return;
+		}
+			
+		game.trainer.getBackpack().removeItem("Bait");
 		battlePokemon.addRunProbability(-10);
 
 		pokemonShouldRun();

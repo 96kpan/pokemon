@@ -43,10 +43,18 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private BufferedImage tile;
 	private boolean begin = true;
 	private static final int max = 32;
-	
-	private int xcoor = 1*32;
-	private int ycoor = 9*32;
-	private int dir = 0;
+
+	private int xcoor = 1 * 32;
+	private int ycoor = 9 * 32;
+	private int index = 0;
+
+	private BufferedImage[] trainer_front;
+	private BufferedImage[] trainer_back;
+	private BufferedImage[] trainer_left;
+	private BufferedImage[] trainer_right;
+
+	private boolean moving;
+	private boolean init = true;
 
 	private List<Frames> frames;
 
@@ -64,104 +72,131 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			e.printStackTrace();
 
 		}
-		
-		
+
+		trainer_front = new BufferedImage[4];
+		trainer_back = new BufferedImage[4];
+		trainer_left = new BufferedImage[4];
+		trainer_right = new BufferedImage[4];
+		BufferedImage img;
+
+		moving = false;
+
+		for (int x = 0; x < 4; x++) {
+			img = Trainer.getInstance().getSheet().getSubimage(x * 32, 0 * 32, 32, 32);
+			trainer_back[x] = img;
+			img = Trainer.getInstance().getSheet().getSubimage(x * 32, 1 * 32, 32, 32);
+			trainer_front[x] = img;
+			img = Trainer.getInstance().getSheet().getSubimage(x * 32, 2 * 32, 32, 32);
+			trainer_right[x] = img;
+			img = Trainer.getInstance().getSheet().getSubimage(x * 32, 3 * 32, 32, 32);
+			trainer_left[x] = img;
+		}
+
 		frames = new LinkedList<Frames>();
 
-		timer = new Timer(4, new ActionListener() {
+		timer = new Timer(10, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Iterator<Frames> it = frames.iterator();
 				while (it.hasNext()) {
 					Frames frame = it.next();
-					if(frame.getX() > 32 || frame.getY() > 32 || frame.getX() < -32 || frame.getY() < -32) {
+					if (frame.getX() > 32 || frame.getY() > 32 || frame.getX() < -32 || frame.getY() < -32) {
 						it.remove();
-					}
-					else {
-						if(Trainer.getInstance().getDir() == Direction.North)
+					} else {
+						if (Trainer.getInstance().getDir() == Direction.North) {
+							if (index > 3) {
+								index = 0;
+							}
 							frame.decY();
-						if(Trainer.getInstance().getDir() == Direction.South)
+							frame.setImg(trainer_front[index]);
+							index++;
+						}
+						if (Trainer.getInstance().getDir() == Direction.South) {
+							if (index > 3) {
+								index = 0;
+							}
 							frame.incY();
-						if(Trainer.getInstance().getDir() == Direction.East)
+							frame.setImg(trainer_back[index]);
+							index++;
+						}
+						if (Trainer.getInstance().getDir() == Direction.East) {
+							if (index > 3) {
+								index = 0;
+							}
 							frame.incX();
-						if(Trainer.getInstance().getDir() == Direction.West)
+							frame.setImg(trainer_right[index]);
+							index++;
+						}
+						if (Trainer.getInstance().getDir() == Direction.West) {
+							if (index > 3) {
+								index = 0;
+							}
 							frame.decX();
+							frame.setImg(trainer_left[index]);
+							index++;
+						}
+						moving = true;
 						repaint();
 					}
 				}
+				moving = false;
 			}
 		});
 		timer.start();
-		
-		
+
 		this.theGame = game;
 		initJPanel();
-		
-		InputMap inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        inputMap.put(KeyStroke.getKeyStroke("UP"), "up");
-        getActionMap().put("up", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	for (int x = 0; x < 4; x++) {
-					BufferedImage temp = Trainer.getInstance().getSheet().getSubimage(x * 32, dir * 32, 32,
-							32);
-					Frames f = new Frames(temp, xcoor, ycoor);
+
+		if (!moving) {
+			InputMap inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+			inputMap.put(KeyStroke.getKeyStroke("UP"), "up");
+			getActionMap().put("up", new AbstractAction() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (index > 3)
+						index = 0;
+					Frames f = new Frames(trainer_front[index], xcoor, ycoor);
 					frames.add(f);
 				}
-            }
-        });
-        
-        inputMap.put(KeyStroke.getKeyStroke("UP"), "up");
-        getActionMap().put("up", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	for (int x = 0; x < 4; x++) {
-					BufferedImage temp = Trainer.getInstance().getSheet().getSubimage(x * 32, 1 * 32, 32,
-							32);
-					Frames f = new Frames(temp, xcoor, ycoor);
+			});
+
+			inputMap.put(KeyStroke.getKeyStroke("DOWN"), "down");
+			getActionMap().put("down", new AbstractAction() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (index > 3)
+						index = 0;
+					Frames f = new Frames(trainer_back[index], xcoor, ycoor);
 					frames.add(f);
 				}
-            }
-        });
-        
-        inputMap.put(KeyStroke.getKeyStroke("DOWN"), "down");
-        getActionMap().put("down", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	for (int x = 0; x < 4; x++) {
-					BufferedImage temp = Trainer.getInstance().getSheet().getSubimage(x * 32, 0 * 32, 32,
-							32);
-					Frames f = new Frames(temp, xcoor, ycoor);
+			});
+
+			inputMap.put(KeyStroke.getKeyStroke("LEFT"), "LEFT");
+			getActionMap().put("LEFT", new AbstractAction() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (index > 3)
+						index = 0;
+					Frames f = new Frames(trainer_left[index], xcoor, ycoor);
 					frames.add(f);
 				}
-            }
-        });
-        
-        inputMap.put(KeyStroke.getKeyStroke("LEFT"), "LEFT");
-        getActionMap().put("LEFT", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	for (int x = 0; x < 4; x++) {
-					BufferedImage temp = Trainer.getInstance().getSheet().getSubimage(x * 32, 3 * 32, 32,
-							32);
-					Frames f = new Frames(temp, xcoor, ycoor);
+			});
+
+			inputMap.put(KeyStroke.getKeyStroke("RIGHT"), "RIGHT");
+			getActionMap().put("RIGHT", new AbstractAction() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if (index > 3)
+						index = 0;
+					Frames f = new Frames(trainer_right[index], xcoor, ycoor);
 					frames.add(f);
 				}
-            }
-        });
-        
-        inputMap.put(KeyStroke.getKeyStroke("RIGHT"), "RIGHT");
-        getActionMap().put("RIGHT", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	for (int x = 0; x < 4; x++) {
-					BufferedImage temp = Trainer.getInstance().getSheet().getSubimage(x * 32, 2 * 32, 32,
-							32);
-					Frames f = new Frames(temp, xcoor, ycoor);
-					frames.add(f);
-				}
-            }
-        });
+			});
+		}
+	}
+	
+	public boolean isMoving() {
+		return moving;
 	}
 
 	private class Frames {
@@ -190,21 +225,25 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		public int getY() {
 			return y;
 		}
-		
+
 		public void incX() {
 			x++;
 		}
-		
+
 		public void incY() {
 			y++;
 		}
-		
+
 		public void decX() {
 			x--;
 		}
-		
+
 		public void decY() {
 			y--;
+		}
+
+		public void setImg(Image i) {
+			frame = i;
 		}
 	}
 
@@ -280,48 +319,9 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 					if (begin) {
 						g.drawImage(Trainer.getInstance().getImage(), j * 32, i * 32, null);
 						begin = false;
-					}
-					else {
-						xcoor = j*32;
-						ycoor = i*32;
-						
-						if (Trainer.getInstance().getDir() == Direction.North) {
-							dir = 1;
-							
-//							for (int x = 0; x < 4; x++) {
-//								BufferedImage temp = Trainer.getInstance().getSheet().getSubimage(x * 32, 1 * 32, 32,
-//										32);
-//								Frames f = new Frames(temp, j * 32, i * 32);
-//								frames.add(f);
-//							}
-						} else if (Trainer.getInstance().getDir() == Direction.South) {
-							dir = 0;
-							
-//							for (int x = 0; x < 4; x++) {
-//								BufferedImage temp = Trainer.getInstance().getSheet().getSubimage(x * 32, 0 * 32, 32,
-//										32);
-//								Frames f = new Frames(temp, j * 32, i * 32);
-//								frames.add(f);
-//							}
-						} else if (Trainer.getInstance().getDir() == Direction.East) {
-							dir = 2;
-							
-//							for (int x = 0; x < 4; x++) {
-//								BufferedImage temp = Trainer.getInstance().getSheet().getSubimage(x * 32, 2 * 32, 32,
-//										32);
-//								Frames f = new Frames(temp, j * 32, i * 32);
-//								frames.add(f);
-//							}
-						} else if (Trainer.getInstance().getDir() == Direction.West) {
-							dir = 3;
-							
-//							for (int x = 0; x < 4; x++) {
-//								BufferedImage temp = Trainer.getInstance().getSheet().getSubimage(x * 32, 3 * 32, 32,
-//										32);
-//								Frames f = new Frames(temp, j * 32, i * 32);
-//								frames.add(f);
-//							}
-						}
+					} else {
+						xcoor = j * 32;
+						ycoor = i * 32;
 						for (Frames f : frames) {
 							f.drawFrame(g);
 						}

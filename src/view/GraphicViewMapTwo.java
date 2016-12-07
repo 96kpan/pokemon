@@ -76,7 +76,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 
 	public void paintComponent(Graphics g) {
 		
-		System.out.println(theGame.trainer.getPokemons().size());
+		//System.out.println(theGame.trainer.getPokemons().size());
 		
 		for(int i = 0; i < theGame.trainer.getPokemons().size(); i++){
 			g.drawImage(theGame.trainer.getPokemons().get(i).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH), 770, 250+(50 * i), null);
@@ -123,7 +123,28 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 
 				// trainer
 				if (curTile.getHasTrainer()) {
-					g.drawImage(Trainer.getInstance().getImage(), j * 32, i * 32, null);
+					if(Trainer.getInstance().isMoving()) {
+						Trainer.getInstance().toggleMove();
+						
+						if(Trainer.getInstance().getDir() == Direction.North) {
+							
+							for(int x = 0; x < 4; x++) {
+								BufferedImage temp = Trainer.getInstance().getSheet();
+								System.out.println("here?");
+								g.drawImage(temp.getSubimage(x*32, 1*32, 32, 32), j*32, i*32, null);
+								this.repaint();
+								revalidate();
+								try {
+									Thread.sleep(150);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					}
+					
+					else
+						g.drawImage(Trainer.getInstance().getImage(), j * 32, i * 32, null);
 				}
 
 			}

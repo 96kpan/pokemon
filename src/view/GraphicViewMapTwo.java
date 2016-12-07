@@ -144,9 +144,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			for (int j = 0; j < 23; j++) {
 				Tile curTile = theGame.getMap().getTile(i, j);
 				
-//				if(i == 15 && j == 3){
-//					return;
-//				}
+				
 
 				// grass
 				if (curTile.toString().equals("g")) {
@@ -184,6 +182,11 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				// trainer
 				if (curTile.getHasTrainer()) {
 					g.drawImage(theGame.trainer.getImage(), j * 32, i * 32, null);
+				}
+				
+				if(i == 15 && j == 3){
+					g.setColor(Color.BLACK);
+					g.fillOval(j * 32, i * 32, 30, 30);
 				}
 
 			}

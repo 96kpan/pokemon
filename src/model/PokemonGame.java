@@ -33,7 +33,7 @@ public class PokemonGame extends Observable implements Serializable {
 		MapTwo mapTwo = new MapTwo();
 
 		// set this for whichever map we want to use
-		if(num == 1) {
+		if(num == 0) {
 			map = mapOne;
 		}
 		else {

@@ -60,5 +60,23 @@ public class itemTest {
 		
 	}
 	
+	@Test
+	public void modelTest(){
+		Bag b = new Bag();
+		b.addItem(new Pokeball(1));
+		b.addItem(new Pokeball(1));
+		b.addItem(new Pokeball(1));
+		b.addItem(new Pokeball(1));
+		b.addItem(new Pokeball(1));
+		b.getCountOfItems("Pokeball");
+		b.getCountOfItems("Pokebal");
+		b.getNumOfPokeballs();
+		b.numItems();
+		b.removeItem("Pokeball");
+		b.toString();
+		b.useItem(null);
+		
+	}
+	
 	
 }

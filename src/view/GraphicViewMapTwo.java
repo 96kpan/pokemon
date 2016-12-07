@@ -127,19 +127,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 						Trainer.getInstance().toggleMove();
 						
 						if(Trainer.getInstance().getDir() == Direction.North) {
-							
-							for(int x = 0; x < 4; x++) {
-								BufferedImage temp = Trainer.getInstance().getSheet();
-								System.out.println("here?");
-								g.drawImage(temp.getSubimage(x*32, 1*32, 32, 32), j*32, i*32, null);
-								this.repaint();
-								revalidate();
-								try {
-									Thread.sleep(150);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-							}
+							animateNorth(g, j*32, i*32);
 						}
 					}
 					
@@ -149,6 +137,18 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 
 			}
 
+		}
+	}
+	
+	private void animateNorth(Graphics g, int x, int y) {
+		BufferedImage[] frames = new BufferedImage[4];
+		frames[0] = Trainer.getInstance().getSheet().getSubimage(0*32, 1*32, 32, 32);
+		frames[1] = Trainer.getInstance().getSheet().getSubimage(1*32, 1*32, 32, 32);
+		frames[2] = Trainer.getInstance().getSheet().getSubimage(2*32, 1*32, 32, 32);
+		frames[3] = Trainer.getInstance().getSheet().getSubimage(3*32, 1*32, 32, 32);
+		
+		for(int i = 0; i < 4; i++) {
+			g.drawImage(frames[i], x, y, null);
 		}
 	}
 

@@ -2,7 +2,10 @@ package view;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -19,7 +22,10 @@ import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
@@ -32,6 +38,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private PokemonGame theGame;
 	private JTextArea messageText;
 	private JTextArea myPokemons;
+	private JTextArea itemCounts;
 	private transient BufferedImage fire;
 	private transient BufferedImage water;
 	private transient BufferedImage emptyGround;
@@ -252,20 +259,34 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		messageText.setSize(150, 25);
 		this.add(messageText);
 
-		this.myPokemons = new JTextArea(theGame.trainer.getName() + "'s Pokemons");
+		this.myPokemons = new JTextArea(theGame.trainer.getName() + "'s Pokemon");
 		myPokemons.setLocation(750, 200);
 		myPokemons.setSize(190, 25);
 		this.add(myPokemons);
 
+
+		this.itemCounts = new JTextArea("Backpack: \n" + theGame.trainer.getBackpack().toString());
+		itemCounts.setLocation(750, 300);
+		itemCounts.setSize(200, 200);
+		this.add(itemCounts);
+
+		JButton healthpotButton = new JButton("Add Health");
+		healthpotButton.setLocation(750, 550);
+		healthpotButton.setSize(190, 25);
+		ButtonListener hpListener = new ButtonListener();
+		healthpotButton.addActionListener(hpListener);
+		healthpotButton.setVisible(true);
+		this.add(healthpotButton);
+
 	}
 
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		// System.out.println(theGame.trainer.getPokemons().size());
+
+		System.out.println(theGame.trainer.getPokemons().size());
 
 		for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
 			g.drawImage(theGame.trainer.getPokemons().get(i).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH),
-					770, 250 + (50 * i), null);
+					770+ (50 * i), 250, null);
 
 		}
 
@@ -326,7 +347,51 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		this.messageText.setText(theGame.toStringNoOfSteps());
+		System.out.println();
+		System.out.println("HEREREEEEE" + theGame.trainer.getBackpack().toString());
+		System.out.println();
+		this.itemCounts.setText("Backpack: \n" + theGame.trainer.getBackpack().toString());
+		if(this.theGame.isGameOver()){
+			JOptionPane.showMessageDialog(null, "Game over");
+			return;
+		}
 		this.repaint();
 		revalidate();
+	}
+
+	private class ButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			String text = arg0.getActionCommand();
+			if (text.equals("Add Health")) {
+
+				JRadioButton[] rb = new JRadioButton[theGame.trainer.getPokemons().size()];
+				JPanel p = new JPanel(new GridLayout(3, 5));
+				for (int x = 0; x < theGame.trainer.getPokemons().size(); x++) {
+					rb[x] = new JRadioButton("" + theGame.trainer.getPokemons().get(x).getName());
+					p.add(rb[x]);
+				}
+				JOptionPane.showMessageDialog(null, p);
+
+				for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
+					if (rb[i].isSelected()) {
+						// find pokemon
+						if(theGame.trainer.getBackpack().getCountOfItems("HealthPot") > 0){
+							theGame.trainer.getBackpack().removeItem("HealthPot");
+							theGame.trainer.getPokemons().get(i)
+									.setTotalHealth(theGame.trainer.getPokemons().get(i).getTotalHealth() + 50);
+							
+							return;
+						}else{
+							JOptionPane.showMessageDialog(null, "No more");
+							return;
+						}
+						
+
+					}
+				}
+
+			}
+		}
 	}
 }

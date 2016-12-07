@@ -2,6 +2,7 @@
 
 package controller;
 
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -24,6 +25,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.Timer;
 
 import model.MapOne;
@@ -31,6 +34,7 @@ import model.MapTwo;
 import model.PokemonBattle;
 import model.PokemonGame;
 import model.PokemonMap;
+import model.TrainerBattle;
 import view.BattleView;
 import view.GraphicViewMapTwo;
 import model.Battle;
@@ -54,7 +58,7 @@ public class GameController extends JFrame implements Observer {
 	public GameController() {
 		firstMap = new MapOne();
 		currentMap = firstMap;
-		theGame = new PokemonGame();
+		theGame = new PokemonGame(1);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		theGame = setUpGame(theGame);
 		setUpFrame();
@@ -153,7 +157,38 @@ public class GameController extends JFrame implements Observer {
 				System.out.println("Reading objects failed");
 			}
 		} else if (result == JOptionPane.NO_OPTION) {
-			theGame = new PokemonGame();
+			JRadioButton[] rb = new JRadioButton[2];
+			JPanel p = new JPanel(new GridLayout(2, 1));
+			for (int x = 0; x < 2; x++) {
+				rb[x] = new JRadioButton("Map " + (x+1));
+				p.add(rb[x]);
+			}
+			JOptionPane.showMessageDialog(null, p);
+			if(rb[0].isSelected()){
+				this.theGame.whichMap = 1;
+				this.theGame = new PokemonGame(1);
+			}else{
+				this.theGame.whichMap = 2;
+				this.theGame = new PokemonGame(2);
+			}
+			
+			JRadioButton[] rb2 = new JRadioButton[3];
+			JPanel p2 = new JPanel(new GridLayout(3, 1));
+			rb2[0] = new JRadioButton("Win Condition 1: Finite steps condition");
+			p2.add(rb2[0]);
+			rb2[1] = new JRadioButton("Win Condition 2: Finite balls condition");
+			p2.add(rb2[1]);
+			rb2[2] = new JRadioButton("Win Condition 3: Finite number of pokemons condition");
+			p2.add(rb2[2]);
+			
+			for(int i = 0; i < 3; i++){
+				if(rb2[i].isSelected()){
+					theGame.winCondition = i;
+				}
+			}
+			
+			JOptionPane.showMessageDialog(null, p2);
+		
 		} else {
 			System.exit(0);
 		}
@@ -162,7 +197,7 @@ public class GameController extends JFrame implements Observer {
 	}
 	
 	private void showBattle() {
-		Battle battle = new PokemonBattle();
+		Battle battle = new TrainerBattle();
 		battleView = new BattleView(battle);
 		layeredPane.add(battleView);
 		layeredPane.setLayer(battleView,1);

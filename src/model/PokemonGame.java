@@ -3,9 +3,14 @@ package model;
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.Observable;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import item.Axe;
+import item.Bait;
+import item.HealthPot;
+import item.Pokeball;
 import pokemons.Pokemon;
 import pokemons.PokemonModel;
 import view.BattleView;
@@ -15,16 +20,25 @@ public class PokemonGame extends Observable implements Serializable {
 	public Trainer trainer;
 	Battle newBattle;
 	BattleView view;
+	public int winCondition;
+	public static int whichMap;
 	public boolean shouldLaunchBattle;
 	private static final int TOTAL_MOVES = 500;
 	private int movesLeft;
 	private static PokemonGame game;
 
-	public PokemonGame()  {
+
+	public PokemonGame(int num)  {
 		MapOne mapOne = new MapOne();
 		MapTwo mapTwo = new MapTwo();
+
 		// set this for whichever map we want to use
-		map = mapOne;
+		if(num == 0) {
+			map = mapOne;
+		}
+		else {
+			map = mapTwo;
+		}
 
 
 		trainer = new Trainer("ASH KETCHUP");
@@ -37,12 +51,12 @@ public class PokemonGame extends Observable implements Serializable {
 	//singleton OODP to only have one instance throughout the game
 	public static PokemonGame getInstance() {
 		if(game == null){
-			game = new PokemonGame();
+			game = new PokemonGame(whichMap);
 		}
 
 		return game;
 	}
-	
+
 	//returns the Game's Map
 	public PokemonMap getMap() {
 		return this.map;
@@ -58,11 +72,11 @@ public class PokemonGame extends Observable implements Serializable {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+
 	//general information
 	public String toStringNoOfSteps(){
 		String s = "No of Steps taken " + this.trainer.stepCount();
-		
+
 		return s;
 	}
 
@@ -127,6 +141,58 @@ public class PokemonGame extends Observable implements Serializable {
 		shouldLaunchBattle = true;
 	}
 
+	public void acquireItem() {
+		Random rand = new Random();
+		int  randNum = rand.nextInt(100) + 1;
+		if(randNum == 1) {
+			if(this.map.getClass() == MapOne.class) {
+				trainer.getBackpack().addItem(new Axe(1));
+			}
+		}
+		else if(randNum > 1 && randNum <= 21) {
+			trainer.getBackpack().addItem(new HealthPot("Health pot", 1));
+		}
+		else if(randNum > 21 && randNum <= 41) {
+			trainer.getBackpack().addItem(new Pokeball(1));
+		}
+		else {
+			trainer.getBackpack().addItem(new Bait("Bait",1));
+		}
 
+	}
+
+	public boolean isGameOver(){
+		
+		if(game == null){
+			game = getInstance();
+			game.map.map[9][1] = new EmptyTile(null);
+		}
+		
+		//Win Condition 1: Finite steps condition
+		if(this.winCondition == 0){
+			if(game.trainer.stepCount() == 0){
+				System.out.println("game.trainer.getBackpack().getNumOfPokeballs() " + game.trainer.getBackpack().getNumOfPokeballs());
+				return true;
+			}
+		}
+		
+		//Win Condition 2: Finite balls condition
+		else if(this.winCondition == 1){
+			if(game.trainer.getBackpack().getNumOfPokeballs() == 0)
+				return true;
+		}
+		
+		//Win Condition 3: Finite number of pokemons condition
+		//hits 5 pokemons, game is over
+		else if(this.winCondition == 2){
+			if(game.trainer.getPokemons().size() == 5){
+				return true;
+			}
+
+		}
+
+		return false;
+
+	}
 
 }

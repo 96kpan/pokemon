@@ -32,7 +32,7 @@ import pokemons.Squirtle;
 public abstract class PokemonMap implements Serializable {
 	public static final int MAP_HEIGHT = 23;
 	public static final int MAP_WIDTH = 23;
-	protected Tile[][] map;
+	public Tile[][] map;
 	public ArrayList<Point> pokemonLocations; 
 	//protected transient BufferedImage placeholder;
 	

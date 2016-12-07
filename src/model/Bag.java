@@ -17,15 +17,27 @@ package model;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
+
+import item.Axe;
+import item.Bait;
+import item.HealthPot;
 import item.Item;
+import item.Pokeball;
 
 public class Bag implements Serializable {
 	private int numItems;
-	private HashMap bag;
+	private static HashMap bag;
 
 	// Creates a new bag with nothing in the backpack
 	public Bag() {
 		bag = new HashMap<String, Integer>();
+		for(int i = 0; i < 31; i++) {
+			this.addItem(new Pokeball(1));
+		}
+		this.addItem(new HealthPot("Health Pot", 1));
+		this.addItem(new Bait("Bait", 1));
+		this.addItem(new Axe(1));
 	}
 
 	// Adds item passed through parameters to the backpack
@@ -33,37 +45,67 @@ public class Bag implements Serializable {
 	public void addItem(Item item) {
 		String itemStr = item.getItemName();
 		if(bag.containsKey(itemStr)){
+			System.out.println("herhehrehrhherhhehr " + this.getNumOfPokeballs());
 			int num = (int) bag.get(itemStr);
 			bag.put(itemStr, num +1);
 		}
 		else{
-			bag.put(itemStr, 1);
+			bag.put(itemStr, 0);
 		}
 	}
+	
 
 	// Removes given item from backpack and shifts array
-	public void removeItem(Item item) {
-		if(bag.containsKey(item.getItemName()) && item.getNumOfItems() > 0){
-			int num = (int) bag.get(item.getItemName());
-			if(num == 1){
-				bag.remove(item.getItemName());
+	public void removeItem(String s) {
+		System.out.println("ehrehhreherhehrh " + s);
+		if(bag.containsKey((String) s) && getCountOfItems(s) > 0){
+			int num = (int) bag.get((String)s);
+			if(num == 0){
+				JOptionPane.showMessageDialog(null, "You are out of" + s);
 			}
 			else{
-				bag.put(item.getItemName(), num-1);
+				bag.put((String)s, num-1);
+
+				System.out.println("fewaf" + bag.get((String) s));
 			}
 		}
+	}
+	
+	//getter for number of pokeballs
+	public int getNumOfPokeballs(){
+		System.out.println(bag.get("Pokeball"));
+		return (int) bag.get("Pokeball");
+	}
+	
+	public int getCountOfItems(String s){
+		if(this.bag.containsKey(s)){
+			System.out.println(s);
+			System.out.println("Contains " + bag.get(s));
+			return (int) bag.get(s);
+		}
+		return 0; 
 	}
 
 	// uses given item from backpack and shifts array
 	public void useItem(Item item) {
-		this.removeItem(item);
+		this.removeItem(item.getItemName());
 	}
 
 	// Prints all current items in the trainer's backpack
 	public String toString() {
 		String str = "";
+		
+//		str += "Bait " + bag.get("Bait") + "\n";
+//		str += "Health Pot " + (int) bag.get("Health Pot") + "\n";
+//		str += "Pokeball " + bag.get("Pokeball") + "\n";
+//		str += "Axes " + (int) bag.get("Axes");
 		for(Object s : bag.keySet()){
-			str += ((Item) s).getItemName() + " " + ((Item) s).getNumOfItems();
+			
+			str += s + "s " + (int) bag.get((String) s) + "\n";
+				
+			
+			
+			
 		}
 		return str;
 	}

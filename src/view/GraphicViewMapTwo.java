@@ -104,18 +104,19 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			public void actionPerformed(ActionEvent e) {
 				it = frames.iterator();
 				while (it.hasNext()) {
-					System.out.println(it.hasNext());
 					Frames frame = it.next();
 					if (frame.getX() > 32 || frame.getY() > 32 || frame.getX() < -32 || frame.getY() < -32) {
 						it.remove();
 					} else {
 						if (Trainer.getInstance().getDir() == Direction.North) {
-							if (index > 3) {
-								index = 0;
+							if (theGame.getInstance().canTrainerMove(Direction.North)) {
+								if (index > 3) {
+									index = 0;
+								}
+								frame.decY();
+								frame.setImg(trainer_front[index]);
+								index++;
 							}
-							frame.decY();
-							frame.setImg(trainer_front[index]);
-							index++;
 						}
 						if (Trainer.getInstance().getDir() == Direction.South) {
 							if (index > 3) {
@@ -157,10 +158,19 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		getActionMap().put("up", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (index > 3)
-					index = 0;
-				Frames f = new Frames(trainer_front[index], xcoor, ycoor-32);
-				frames.add(f);
+				if (!theGame.getInstance().canTrainerMove(Direction.North)) {
+					System.out.println("HERE?");
+					if (index > 3)
+						index = 0;
+					Frames f = new Frames(trainer_front[index], xcoor, ycoor);
+					frames.add(f);
+				} else {
+					System.out.println("OR HERE?");
+					if (index > 3)
+						index = 0;
+					Frames f = new Frames(trainer_front[index], xcoor, ycoor-32);
+					frames.add(f);
+				}
 			}
 		});
 
@@ -170,7 +180,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			public void actionPerformed(ActionEvent e) {
 				if (index > 3)
 					index = 0;
-				Frames f = new Frames(trainer_back[index], xcoor, ycoor+32);
+				Frames f = new Frames(trainer_back[index], xcoor, ycoor + 32);
 				frames.add(f);
 			}
 		});
@@ -181,7 +191,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			public void actionPerformed(ActionEvent e) {
 				if (index > 3)
 					index = 0;
-				Frames f = new Frames(trainer_left[index], xcoor-32, ycoor);
+				Frames f = new Frames(trainer_left[index], xcoor - 32, ycoor);
 				frames.add(f);
 			}
 		});
@@ -192,7 +202,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			public void actionPerformed(ActionEvent e) {
 				if (index > 3)
 					index = 0;
-				Frames f = new Frames(trainer_right[index], xcoor+32, ycoor);
+				Frames f = new Frames(trainer_right[index], xcoor + 32, ycoor);
 				frames.add(f);
 			}
 		});
@@ -264,7 +274,6 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		myPokemons.setSize(190, 25);
 		this.add(myPokemons);
 
-
 		this.itemCounts = new JTextArea("Backpack: \n" + theGame.trainer.getBackpack().toString());
 		itemCounts.setLocation(750, 300);
 		itemCounts.setSize(200, 200);
@@ -282,11 +291,9 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 
 	public void paintComponent(Graphics g) {
 
-		System.out.println(theGame.trainer.getPokemons().size());
-
 		for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
 			g.drawImage(theGame.trainer.getPokemons().get(i).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH),
-					770+ (50 * i), 250, null);
+					770 + (50 * i), 250, null);
 
 		}
 
@@ -347,11 +354,8 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		this.messageText.setText(theGame.toStringNoOfSteps());
-		System.out.println();
-		System.out.println("HEREREEEEE" + theGame.trainer.getBackpack().toString());
-		System.out.println();
 		this.itemCounts.setText("Backpack: \n" + theGame.trainer.getBackpack().toString());
-		if(this.theGame.isGameOver()){
+		if (this.theGame.isGameOver()) {
 			JOptionPane.showMessageDialog(null, "Game over");
 			return;
 		}
@@ -376,17 +380,16 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
 					if (rb[i].isSelected()) {
 						// find pokemon
-						if(theGame.trainer.getBackpack().getCountOfItems("HealthPot") > 0){
+						if (theGame.trainer.getBackpack().getCountOfItems("HealthPot") > 0) {
 							theGame.trainer.getBackpack().removeItem("HealthPot");
 							theGame.trainer.getPokemons().get(i)
 									.setTotalHealth(theGame.trainer.getPokemons().get(i).getTotalHealth() + 50);
-							
+
 							return;
-						}else{
+						} else {
 							JOptionPane.showMessageDialog(null, "No more");
 							return;
 						}
-						
 
 					}
 				}

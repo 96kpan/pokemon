@@ -79,8 +79,44 @@ public class PokemonGame extends Observable implements Serializable {
 
 		return s;
 	}
+	
+	public boolean canTrainerMove(Direction d) {
+		boolean move = false;
+		int currX = trainer.getLocation().x;
+		int currY = trainer.getLocation().y;
+		switch (d) {
+		case South:
+			if (currX + 1 < PokemonMap.MAP_WIDTH 
+					&& map.getTile(currX + 1, currY).canMove) {
+				move = true;
+			}
+			break;
+		case North:
+			if (currX - 1 >= 0 && map.getTile(currX - 1, currY).canMove) {
+				move = true;
+			}
 
-	private void moveTrainerInDirection(Direction direction) {
+			break;
+
+		case West:
+			if (currY - 1 >= 0 && map.getTile(currX, currY - 1).canMove) {
+				move = true; 
+			}
+			break;
+
+		case East: {
+			if (currY + 1 < PokemonMap.MAP_HEIGHT
+					&& map.getTile(currX, currY + 1).canMove) {
+				move = true;
+			}
+		}
+		break;
+		}
+		return move;
+	}
+
+	public boolean moveTrainerInDirection(Direction direction) {
+		boolean move = false;
 		if (movesLeft < 0) {
 			JOptionPane.showMessageDialog(null, "Game over you have reached the max number of steps");
 			System.exit(0);
@@ -96,7 +132,7 @@ public class PokemonGame extends Observable implements Serializable {
 				map.getTile(currX + 1, currY).setHasTrainer(true);
 				trainer.setLocation(new Point(currX + 1, currY));
 				movesLeft--;
-
+				move = true;
 			}
 			break;
 		case North:
@@ -106,6 +142,7 @@ public class PokemonGame extends Observable implements Serializable {
 				map.getTile(currX - 1, currY).setHasTrainer(true);
 				trainer.setLocation(new Point(currX - 1, currY));
 				movesLeft--;
+				move = true;
 			}
 
 			break;
@@ -117,7 +154,7 @@ public class PokemonGame extends Observable implements Serializable {
 				map.getTile(currX, currY - 1).setHasTrainer(true);
 				trainer.setLocation(new Point(currX, currY - 1));
 				movesLeft--;
-
+				move = true; 
 			}
 			break;
 
@@ -129,12 +166,13 @@ public class PokemonGame extends Observable implements Serializable {
 				map.getTile(currX, currY + 1).setHasTrainer(true);
 				trainer.setLocation(new Point(currX, currY + 1));
 				movesLeft--;
+				move = true;
 			}
 		}
 		break;
 		}
 		map.getTile(trainer.getLocation().x, trainer.getLocation().y).playerIsOnTile(this);
-
+		return move;
 	}
 
 	public void launchBattle() {
@@ -171,7 +209,6 @@ public class PokemonGame extends Observable implements Serializable {
 		//Win Condition 1: Finite steps condition
 		if(this.winCondition == 0){
 			if(game.trainer.stepCount() == 0){
-				System.out.println("game.trainer.getBackpack().getNumOfPokeballs() " + game.trainer.getBackpack().getNumOfPokeballs());
 				return true;
 			}
 		}

@@ -40,6 +40,17 @@ public class PokemonGame extends Observable implements Serializable {
 
 	//singleton OODP to only have one instance throughout the game
 	
+	public void toggleMap(){
+	
+		if(this.whichMap == 1){
+			whichMap = 2;
+			map = new MapOne();
+		}
+		else{
+			whichMap = 1;
+			map = new MapTwo();
+		}
+	}
 
 	//returns the Game's Map
 	public PokemonMap getMap() {

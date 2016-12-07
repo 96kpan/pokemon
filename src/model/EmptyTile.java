@@ -12,7 +12,9 @@ public class EmptyTile extends Tile implements Serializable {
 
 	// do nothing because we are on an empty tile
 	@Override
-	public void playerIsOnTile(PokemonGame game) {}
+	public void playerIsOnTile(PokemonGame game) {
+		
+	}
 	
 	// here we return an e for an empty tile
 	@Override

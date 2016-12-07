@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
@@ -30,7 +31,7 @@ import view.*;
 
 public class GraphicViewMapTwo extends JPanel implements Observer {
 	private PokemonMap map;
-	private PokemonGame theGame;
+	public PokemonGame theGame;
 	private JLabel messageText;
 	private JLabel myPokemons;
 	private JLabel itemCounts;
@@ -126,8 +127,6 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 
 	public void paintComponent(Graphics g) {
 
-		System.out.println(theGame.trainer.getPokemons().size());
-
 		for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
 			g.drawImage(theGame.trainer.getPokemons().get(i).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH),
 					770+ (50 * i), 250, null);
@@ -137,6 +136,10 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		for (int i = 0; i < 23; i++) {
 			for (int j = 0; j < 23; j++) {
 				Tile curTile = theGame.getMap().getTile(i, j);
+				
+//				if(i == 15 && j == 3){
+//					return;
+//				}
 
 				// grass
 				if (curTile.toString().equals("g")) {
@@ -187,6 +190,13 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		if(this.theGame.isGameOver()){
 			JOptionPane.showMessageDialog(null, "Game over");
 			return;
+		}
+		if(theGame.trainer.getLocation().equals(new Point(15, 3))){
+			theGame.toggleMap();
+			this.repaint();
+			JOptionPane.showMessageDialog(null, "Transported to another map");
+			
+			
 		}
 		this.repaint();
 		revalidate();

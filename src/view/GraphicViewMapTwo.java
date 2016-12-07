@@ -96,11 +96,11 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 
 	public void paintComponent(Graphics g) {
 
-		//System.out.println(theGame.trainer.getPokemons().size());
+		System.out.println(theGame.trainer.getPokemons().size());
 
 		for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
 			g.drawImage(theGame.trainer.getPokemons().get(i).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH),
-					770, 250 + (50 * i), null);
+					770+ (50 * i), 250, null);
 
 		}
 
@@ -154,7 +154,14 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		this.messageText.setText(theGame.toStringNoOfSteps());
+		System.out.println();
+		System.out.println("HEREREEEEE" + theGame.trainer.getBackpack().toString());
+		System.out.println();
 		this.itemCounts.setText("Backpack: \n" + theGame.trainer.getBackpack().toString());
+		if(this.theGame.isGameOver()){
+			JOptionPane.showMessageDialog(null, "Game over");
+			return;
+		}
 		this.repaint();
 		revalidate();
 	}
@@ -184,6 +191,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 							return;
 						}else{
 							JOptionPane.showMessageDialog(null, "No more");
+							return;
 						}
 						
 

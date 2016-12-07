@@ -172,11 +172,30 @@ public class GameController extends JFrame implements Observer {
 			JOptionPane.showMessageDialog(null, p);
 			
 			if(rb[0].isSelected()){
-				System.out.println("here");
 				this.theGame = new PokemonGame(new MapOne());
 			}else{
 				this.theGame = new PokemonGame(new MapTwo());
-			}	
+			}
+			
+			JRadioButton[] rb2 = new JRadioButton[3];
+			JPanel p2 = new JPanel(new GridLayout(3, 1));
+			rb2[0] = new JRadioButton("Win Condition 1: Finite steps condition");
+			p2.add(rb2[0]);
+			rb2[1] = new JRadioButton("Win Condition 2: Finite balls condition");
+			p2.add(rb2[1]);
+			rb2[2] = new JRadioButton("Win Condition 3: Finite number of pokemons condition");
+			p2.add(rb2[2]);
+			
+			for(int i = 0; i < 3; i++){
+				if(rb2[i].isSelected()){
+					theGame.winCondition = i;
+				}
+			}
+			
+			JOptionPane.showMessageDialog(null, p2);
+			
+			
+			
 			
 		} else {
 			System.exit(0);

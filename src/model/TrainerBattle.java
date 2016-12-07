@@ -128,6 +128,7 @@ public class TrainerBattle extends Battle implements Serializable{
 	// than 75
 	public void throwPokeball() {
 		game.trainer.getBackpack().removeItem("Pokeball");
+		System.out.println("IS IT REMOVING?? " + game.trainer.getBackpack().getNumOfPokeballs());
 		int randNum = rand.nextInt(150);
 		int catchProbability = battlePokemon.getTotalHealth() + battlePokemon.getRunProbability();
 		if (catchProbability < randNum) {

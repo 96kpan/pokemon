@@ -20,6 +20,7 @@ public class PokemonGame extends Observable implements Serializable {
 	public Trainer trainer;
 	Battle newBattle;
 	BattleView view;
+	public int winCondition;
 	public boolean shouldLaunchBattle;
 	private static final int TOTAL_MOVES = 500;
 	private int movesLeft;
@@ -27,9 +28,9 @@ public class PokemonGame extends Observable implements Serializable {
 
 
 	public PokemonGame(PokemonMap m)  {
-		
-//		MapOne mapOne = new MapOne();
-//		MapTwo mapTwo = new MapTwo();
+
+		//		MapOne mapOne = new MapOne();
+		//		MapTwo mapTwo = new MapTwo();
 		// set this for whichever map we want to use
 		map = m;
 
@@ -49,7 +50,7 @@ public class PokemonGame extends Observable implements Serializable {
 
 		return game;
 	}
-	
+
 	//returns the Game's Map
 	public PokemonMap getMap() {
 		return this.map;
@@ -65,11 +66,11 @@ public class PokemonGame extends Observable implements Serializable {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+
 	//general information
 	public String toStringNoOfSteps(){
 		String s = "No of Steps taken " + this.trainer.stepCount();
-		
+
 		return s;
 	}
 
@@ -141,7 +142,6 @@ public class PokemonGame extends Observable implements Serializable {
 			if(this.map.getClass() == MapOne.class) {
 				trainer.getBackpack().addItem(new Axe(1));
 			}
-			
 		}
 		else if(randNum > 1 && randNum <= 21) {
 			trainer.getBackpack().addItem(new HealthPot("Health pot", 1));
@@ -152,8 +152,44 @@ public class PokemonGame extends Observable implements Serializable {
 		else {
 			trainer.getBackpack().addItem(new Bait("Bait",1));
 		}
-		
+
 	}
+
+	public boolean isGameOver(){
+		
+		if(game == null){
+			game = getInstance();
+			game.map.map[9][1] = new EmptyTile(null);
+		}
+		
+		//Win Condition 1: Finite steps condition
+		if(this.winCondition == 0){
+			if(game.trainer.stepCount() == 0){
+				System.out.println("game.trainer.getBackpack().getNumOfPokeballs() " + game.trainer.getBackpack().getNumOfPokeballs());
+				return true;
+			}
+		}
+		
+		//Win Condition 2: Finite balls condition
+		else if(this.winCondition == 1){
+			if(game.trainer.getBackpack().getNumOfPokeballs() == 0)
+				return true;
+		}
+		
+		//Win Condition 3: Finite number of pokemons condition
+		//hits 5 pokemons, game is over
+		else if(this.winCondition == 2){
+			if(game.trainer.getPokemons().size() == 5){
+				return true;
+			}
+
+		}
+
+		return false;
+
+	}
+
+
 
 
 

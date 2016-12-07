@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -19,6 +20,8 @@ import pokemons.Pokemon;
 //One of the map's for the game
 public class MapOne extends PokemonMap implements Serializable {
 	public static final Point startPoint = new Point(9,1);
+	private transient BufferedImage gymLeader;
+	
 	
 	
 	public MapOne() {
@@ -36,7 +39,20 @@ public class MapOne extends PokemonMap implements Serializable {
 		makeGrassRectangle(new Point(11, 1),11,10);
 		makeGrassRectangle(new Point(1,13), 11,9);
 		bottomGrassTriangle();
-		//placePokemon();
+		BufferedImage trainer_sheet = null;
+		try {
+			trainer_sheet = ImageIO.read(new File("images/trainerSprite.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//gymLeader = trainer_sheet.getSubimage(5*32, 3*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+		map[1][20] = new BossTile(trainer_sheet);
+		map[1][21] = new TerrainTile(null,"t");
+		map[2][20] = new TerrainTile(null, "t");
+		map[1][19] = new TerrainTile(null, "t");
+		map[2][21] = new TerrainTile(null, "t");
+		map[2][19] = new TerrainTile(null, "t");
 		
 		
 	}

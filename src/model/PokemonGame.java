@@ -168,7 +168,7 @@ public class PokemonGame extends Observable implements Serializable {
 		
 		//Win Condition 1: Finite steps condition
 		if(this.winCondition == 0){
-			if(this.trainer.stepCount() == 0){
+			if(movesLeft <= 0){
 				System.out.println("game.trainer.getBackpack().getNumOfPokeballs() " + this.trainer.getBackpack().getNumOfPokeballs());
 				return true;
 			}

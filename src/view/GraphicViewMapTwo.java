@@ -41,6 +41,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private transient BufferedImage grass;
 	private transient BufferedImage tree;
 	private transient BufferedImage trainer_sheet;
+	private transient BufferedImage gymLeader;
 	
 	private transient Image[] trainer_front;
 	private transient Image[] trainer_back;
@@ -63,6 +64,8 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			tree = ImageIO.read(new File("images/tree.png"));
 			trainer_sheet = ImageIO.read(new File("images/trainerSprite.png"));
 			terrain_sheet = ImageIO.read(new File("images/terrain.png"));
+			gymLeader = ImageIO.read(new File("images/gymLeader.png"));
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -147,7 +150,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				
 
 				// grass
-				if (curTile.toString().equals("g")) {
+				if (curTile.toString().equals("g") || curTile.toString().equals("B")) {
 					tile = terrain_sheet.getSubimage(0 * size, 0 * size, size, size);
 					g.drawImage(tile, j * 32, i * 32, null);
 				}
@@ -182,6 +185,10 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				// trainer
 				if (curTile.getHasTrainer()) {
 					g.drawImage(theGame.trainer.getImage(), j * 32, i * 32, null);
+				}
+				
+				if(curTile.toString().equals("B")) {
+					g.drawImage(gymLeader, j * 32, i * 32, null);
 				}
 				
 				if(i == 15 && j == 3){

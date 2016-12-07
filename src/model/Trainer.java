@@ -38,6 +38,7 @@ public class Trainer implements Serializable {
 		backpack = new Bag();
 		this.steps = 0;
 		pokemon = new ArrayList<Pokemon>();
+		pokemon.add(new Pikachu());
 		
 		this.location = new Point(0,0);
 		totalHPLeft = 1000;

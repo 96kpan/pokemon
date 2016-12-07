@@ -40,6 +40,15 @@ public class TrainerBattle extends Battle implements Serializable{
 	// get random pokemon
 	private void randomPokemon() {
 		int rand = (int) (Math.random() * 100) + 1;
+		System.out.println("rand ");
+		
+		System.out.println("rand ");
+		System.out.println("rand ");
+		System.out.println("rand ");
+		
+		System.out.println("rand ");
+		System.out.println("rand ");
+		
 
 		if (rand < 60) {
 			// common pokemons

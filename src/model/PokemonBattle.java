@@ -37,8 +37,13 @@ public class PokemonBattle extends Battle implements Serializable {
 	//this method must be overriden since battle over is different between the two types
 	//of the battles in the pokemon game
 	public boolean battleOver() {
+		System.out.println("here");
+		System.out.println("here");
+		System.out.println("here");
+		System.out.println("here");
 		if (ranAway || !this.battlePokemon.getFainted() || !this.gymTrainerPokemon.getFainted())
 			return true;
+		
 		return false;
 	}
 	

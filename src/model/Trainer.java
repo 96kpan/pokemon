@@ -25,7 +25,7 @@ public class Trainer implements Serializable {
 	private Bag backpack;
 	private static Trainer myTrainer;
 	private int totalHPLeft;
-	private int steps;
+	private static int steps;
 	private int MAX_STEPS = 500;
 	private Point location;
 	private Direction d;
@@ -110,7 +110,7 @@ public class Trainer implements Serializable {
 	
 	// Adds steps to the steps global variable
 	public boolean addSteps(int add) {
-		steps += 1;
+		steps += add;
 		if(steps >= MAX_STEPS) {
 			System.out.println("Trainer has walked maximum number of steps");
 			return false;

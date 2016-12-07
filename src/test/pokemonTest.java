@@ -148,11 +148,11 @@ public class pokemonTest {
 		Trainer trainer = new Trainer("damn");
 		Bag trainerBag = trainer.getBackpack();
 		assertTrue(trainer.getName().equals("damn"));
-		assertTrue(trainerBag.numItems() == 0);
-		trainerBag.addItem(new Pokeball(1));
-		trainerBag.removeItem("Pokeball");
-		trainerBag.toString();
-		trainerBag.addItem(new Pokeball(1));
+//		assertTrue(trainerBag.numItems() == 0);
+//		trainerBag.addItem(new Pokeball(1));
+//		trainerBag.removeItem("Pokeball");
+//		trainerBag.toString();
+//		trainerBag.addItem(new Pokeball(1));
 	}
 	
 	

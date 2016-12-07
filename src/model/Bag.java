@@ -101,20 +101,22 @@ public class Bag implements Serializable {
 //		str += "Axes " + (int) bag.get("Axes");
 		for(Object s : bag.keySet()){
 			
-			str += s + "s " + (int) bag.get((String) s) + "\n";
+			str += ""+ s + "s " + (int) bag.get((String) s) + "<br>";
 				
 			
 			
 			
 		}
-		return str;
+		return str+"</body></html>";
 	}
 
 	// Returns the number of items in the trainer's backpack	
 	public int numItems() {
+
+		
 		int count = 0;
 		for(Object s : bag.keySet()){
-			count += ((Item) s).getNumOfItems();
+			count += getCountOfItems((String) s);
 		}
 
 		return count;

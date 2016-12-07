@@ -18,6 +18,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -30,9 +31,9 @@ import view.*;
 public class GraphicViewMapTwo extends JPanel implements Observer {
 	private PokemonMap map;
 	private PokemonGame theGame;
-	private JTextArea messageText;
-	private JTextArea myPokemons;
-	private JTextArea itemCounts;
+	private JLabel messageText;
+	private JLabel myPokemons;
+	private JLabel itemCounts;
 	private transient BufferedImage fire;
 	private transient BufferedImage water;
 	private transient BufferedImage emptyGround;
@@ -70,17 +71,17 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		this.setFocusable(true);
 		this.addKeyListener(new MovementListener(theGame));
 
-		messageText = new JTextArea("No of Steps taken 500");
+		messageText = new JLabel("No of Steps taken 500");
 		messageText.setLocation(750, 100);
 		messageText.setSize(150, 25);
 		this.add(messageText);
 
-		this.myPokemons = new JTextArea(theGame.trainer.getName() + "'s Pokemon");
+		this.myPokemons = new JLabel(theGame.trainer.getName() + "'s Pokemon");
 		myPokemons.setLocation(750, 200);
 		myPokemons.setSize(190, 25);
 		this.add(myPokemons);
 
-		this.itemCounts = new JTextArea("Backpack: \n" + theGame.trainer.getBackpack().toString());
+		this.itemCounts = new JLabel("<html><body>Backpack: <br>" + theGame.trainer.getBackpack().toString());
 		itemCounts.setLocation(750, 300);
 		itemCounts.setSize(200, 200);
 		this.add(itemCounts);
@@ -88,6 +89,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		JButton healthpotButton = new JButton("Add Health");
 		healthpotButton.setLocation(750, 550);
 		healthpotButton.setSize(190, 25);
+		healthpotButton.setFocusable(false);
 		ButtonListener hpListener = new ButtonListener();
 		healthpotButton.addActionListener(hpListener);
 		healthpotButton.setVisible(true);
@@ -158,7 +160,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		System.out.println();
 		System.out.println("HEREREEEEE" + theGame.trainer.getBackpack().toString());
 		System.out.println();
-		this.itemCounts.setText("Backpack: \n" + theGame.trainer.getBackpack().toString());
+		this.itemCounts.setText("<html><body>Backpack: <br>" + theGame.trainer.getBackpack().toString());
 		if(this.theGame.isGameOver()){
 			JOptionPane.showMessageDialog(null, "Game over");
 			return;

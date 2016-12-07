@@ -129,7 +129,6 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			}
 
 		}
-
 	}
 
 	@Override
@@ -138,5 +137,4 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		this.repaint();
 		revalidate();
 	}
-
 }

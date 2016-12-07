@@ -28,6 +28,7 @@ public class Trainer implements Serializable {
 	private int steps;
 	private int MAX_STEPS = 500;
 	private Point location;
+	private Direction d;
 	
 	private static ArrayList<Pokemon> pokemon;
 	
@@ -55,8 +56,12 @@ public class Trainer implements Serializable {
 		return trainerImage;
 	}
 	
+	public Direction getDir() {
+		return d;
+	}
+	
 	public void setImage(Direction d) {
-		if(d == Direction.North)
+		if(d == Direction.North) 
 			trainerImage = trainer_sheet.getSubimage(0, 1*32, 32, 32);
 		if(d == Direction.South)
 			trainerImage = trainer_sheet.getSubimage(0, 0*32, 32, 32);
@@ -64,6 +69,7 @@ public class Trainer implements Serializable {
 			trainerImage = trainer_sheet.getSubimage(0, 2*32, 32, 32);
 		if(d == Direction.West)
 			trainerImage = trainer_sheet.getSubimage(0, 3*32, 32, 32);
+		this.d = d;
 	}
 	
 	public BufferedImage getBackOfTrainer() {

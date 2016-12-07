@@ -5,6 +5,8 @@ package controller;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -22,6 +24,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+
 import model.MapOne;
 import model.MapTwo;
 import model.PokemonBattle;
@@ -62,9 +66,7 @@ public class GameController extends JFrame implements Observer {
 		layeredPane.add(graphicViewMapTwo,0);
 		graphicViewMapTwo.setVisible(true);
 		theGame.addObserver(graphicViewMapTwo);
-
 	}
-
 
 	
 

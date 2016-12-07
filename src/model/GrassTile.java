@@ -22,7 +22,7 @@ public class GrassTile extends Tile implements Serializable {
 		}
 		else if(randomNum >= 10 && randomNum <= 15) {
 			game.acquireItem();
-			JOptionPane.showMessageDialog(null, "Acquiring Item");
+			JOptionPane.showMessageDialog(null, "Acquiring Item: " + game.getItemAdded());
 		}
 		
 	}

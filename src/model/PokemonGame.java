@@ -25,6 +25,7 @@ public class PokemonGame extends Observable implements Serializable {
 	public boolean shouldLaunchBattle;
 	private static final int TOTAL_MOVES = 500;
 	private int movesLeft;
+	private String itemadded;
 
 
 	public PokemonGame(PokemonMap m)  {
@@ -126,18 +127,26 @@ public class PokemonGame extends Observable implements Serializable {
 		if(randNum == 1) {
 			if(this.map.getClass() == MapOne.class) {
 				trainer.getBackpack().addItem(new Axe(1));
+				itemadded = "Axe";
 			}
 		}
 		else if(randNum > 1 && randNum <= 21) {
 			trainer.getBackpack().addItem(new HealthPot("Health pot", 1));
+			itemadded = "HealthPot";
 		}
 		else if(randNum > 21 && randNum <= 41) {
 			trainer.getBackpack().addItem(new Pokeball(1));
+			itemadded = "Pokeball";
 		}
 		else {
 			trainer.getBackpack().addItem(new Bait("Bait",1));
+			itemadded = "Bait";
 		}
 
+	}
+	
+	public String getItemAdded(){
+		return this.itemadded;
 	}
 
 	public boolean isGameOver(){

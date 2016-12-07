@@ -5,6 +5,9 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
+import item.Pokeball;
 import pokemons.*;
 import pokemons.Pokemon;
 
@@ -102,7 +105,7 @@ public class TrainerBattle extends Battle implements Serializable{
 		int  randomNum = rand.nextInt(200);
 		if(randomNum < battlePokemon.getRunProbability()) {
 			battleOver = true;
-			JOptionPane.showMessageDialog(null, "The pokemon got away");
+			//JOptionPane.showMessageDialog(null, "The pokemon got away");
 		}
 		
 		
@@ -110,11 +113,12 @@ public class TrainerBattle extends Battle implements Serializable{
 
 
 	// throw rock, each rock throw is -50 hp
-	public void throwRock() {
+	public void attack() {
 
 		if (battlePokemon.getTotalHealth() <= 50) {
 			battleOver = true;
 		} else {
+			System.out.println("threw rock");
 			battlePokemon.setTotalHealth(battlePokemon.getTotalHealth() - ROCK_HEALTH);
 			battlePokemon.addRunProbability(10);
 		}
@@ -123,6 +127,7 @@ public class TrainerBattle extends Battle implements Serializable{
 	// throw pokeball, will only catch pokemon if the pokemon's health is less
 	// than 75
 	public void throwPokeball() {
+		game.trainer.getBackpack().removeItem(new Pokeball(1));
 		int randNum = rand.nextInt(150);
 		int catchProbability = battlePokemon.getTotalHealth() + battlePokemon.getRunProbability();
 		if (catchProbability < randNum) {
@@ -150,7 +155,7 @@ public class TrainerBattle extends Battle implements Serializable{
 	// player run away
 	public void runAway() {
 		int randGen = (int) (Math.random() * 100) + 1; 
-		if (randGen <  battlePokemon.getRunProbability()){
+		if (randGen <  50){
 			battleOver = true;
 		}
 	}

@@ -27,7 +27,7 @@ import item.Pokeball;
 
 public class Bag implements Serializable {
 	private int numItems;
-	private static HashMap bag;
+	private  HashMap bag;
 
 	// Creates a new bag with nothing in the backpack
 	public Bag() {
@@ -45,7 +45,6 @@ public class Bag implements Serializable {
 	public void addItem(Item item) {
 		String itemStr = item.getItemName();
 		if(bag.containsKey(itemStr)){
-			System.out.println("herhehrehrhherhhehr " + this.getNumOfPokeballs());
 			int num = (int) bag.get(itemStr);
 			bag.put(itemStr, num +1);
 		}
@@ -57,7 +56,6 @@ public class Bag implements Serializable {
 
 	// Removes given item from backpack and shifts array
 	public void removeItem(String s) {
-		System.out.println("ehrehhreherhehrh " + s);
 		if(bag.containsKey((String) s) && getCountOfItems(s) > 0){
 			int num = (int) bag.get((String)s);
 			if(num == 0){
@@ -65,22 +63,18 @@ public class Bag implements Serializable {
 			}
 			else{
 				bag.put((String)s, num-1);
-
-				System.out.println("fewaf" + bag.get((String) s));
 			}
 		}
 	}
 	
 	//getter for number of pokeballs
 	public int getNumOfPokeballs(){
-		System.out.println(bag.get("Pokeball"));
+		
 		return (int) bag.get("Pokeball");
 	}
 	
 	public int getCountOfItems(String s){
 		if(this.bag.containsKey(s)){
-			System.out.println(s);
-			System.out.println("Contains " + bag.get(s));
 			return (int) bag.get(s);
 		}
 		return 0; 
@@ -94,21 +88,12 @@ public class Bag implements Serializable {
 	// Prints all current items in the trainer's backpack
 	public String toString() {
 		String str = "";
-		
-//		str += "Bait " + bag.get("Bait") + "\n";
-//		str += "Health Pot " + (int) bag.get("Health Pot") + "\n";
-//		str += "Pokeball " + bag.get("Pokeball") + "\n";
-//		str += "Axes " + (int) bag.get("Axes");
 		for(Object s : bag.keySet()){
-			
-			str += ""+ s + "s " + (int) bag.get((String) s) + "<br>";
-				
-			
-			
-			
+			str += s + "s " + (int) bag.get((String) s) + "\n";
 		}
-		return str+"</body></html>";
+		return str;
 	}
+	
 
 	// Returns the number of items in the trainer's backpack	
 	public int numItems() {

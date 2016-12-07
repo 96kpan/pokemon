@@ -39,6 +39,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private transient BufferedImage emptyGround;
 	private transient BufferedImage grass;
 	private transient BufferedImage tree;
+	JButton statsButton;
 
 	private BufferedImage terrain_sheet;
 	private final int size = 32;
@@ -94,6 +95,15 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		healthpotButton.addActionListener(hpListener);
 		healthpotButton.setVisible(true);
 		this.add(healthpotButton);
+		
+		statsButton = new JButton("Items & Pokemon");
+		statsButton.setLocation(750, 650);
+		statsButton.setSize(190, 25);
+		StatsListener statsListener = new StatsListener();
+		statsButton.addActionListener(statsListener);
+		statsButton.setVisible(true);
+		this.add(statsButton);
+
 
 	}
 
@@ -157,9 +167,6 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		this.messageText.setText(theGame.toStringNoOfSteps());
-		System.out.println();
-		System.out.println("HEREREEEEE" + theGame.trainer.getBackpack().toString());
-		System.out.println();
 		this.itemCounts.setText("<html><body>Backpack: <br>" + theGame.trainer.getBackpack().toString());
 		if(this.theGame.isGameOver()){
 			JOptionPane.showMessageDialog(null, "Game over");
@@ -205,6 +212,15 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				}
 
 			}
+		}
+	}
+	
+	private class StatsListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(null,theGame.trainer.getBackpack().toString());
+			statsButton.setFocusable(false);
+			return;
 		}
 	}
 }

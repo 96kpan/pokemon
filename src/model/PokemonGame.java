@@ -16,12 +16,12 @@ import pokemons.PokemonModel;
 import view.BattleView;
 
 public class PokemonGame extends Observable implements Serializable {
-	static PokemonMap map;
+	PokemonMap map;
 	public Trainer trainer;
 	Battle newBattle;
 	BattleView view;
 	public int winCondition;
-	public static int whichMap;
+	public int whichMap;
 	public boolean shouldLaunchBattle;
 	private static final int TOTAL_MOVES = 500;
 	private int movesLeft;
@@ -40,10 +40,6 @@ public class PokemonGame extends Observable implements Serializable {
 
 	//singleton OODP to only have one instance throughout the game
 	public static PokemonGame getInstance() {
-		if(game == null){
-			game = new PokemonGame(map);
-		}
-
 		return game;
 	}
 
@@ -71,10 +67,6 @@ public class PokemonGame extends Observable implements Serializable {
 	}
 
 	private void moveTrainerInDirection(Direction direction) {
-		if (movesLeft < 0) {
-			JOptionPane.showMessageDialog(null, "Game over you have reached the max number of steps");
-			System.exit(0);
-		}
 		int currX = trainer.getLocation().x;
 		int currY = trainer.getLocation().y;
 		switch (direction) {
@@ -159,7 +151,6 @@ public class PokemonGame extends Observable implements Serializable {
 		}
 		
 		//Win Condition 1: Finite steps condition
-		System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");System.out.println("here");
 		if(this.winCondition == 0){
 			if(game.trainer.stepCount() == 0){
 				System.out.println("game.trainer.getBackpack().getNumOfPokeballs() " + game.trainer.getBackpack().getNumOfPokeballs());

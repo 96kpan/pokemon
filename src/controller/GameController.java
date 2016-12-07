@@ -222,7 +222,6 @@ public class GameController extends JFrame implements Observer {
 		layeredPane.setLayer(battleView,1);
 		battleView.setVisible(true);
 		graphicViewMapTwo.setFocusable(false);
-		graphicViewMapTwo.setEnabled(false);
 		
 	
 		
@@ -238,9 +237,6 @@ public class GameController extends JFrame implements Observer {
 			theGame.shouldLaunchBattle = false;
 			graphicViewMapTwo.setFocusable(true);
 			graphicViewMapTwo.setVisible(true);
-			
-			
-			
 		}
 		
 		

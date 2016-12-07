@@ -20,6 +20,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -65,7 +66,7 @@ public class GameController extends JFrame implements Observer {
 		player = new AudioFilePlayer("./songfiles/Walking.mp3");
 		firstMap = new MapOne();
 		currentMap = firstMap;
-		theGame = new PokemonGame(1);
+		theGame = new PokemonGame(new MapOne());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		theGame = setUpGame(theGame);
 		setUpFrame();
@@ -169,28 +170,34 @@ public class GameController extends JFrame implements Observer {
 				System.out.println("Reading objects failed");
 			}
 		} else if (result == JOptionPane.NO_OPTION) {
+			ButtonGroup bg = new ButtonGroup();
 			JRadioButton[] rb = new JRadioButton[2];
 			JPanel p = new JPanel(new GridLayout(2, 1));
 			for (int x = 0; x < 2; x++) {
 				rb[x] = new JRadioButton("Map " + (x+1));
+				bg.add(rb[x]);
 				p.add(rb[x]);
 			}
 			JOptionPane.showMessageDialog(null, p);
 			if(rb[0].isSelected()){
 				this.theGame.whichMap = 1;
-				this.theGame = new PokemonGame(1);
+				this.theGame = new PokemonGame(new MapOne());
 			}else{
 				this.theGame.whichMap = 2;
-				this.theGame = new PokemonGame(2);
+				this.theGame = new PokemonGame(new MapTwo());
 			}
 			
+			ButtonGroup bg2 = new ButtonGroup();
 			JRadioButton[] rb2 = new JRadioButton[3];
 			JPanel p2 = new JPanel(new GridLayout(3, 1));
 			rb2[0] = new JRadioButton("Win Condition 1: Finite steps condition");
+			bg2.add(rb2[0]);
 			p2.add(rb2[0]);
 			rb2[1] = new JRadioButton("Win Condition 2: Finite balls condition");
+			bg2.add(rb2[1]);
 			p2.add(rb2[1]);
 			rb2[2] = new JRadioButton("Win Condition 3: Finite number of pokemons condition");
+			bg2.add(rb2[2]);
 			p2.add(rb2[2]);
 			
 			for(int i = 0; i < 3; i++){

@@ -134,7 +134,7 @@ public class pokemonTest {
 	}
 	@Test
 	public void gameTest() {
-		PokemonGame game = new PokemonGame();
+		PokemonGame game = new PokemonGame(new MapOne());
 		game.moveTrainer(Direction.North);
 		game.moveTrainer(Direction.South);
 		game.moveTrainer(Direction.East);
@@ -150,7 +150,7 @@ public class pokemonTest {
 		assertTrue(trainer.getName().equals("damn"));
 		assertTrue(trainerBag.numItems() == 0);
 		trainerBag.addItem(new Pokeball(1));
-		trainerBag.removeItem(new Pokeball(1));
+		trainerBag.removeItem("Pokeball");
 		trainerBag.toString();
 		trainerBag.addItem(new Pokeball(1));
 	}

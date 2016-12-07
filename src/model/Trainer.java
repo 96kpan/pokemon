@@ -29,7 +29,6 @@ public class Trainer implements Serializable {
 	private int MAX_STEPS = 500;
 	private Point location;
 	private Direction d;
-	private boolean moving;
 	private static ArrayList<Pokemon> pokemon;
 	
 	public Trainer(String name) {
@@ -38,7 +37,6 @@ public class Trainer implements Serializable {
 		backpack = new Bag();
 		this.steps = 0;
 		pokemon = new ArrayList<Pokemon>();
-		moving = false;
 		this.location = new Point(0,0);
 		totalHPLeft = 1000;
 	}
@@ -136,20 +134,6 @@ public class Trainer implements Serializable {
 		return totalHPLeft;
 	}
 	
-	public boolean isMoving() {
-		if(moving)
-			return true;
-		else
-			return false;
-	}
-	
-	public void toggleMove() {
-		if(moving)
-			moving = false;
-		else
-			moving = true;
-	}
-
 //	public String getStepsLeft() {
 //		// TODO Auto-generated method stub
 //		return null;

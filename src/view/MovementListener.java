@@ -26,23 +26,15 @@ public class MovementListener implements KeyListener {
 		if (e.getKeyCode() == 38) {
 			theGame.moveTrainer(Direction.North);
 			theGame.trainer.getInstance().setImage(Direction.North);
-			theGame.trainer.getInstance().toggleMove();
-			System.out.println("Moving = " + theGame.trainer.getInstance().isMoving());
 		} else if (e.getKeyCode() == 39) {
 			theGame.moveTrainer(Direction.East);
 			theGame.trainer.getInstance().setImage(Direction.East);
-			theGame.trainer.getInstance().toggleMove();
-			System.out.println("Moving = " + theGame.trainer.getInstance().isMoving());
 		} else if (e.getKeyCode() == 37) {
 			theGame.moveTrainer(Direction.West);
 			theGame.trainer.getInstance().setImage(Direction.West);
-			theGame.trainer.getInstance().toggleMove();
-			System.out.println("Moving = " + theGame.trainer.getInstance().isMoving());
 		} else if (e.getKeyCode() == 40) {
 			theGame.moveTrainer(Direction.South);
 			theGame.trainer.getInstance().setImage(Direction.South);
-			theGame.trainer.getInstance().toggleMove();
-			System.out.println("Moving = " + theGame.trainer.getInstance().isMoving());
 		}
 		
 		

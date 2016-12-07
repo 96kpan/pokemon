@@ -39,6 +39,13 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private transient BufferedImage emptyGround;
 	private transient BufferedImage grass;
 	private transient BufferedImage tree;
+	private transient BufferedImage trainer_sheet;
+	
+	private transient Image[] trainer_front;
+	private transient Image[] trainer_back;
+	private transient Image[] trainer_left;
+	private transient Image[] trainer_right;
+	
 	JButton statsButton;
 
 	private BufferedImage terrain_sheet;
@@ -52,7 +59,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			emptyGround = ImageIO.read(new File("images/emptyGround.png"));
 			grass = ImageIO.read(new File("images/grass.png"));
 			tree = ImageIO.read(new File("images/tree.png"));
-
+			trainer_sheet = ImageIO.read(new File("images/trainerSprite.png"));
 			terrain_sheet = ImageIO.read(new File("images/terrain.png"));
 
 		} catch (IOException e) {
@@ -62,6 +69,21 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		this.theGame = game;
 		initJPanel();
 
+		trainer_front = new Image[4];
+		trainer_back = new Image[4];
+		trainer_left = new Image[4];
+		trainer_right = new Image[4];
+		Image scaledImage;
+		for(int x = 0; x < 4; x++) {
+			scaledImage = trainer_sheet.getSubimage(0*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+			trainer_front[x] = scaledImage;
+			scaledImage = trainer_sheet.getSubimage(1*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+			trainer_back[x] = scaledImage;
+			scaledImage = trainer_sheet.getSubimage(2*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+			trainer_right[x] = scaledImage;
+			scaledImage = trainer_sheet.getSubimage(3*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+			trainer_left[x] = scaledImage;
+		} 
 	}
 
 	private void initJPanel() {

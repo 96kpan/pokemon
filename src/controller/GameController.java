@@ -165,9 +165,10 @@ public class GameController extends JFrame implements Observer {
 			}
 			JOptionPane.showMessageDialog(null, p);
 			if(rb[0].isSelected()){
-
+				this.theGame.whichMap = 1;
 				this.theGame = new PokemonGame(1);
 			}else{
+				this.theGame.whichMap = 2;
 				this.theGame = new PokemonGame(2);
 			}
 			

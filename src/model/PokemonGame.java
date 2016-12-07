@@ -21,6 +21,7 @@ public class PokemonGame extends Observable implements Serializable {
 	Battle newBattle;
 	BattleView view;
 	public int winCondition;
+	public static int whichMap;
 	public boolean shouldLaunchBattle;
 	private static final int TOTAL_MOVES = 500;
 	private int movesLeft;
@@ -49,7 +50,9 @@ public class PokemonGame extends Observable implements Serializable {
 
 	//singleton OODP to only have one instance throughout the game
 	public static PokemonGame getInstance() {
-		
+		if(game == null){
+			game = new PokemonGame(whichMap);
+		}
 
 		return game;
 	}

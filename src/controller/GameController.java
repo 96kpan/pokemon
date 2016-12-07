@@ -38,7 +38,6 @@ import model.TrainerBattle;
 import view.BattleView;
 import view.GraphicViewMapTwo;
 import model.Battle;
-import model.EmptyTile;
 import view.PokemonTextView;
 
 public class GameController extends JFrame implements Observer {
@@ -59,15 +58,14 @@ public class GameController extends JFrame implements Observer {
 	public GameController() {
 		firstMap = new MapOne();
 		currentMap = firstMap;
-		theGame = null;
+		theGame = new PokemonGame(1);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setUpGame();
+		theGame = setUpGame(theGame);
 		setUpFrame();
 		theGame.addObserver(this);
 		this.setTitle("Pokemon Safari Zone");
 		setUpLayeredFrame();
 		theGame.addObserver(this);
-		System.out.println("aaaaaa" + theGame);
 		graphicViewMapTwo = new GraphicViewMapTwo(theGame);
 		layeredPane.add(graphicViewMapTwo,0);
 		graphicViewMapTwo.setVisible(true);
@@ -146,23 +144,19 @@ public class GameController extends JFrame implements Observer {
 		}
 	}
 
-	private void setUpGame() {
+	private PokemonGame setUpGame(PokemonGame theGame) {
 		int result = JOptionPane.showConfirmDialog(this,
 				"Start with previous saved state?\n" + "No means all new objects");
 		if (result == JOptionPane.YES_OPTION) {
 			try {
-				System.out.println("reading game");
 				FileInputStream rawBytes = new FileInputStream("Pokemon_Saved_Data");
 				ObjectInputStream inFile = new ObjectInputStream(rawBytes);
-				this.theGame = (PokemonGame) inFile.readObject();
-				System.out.println();
+				theGame = (PokemonGame) inFile.readObject();
 				inFile.close();
 			} catch (Exception e) {
 				System.out.println("Reading objects failed");
 			}
 		} else if (result == JOptionPane.NO_OPTION) {
-			
-			
 			JRadioButton[] rb = new JRadioButton[2];
 			JPanel p = new JPanel(new GridLayout(2, 1));
 			for (int x = 0; x < 2; x++) {
@@ -170,18 +164,16 @@ public class GameController extends JFrame implements Observer {
 				p.add(rb[x]);
 			}
 			JOptionPane.showMessageDialog(null, p);
-			
 			if(rb[0].isSelected()){
-				System.out.println("here");
-				this.theGame = new PokemonGame(new MapOne());
-			}else{
-				this.theGame = new PokemonGame(new MapTwo());
-			}	
-			
+				theGame = new PokemonGame(1);
+			}
+			else {
+				theGame = new PokemonGame(2);
+			}
 		} else {
 			System.exit(0);
 		}
-		
+		return theGame;
 
 	}
 	
@@ -199,8 +191,6 @@ public class GameController extends JFrame implements Observer {
 	public void update(Observable o, Object arg) {
 		if(theGame.shouldLaunchBattle) {
 			showBattle();
-			this.theGame.getMap().map[9][1] = new EmptyTile(null);
-			//System.out.println(this.theGame.toString());
 			theGame.shouldLaunchBattle = false;
 			graphicViewMapTwo.setFocusable(true);
 			graphicViewMapTwo.setVisible(true);

@@ -42,7 +42,6 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private final int size = 32;
 	private BufferedImage tile;
 	private boolean begin = true;
-	private static final int max = 32;
 
 	private int xcoor = 1 * 32;
 	private int ycoor = 9 * 32;
@@ -53,8 +52,9 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private BufferedImage[] trainer_left;
 	private BufferedImage[] trainer_right;
 
-	private boolean moving;
-	private boolean init = true;
+	private static final int DELAY_IN_MS = 0;
+
+	private Iterator<Frames> it;
 
 	private List<Frames> frames;
 
@@ -79,8 +79,6 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		trainer_right = new BufferedImage[4];
 		BufferedImage img;
 
-		moving = false;
-
 		for (int x = 0; x < 4; x++) {
 			img = Trainer.getInstance().getSheet().getSubimage(x * 32, 0 * 32, 32, 32);
 			trainer_back[x] = img;
@@ -94,11 +92,12 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 
 		frames = new LinkedList<Frames>();
 
-		timer = new Timer(10, new ActionListener() {
+		timer = new Timer(DELAY_IN_MS, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Iterator<Frames> it = frames.iterator();
+				it = frames.iterator();
 				while (it.hasNext()) {
+					System.out.println(it.hasNext());
 					Frames frame = it.next();
 					if (frame.getX() > 32 || frame.getY() > 32 || frame.getX() < -32 || frame.getY() < -32) {
 						it.remove();
@@ -135,11 +134,10 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 							frame.setImg(trainer_left[index]);
 							index++;
 						}
-						moving = true;
 						repaint();
+
 					}
 				}
-				moving = false;
 			}
 		});
 		timer.start();
@@ -147,56 +145,50 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		this.theGame = game;
 		initJPanel();
 
-		if (!moving) {
-			InputMap inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-			inputMap.put(KeyStroke.getKeyStroke("UP"), "up");
-			getActionMap().put("up", new AbstractAction() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if (index > 3)
-						index = 0;
-					Frames f = new Frames(trainer_front[index], xcoor, ycoor);
-					frames.add(f);
-				}
-			});
+		InputMap inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		inputMap.put(KeyStroke.getKeyStroke("UP"), "up");
+		getActionMap().put("up", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (index > 3)
+					index = 0;
+				Frames f = new Frames(trainer_front[index], xcoor, ycoor-32);
+				frames.add(f);
+			}
+		});
 
-			inputMap.put(KeyStroke.getKeyStroke("DOWN"), "down");
-			getActionMap().put("down", new AbstractAction() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if (index > 3)
-						index = 0;
-					Frames f = new Frames(trainer_back[index], xcoor, ycoor);
-					frames.add(f);
-				}
-			});
+		inputMap.put(KeyStroke.getKeyStroke("DOWN"), "down");
+		getActionMap().put("down", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (index > 3)
+					index = 0;
+				Frames f = new Frames(trainer_back[index], xcoor, ycoor+32);
+				frames.add(f);
+			}
+		});
 
-			inputMap.put(KeyStroke.getKeyStroke("LEFT"), "LEFT");
-			getActionMap().put("LEFT", new AbstractAction() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if (index > 3)
-						index = 0;
-					Frames f = new Frames(trainer_left[index], xcoor, ycoor);
-					frames.add(f);
-				}
-			});
+		inputMap.put(KeyStroke.getKeyStroke("LEFT"), "LEFT");
+		getActionMap().put("LEFT", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (index > 3)
+					index = 0;
+				Frames f = new Frames(trainer_left[index], xcoor-32, ycoor);
+				frames.add(f);
+			}
+		});
 
-			inputMap.put(KeyStroke.getKeyStroke("RIGHT"), "RIGHT");
-			getActionMap().put("RIGHT", new AbstractAction() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if (index > 3)
-						index = 0;
-					Frames f = new Frames(trainer_right[index], xcoor, ycoor);
-					frames.add(f);
-				}
-			});
-		}
-	}
-	
-	public boolean isMoving() {
-		return moving;
+		inputMap.put(KeyStroke.getKeyStroke("RIGHT"), "RIGHT");
+		getActionMap().put("RIGHT", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (index > 3)
+					index = 0;
+				Frames f = new Frames(trainer_right[index], xcoor+32, ycoor);
+				frames.add(f);
+			}
+		});
 	}
 
 	private class Frames {
@@ -215,7 +207,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		}
 
 		public void drawFrame(Graphics g) {
-			g.drawImage(frame, x + j, y + i, 32, 32, null);
+			g.drawImage(frame, j, i, 32, 32, null);
 		}
 
 		public int getX() {

@@ -7,8 +7,6 @@ import model.Direction;
 import model.PokemonGame;
 import model.PokemonMap;
 
-
-
 public class MovementListener implements KeyListener {
 	PokemonGame theGame;
 
@@ -24,20 +22,19 @@ public class MovementListener implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == 38) {
-			theGame.moveTrainer(Direction.North);
-			theGame.trainer.getInstance().setImage(Direction.North);
+				theGame.moveTrainer(Direction.North);
+				theGame.trainer.getInstance().setImage(Direction.North);
 		} else if (e.getKeyCode() == 39) {
-			theGame.moveTrainer(Direction.East);
-			theGame.trainer.getInstance().setImage(Direction.East);
+				theGame.moveTrainer(Direction.East);
+				theGame.trainer.getInstance().setImage(Direction.East);
 		} else if (e.getKeyCode() == 37) {
-			theGame.moveTrainer(Direction.West);
-			theGame.trainer.getInstance().setImage(Direction.West);
+				theGame.moveTrainer(Direction.West);
+				theGame.trainer.getInstance().setImage(Direction.West);
 		} else if (e.getKeyCode() == 40) {
-			theGame.moveTrainer(Direction.South);
-			theGame.trainer.getInstance().setImage(Direction.South);
+				theGame.moveTrainer(Direction.South);
+				theGame.trainer.getInstance().setImage(Direction.South);
 		}
-		
-		
+
 	}
 
 	@Override
@@ -45,6 +42,3 @@ public class MovementListener implements KeyListener {
 
 	}
 }
-
-
-

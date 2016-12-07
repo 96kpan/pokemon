@@ -80,7 +80,7 @@ public class BattleView extends JPanel {
 		initButtons();
 		initTextView();
 		initBattleText();
-		theGame = PokemonGame.getInstance();
+		theGame = battle.game;
 
 		Timer timer = new Timer(40, new ActionListener() {
 			@Override

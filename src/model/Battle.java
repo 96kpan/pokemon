@@ -11,7 +11,7 @@ import pokemons.Pokemon;
 public abstract class Battle implements Serializable{
 
 	private Trainer player;
-	private PokemonGame game;
+	public PokemonGame game;
 	private Pokemon battlePokemon;
 	private boolean battleOver;
 	private boolean caughtPokemon;
@@ -20,9 +20,9 @@ public abstract class Battle implements Serializable{
 	Random rand;
 
 	// constructor which will initialize variables
-	public Battle() {
+	public Battle(PokemonGame theGame) {
 		player = player.getInstance();
-		game = game.getInstance();
+		game = theGame;
 		rand = new Random();
 		randomPokemon();
 		battleOver = false;

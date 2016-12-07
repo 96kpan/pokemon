@@ -27,7 +27,7 @@ public class TrainerBattle extends Battle implements Serializable{
 
 	// constructor which will initialize variables
 	public TrainerBattle(PokemonGame theGame) {
-		super();
+		super(theGame);
 		player = player.getInstance();
 		game = theGame;
 		rand = new Random();

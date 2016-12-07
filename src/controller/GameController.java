@@ -32,7 +32,6 @@ import javax.swing.Timer;
 
 import model.MapOne;
 import model.MapTwo;
-import model.PokemonBattle;
 import model.PokemonGame;
 import model.PokemonMap;
 import model.TrainerBattle;
@@ -64,16 +63,13 @@ public class GameController extends JFrame implements Observer {
 
 	public GameController() {
 		player = new AudioFilePlayer("./songfiles/Walking.mp3");
-		firstMap = new MapOne();
-		currentMap = firstMap;
 		theGame = new PokemonGame(new MapOne());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		theGame = setUpGame(theGame);
+		setUpGame();
 		setUpFrame();
 		theGame.addObserver(this);
 		this.setTitle("Pokemon Safari Zone");
 		setUpLayeredFrame();
-		theGame.addObserver(this);
 		graphicViewMapTwo = new GraphicViewMapTwo(theGame);
 		layeredPane.add(graphicViewMapTwo,0);
 		graphicViewMapTwo.setVisible(true);
@@ -157,7 +153,7 @@ public class GameController extends JFrame implements Observer {
 		}
 	}
 
-	private PokemonGame setUpGame(PokemonGame theGame) {
+	private void setUpGame() {
 		int result = JOptionPane.showConfirmDialog(this,
 				"Start with previous saved state?\n" + "No means all new objects");
 		if (result == JOptionPane.YES_OPTION) {
@@ -165,6 +161,7 @@ public class GameController extends JFrame implements Observer {
 				FileInputStream rawBytes = new FileInputStream("Pokemon_Saved_Data");
 				ObjectInputStream inFile = new ObjectInputStream(rawBytes);
 				theGame = (PokemonGame) inFile.readObject();
+				System.out.println(theGame.toString());
 				inFile.close();
 			} catch (Exception e) {
 				System.out.println("Reading objects failed");
@@ -211,7 +208,7 @@ public class GameController extends JFrame implements Observer {
 		} else {
 			System.exit(0);
 		}
-		return theGame;
+		//return theGame;
 
 	}
 	

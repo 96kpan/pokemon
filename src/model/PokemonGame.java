@@ -16,7 +16,7 @@ import pokemons.PokemonModel;
 import view.BattleView;
 
 public class PokemonGame extends Observable implements Serializable {
-	static PokemonMap map;
+	PokemonMap map;
 	public Trainer trainer;
 	Battle newBattle;
 	BattleView view;
@@ -25,7 +25,6 @@ public class PokemonGame extends Observable implements Serializable {
 	public boolean shouldLaunchBattle;
 	private static final int TOTAL_MOVES = 500;
 	private int movesLeft;
-	private static PokemonGame game;
 
 
 	public PokemonGame(PokemonMap m)  {
@@ -39,13 +38,7 @@ public class PokemonGame extends Observable implements Serializable {
 	}
 
 	//singleton OODP to only have one instance throughout the game
-	public static PokemonGame getInstance() {
-		if(game == null){
-			game = new PokemonGame(map);
-		}
-
-		return game;
-	}
+	
 
 	//returns the Game's Map
 	public PokemonMap getMap() {
@@ -149,29 +142,28 @@ public class PokemonGame extends Observable implements Serializable {
 
 	public boolean isGameOver(){
 		
-		if(game == null){
-			game = getInstance();
-			game.map.map[9][1] = new EmptyTile(null);
-		}
+		
+			this.map.map[9][1] = new EmptyTile(null);
+	
 		
 		//Win Condition 1: Finite steps condition
 		if(this.winCondition == 0){
-			if(game.trainer.stepCount() == 0){
-				System.out.println("game.trainer.getBackpack().getNumOfPokeballs() " + game.trainer.getBackpack().getNumOfPokeballs());
+			if(this.trainer.stepCount() == 0){
+				System.out.println("game.trainer.getBackpack().getNumOfPokeballs() " + this.trainer.getBackpack().getNumOfPokeballs());
 				return true;
 			}
 		}
 		
 		//Win Condition 2: Finite balls condition
 		else if(this.winCondition == 1){
-			if(game.trainer.getBackpack().getNumOfPokeballs() == 0)
+			if(this.trainer.getBackpack().getNumOfPokeballs() == 0)
 				return true;
 		}
 		
 		//Win Condition 3: Finite number of pokemons condition
 		//hits 5 pokemons, game is over
 		else if(this.winCondition == 2){
-			if(game.trainer.getPokemons().size() == 5){
+			if(this.trainer.getPokemons().size() == 5){
 				return true;
 			}
 

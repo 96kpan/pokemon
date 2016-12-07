@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
@@ -23,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
+import javax.swing.Timer;
 
 import model.*;
 import pokemons.Garchomp;
@@ -41,11 +44,10 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private transient BufferedImage tree;
 	private transient BufferedImage trainer_sheet;
 	
-	private transient Image[] trainer_front;
-	private transient Image[] trainer_back;
-	private transient Image[] trainer_left;
-	private transient Image[] trainer_right;
+	private List<Image> f;
 	
+	private boolean drawMove;
+
 	JButton statsButton;
 
 	private BufferedImage terrain_sheet;
@@ -53,13 +55,14 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private BufferedImage tile;
 
 	public GraphicViewMapTwo(PokemonGame game) {
+		f = new LinkedList<Image>();
+		
 		try {
 			fire = ImageIO.read(new File("images/fire.png"));
 			water = ImageIO.read(new File("images/water.png"));
 			emptyGround = ImageIO.read(new File("images/emptyGround.png"));
 			grass = ImageIO.read(new File("images/grass.png"));
 			tree = ImageIO.read(new File("images/tree.png"));
-			trainer_sheet = ImageIO.read(new File("images/trainerSprite.png"));
 			terrain_sheet = ImageIO.read(new File("images/terrain.png"));
 
 		} catch (IOException e) {
@@ -69,21 +72,31 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		this.theGame = game;
 		initJPanel();
 
-		trainer_front = new Image[4];
-		trainer_back = new Image[4];
-		trainer_left = new Image[4];
-		trainer_right = new Image[4];
-		Image scaledImage;
-		for(int x = 0; x < 4; x++) {
-			scaledImage = trainer_sheet.getSubimage(0*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
-			trainer_front[x] = scaledImage;
-			scaledImage = trainer_sheet.getSubimage(1*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
-			trainer_back[x] = scaledImage;
-			scaledImage = trainer_sheet.getSubimage(2*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
-			trainer_right[x] = scaledImage;
-			scaledImage = trainer_sheet.getSubimage(3*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
-			trainer_left[x] = scaledImage;
-		} 
+		drawMove = false;
+		
+		Timer timer = new Timer(40, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				while (theGame.getInstance().isMoving()) {
+					for (int x = 0; x < 4; x++) {
+						System.out.println("Hhere?");
+						f.add(theGame.getInstance().getFrame().img[x]);
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						f.removeAll(f);
+						drawMove = true;
+						repaint();
+					}
+					drawMove = false;
+					theGame.getInstance().setMoving(false);
+				}
+			}
+
+		});
+		timer.start();
 	}
 
 	private void initJPanel() {
@@ -112,7 +125,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		healthpotButton.addActionListener(hpListener);
 		healthpotButton.setVisible(true);
 		this.add(healthpotButton);
-		
+
 		statsButton = new JButton("Items & Pokemon");
 		statsButton.setLocation(750, 650);
 		statsButton.setSize(190, 25);
@@ -121,16 +134,13 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		statsButton.setVisible(true);
 		this.add(statsButton);
 
-
 	}
 
 	public void paintComponent(Graphics g) {
 
-		System.out.println(theGame.trainer.getPokemons().size());
-
 		for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
 			g.drawImage(theGame.trainer.getPokemons().get(i).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH),
-					770+ (50 * i), 250, null);
+					770 + (50 * i), 250, null);
 
 		}
 
@@ -175,6 +185,10 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				if (curTile.getHasTrainer()) {
 					g.drawImage(Trainer.getInstance().getImage(), j * 32, i * 32, null);
 				}
+				if(!f.isEmpty()) {
+					System.out.println("test");
+					g.drawImage(f.get(0), j*32, i*32, 32, 32, null);
+				}
 
 			}
 
@@ -184,7 +198,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		this.messageText.setText(theGame.toStringNoOfSteps());
-		if(this.theGame.isGameOver()){
+		if (this.theGame.isGameOver()) {
 			JOptionPane.showMessageDialog(null, "Game over");
 			return;
 		}
@@ -197,7 +211,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		public void actionPerformed(ActionEvent arg0) {
 			String text = arg0.getActionCommand();
 			if (text.equals("Add Health")) {
-				
+
 				ButtonGroup bg1 = new ButtonGroup();
 
 				JRadioButton[] rb = new JRadioButton[theGame.trainer.getPokemons().size()];
@@ -212,17 +226,16 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
 					if (rb[i].isSelected()) {
 						// find pokemon
-						if(theGame.trainer.getBackpack().getCountOfItems("HealthPot") > 0){
+						if (theGame.trainer.getBackpack().getCountOfItems("HealthPot") > 0) {
 							theGame.trainer.getBackpack().removeItem("HealthPot");
 							theGame.trainer.getPokemons().get(i)
 									.setTotalHealth(theGame.trainer.getPokemons().get(i).getTotalHealth() + 50);
-							
+
 							return;
-						}else{
+						} else {
 							JOptionPane.showMessageDialog(null, "No more");
 							return;
 						}
-						
 
 					}
 				}
@@ -230,11 +243,11 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			}
 		}
 	}
-	
+
 	private class StatsListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(null,theGame.trainer.getBackpack().toString());
+			JOptionPane.showMessageDialog(null, theGame.trainer.getBackpack().toString());
 			statsButton.setFocusable(false);
 			return;
 		}

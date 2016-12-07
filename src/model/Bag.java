@@ -57,6 +57,7 @@ public class Bag implements Serializable {
 
 	// Removes given item from backpack and shifts array
 	public void removeItem(String s) {
+		System.out.println("ehrehhreherhehrh " + s);
 		if(bag.containsKey((String) s) && getCountOfItems(s) > 0){
 			int num = (int) bag.get((String)s);
 			if(num == 0){

@@ -183,8 +183,8 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				for (int i = 0; i < theGame.trainer.getPokemons().size(); i++) {
 					if (rb[i].isSelected()) {
 						// find pokemon
-						if(theGame.trainer.getBackpack().getCountOfItems("Health Pots") > 0){
-							theGame.trainer.getBackpack().removeItem("Health Pots");
+						if(theGame.trainer.getBackpack().getCountOfItems("HealthPot") > 0){
+							theGame.trainer.getBackpack().removeItem("HealthPot");
 							theGame.trainer.getPokemons().get(i)
 									.setTotalHealth(theGame.trainer.getPokemons().get(i).getTotalHealth() + 50);
 							

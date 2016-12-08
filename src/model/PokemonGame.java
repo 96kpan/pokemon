@@ -71,7 +71,7 @@ public class PokemonGame extends Observable implements Serializable {
 
 	//general information
 	public String toStringNoOfSteps(){
-		String s = "No of Steps taken " + this.movesLeft;
+		String s = "Steps left " + this.movesLeft;
 
 		return s;
 	}

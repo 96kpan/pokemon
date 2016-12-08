@@ -99,18 +99,13 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		this.setFocusable(true);
 		this.addKeyListener(new MovementListener(theGame));
 
-		messageText = new JLabel("No of Steps taken 500");
+		messageText = new JLabel("Steps left 500");
 		messageText.setLocation(750, 100);
 		messageText.setSize(150, 25);
 		this.add(messageText);
 
-		this.myPokemons = new JLabel(theGame.trainer.getName() + "'s Pokemon");
-		myPokemons.setLocation(750, 200);
-		myPokemons.setSize(190, 25);
-		this.add(myPokemons);
-
 		JButton healthpotButton = new JButton("Add Health");
-		healthpotButton.setLocation(750, 550);
+		healthpotButton.setLocation(750, 250);
 		healthpotButton.setSize(190, 25);
 		healthpotButton.setFocusable(false);
 		ButtonListener hpListener = new ButtonListener();
@@ -118,8 +113,8 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		healthpotButton.setVisible(true);
 		this.add(healthpotButton);
 		
-		statsButton = new JButton("Items & Pokemon");
-		statsButton.setLocation(750, 650);
+		statsButton = new JButton("Items");
+		statsButton.setLocation(750, 300);
 		statsButton.setSize(190, 25);
 		StatsListener statsListener = new StatsListener();
 		statsButton.addActionListener(statsListener);

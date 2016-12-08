@@ -1,3 +1,6 @@
+-------->FOR SOUND: ADD THE JAR's in the LIB FOLDER to the PATH<-------
+-^Instructions in ReadME in LIB folder!!
+
 # final-project-start
 
 This is the GitHub repo we will use to store our CSC 335 Final Project, Fall 2016

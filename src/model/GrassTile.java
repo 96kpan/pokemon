@@ -18,7 +18,7 @@ public class GrassTile extends Tile implements Serializable {
 		Random rand = new Random();
 		int  randomNum = rand.nextInt(100);
 		if(randomNum < 10) {
-			game.launchBattle();
+			game.launchBattle(1);
 		}
 		else if(randomNum >= 10 && randomNum <= 15) {
 			game.acquireItem();

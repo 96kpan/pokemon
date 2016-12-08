@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import controller.GameController;
 import model.*;
 import pokemons.*;
 import view.BattleView;
@@ -882,9 +883,6 @@ public class itemTest {
 		g.toggleMap();
 		for(int x = 0; x < 20; x++)
 			g.moveTrainer(Direction.North);
-		g.movingIntoTree(0, 0);
-		g.movingIntoTree(20, 20);
-		g.chopTree(0,0);
 	}
 
 	// step count
@@ -899,6 +897,12 @@ public class itemTest {
 		Direction.North.valueOf(Direction.North.toString());
 		Direction.South.valueOf(Direction.South.toString());
 		Direction.West.valueOf(Direction.West.toString());
+	}
+	
+	@Test
+	public void testBag2() {
+		Bag b = new Bag();
+		b.addItem(new Pokeball(-31));
 	}
 
 	@Test
@@ -930,6 +934,16 @@ public class itemTest {
 		b.chosenName();
 	}
 	
-	
+	@Test
+	public void testMovement() {
+		PokemonGame pg = new PokemonGame(new MapOne());
+		for(int x = 0; x < 1000; x++) {
+			pg.moveTrainer(Direction.South);
+			pg.moveTrainer(Direction.East);
+			pg.moveTrainer(Direction.North);
+			pg.moveTrainer(Direction.West);
+		}
+		
+	}
 	
 }

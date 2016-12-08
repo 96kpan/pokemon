@@ -199,22 +199,23 @@ public class PokemonGame extends Observable implements Serializable {
 		
 			this.map.map[9][1] = new EmptyTile(null);
 	
-		
-		//Win Condition 1: Finite steps condition
+			
+		//Win Condition 1: Finite steps condition -> WORKS
 		if(this.winCondition == 0){
 			if(movesLeft <= 0){
-				System.out.println("game.trainer.getBackpack().getNumOfPokeballs() " + this.trainer.getBackpack().getNumOfPokeballs());
 				return true;
 			}
 		}
 		
 		//Win Condition 2: Finite balls condition
 		else if(this.winCondition == 1){
+			System.out.println("HOW MANY BALLS ARE THERE " + this.trainer.getBackpack().getNumOfPokeballs() );
+			System.out.println("HOW MANY BALLS ARE THERE " + (this.trainer.getBackpack().getNumOfPokeballs() == 0) );
 			if(this.trainer.getBackpack().getNumOfPokeballs() == 0)
 				return true;
 		}
 		
-		//Win Condition 3: Finite number of pokemons condition
+		//Win Condition 3: Finite number of pokemons condition -> works
 		//hits 5 pokemons, game is over
 		else if(this.winCondition == 2){
 			if(this.trainer.getPokemons().size() == 5){

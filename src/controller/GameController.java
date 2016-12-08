@@ -191,7 +191,7 @@ public class GameController extends JFrame implements Observer {
 			rb2[0] = new JRadioButton("Win Condition 1: Finite steps condition");
 			bg2.add(rb2[0]);
 			p2.add(rb2[0]);
-			rb2[0].setSelected(true);
+			//rb2[0].setSelected(true);
 			rb2[1] = new JRadioButton("Win Condition 2: Finite balls condition");
 			bg2.add(rb2[1]);
 			p2.add(rb2[1]);
@@ -199,13 +199,16 @@ public class GameController extends JFrame implements Observer {
 			bg2.add(rb2[2]);
 			p2.add(rb2[2]);
 			
+		
+			
+			JOptionPane.showMessageDialog(null, p2);
+			
 			for(int i = 0; i < 3; i++){
 				if(rb2[i].isSelected()){
+					System.out.println("this is selected " + i);
 					theGame.winCondition = i;
 				}
 			}
-			
-			JOptionPane.showMessageDialog(null, p2);
 		
 		} else {
 			System.exit(0);

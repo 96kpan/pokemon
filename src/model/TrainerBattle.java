@@ -36,11 +36,21 @@ public class TrainerBattle extends Battle implements Serializable{
 		isOccuring = true;
 		
 	}
+	
+	public TrainerBattle(PokemonGame theGame, Pokemon pokemonToBattle) {
+		super(theGame);
+		player = theGame.trainer;
+		game = theGame;
+		rand = new Random();
+		battlePokemon = pokemonToBattle;
+		battleOver = false;
+		isOccuring = true;
+		
+	}
 
 	// get random pokemon
 	private void randomPokemon() {
 		int rand = (int) (Math.random() * 100) + 1;
-		System.out.println("rand ");System.out.println("rand ");System.out.println("rand ");System.out.println("rand ");System.out.println("rand ");System.out.println("rand ");System.out.println("rand ");System.out.println("rand ");System.out.println("rand ");System.out.println("rand ");System.out.println("rand ");
 		
 		
 
@@ -89,16 +99,11 @@ public class TrainerBattle extends Battle implements Serializable{
 		}
 
 		else {
-			// rare pokemons
-			double rarePokemon = (Math.random() * 2) + 1;
-			if (rarePokemon < 1) {
-				battlePokemon = new Lugia(); // rare
-				return;
-			} else {
 				battlePokemon = new Mewtwo(); // rare
-				return;
-			}
 		}
+			
+			
+		
 	}
 
 	// getter for random pokemon

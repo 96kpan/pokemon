@@ -80,6 +80,9 @@ public class PokemonGame extends Observable implements Serializable {
 		int currY = trainer.getLocation().y;
 		switch (direction) {
 		case South:
+			if(map.getTile(currX + 1, currY).toString().equals("t")) {
+				movingIntoTree(currX + 1, currY);
+			}
 			if (currX + 1 < PokemonMap.MAP_WIDTH 
 					&& map.getTile(currX + 1, currY).canMove) {
 				map.getTile(trainer.getLocation().x, trainer.getLocation().y)
@@ -91,6 +94,9 @@ public class PokemonGame extends Observable implements Serializable {
 			}
 			break;
 		case North:
+			if(map.getTile(currX - 1, currY).toString().equals("t")) {
+				movingIntoTree(currX -1, currY);
+			}
 			if (currX - 1 >= 0 && map.getTile(currX - 1, currY).canMove) {
 				map.getTile(trainer.getLocation().x, trainer.getLocation().y)
 				.setHasTrainer(false);
@@ -102,6 +108,9 @@ public class PokemonGame extends Observable implements Serializable {
 			break;
 
 		case West:
+			if (currY - 1 >= 0 && map.getTile(currX, currY - 1).toString().equals("t")) {
+				movingIntoTree(currX,currY -1);
+			}
 			if (currY - 1 >= 0 && map.getTile(currX, currY - 1).canMove) {
 				map.getTile(trainer.getLocation().x, trainer.getLocation().y)
 				.setHasTrainer(false);
@@ -113,6 +122,10 @@ public class PokemonGame extends Observable implements Serializable {
 			break;
 
 		case East: {
+			if(currY + 1 < PokemonMap.MAP_HEIGHT
+					&& map.getTile(currX, currY + 1).toString().equals("t")) {
+				movingIntoTree(currX, currY + 1);
+			}
 			if (currY + 1 < PokemonMap.MAP_HEIGHT
 					&& map.getTile(currX, currY + 1).canMove) {
 				map.getTile(trainer.getLocation().x, trainer.getLocation().y)
@@ -127,6 +140,27 @@ public class PokemonGame extends Observable implements Serializable {
 		map.getTile(trainer.getLocation().x, trainer.getLocation().y).playerIsOnTile(this);
 
 	}
+	
+	private void movingIntoTree(int xPos, int yPos) {
+		int result = JOptionPane.showConfirmDialog(
+				null, "You have run into a tree would you like to try and chop it?");
+		if(result == JOptionPane.YES_OPTION) {
+			chopTree(xPos,yPos);
+		}
+		
+	}
+	
+	private void chopTree(int xPos, int yPos) {
+		if(trainer.getBackpack().getCountOfItems("Axe") > 0) {
+			map.map[xPos][yPos] = new GrassTile(null);
+			JOptionPane.showMessageDialog(null, "You chopped the tree!!");
+			
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "You need to find an axe.... try looking in the grass");
+		}
+		
+	}
 
 	public void launchBattle() {
 		shouldLaunchBattle = true;
@@ -135,7 +169,7 @@ public class PokemonGame extends Observable implements Serializable {
 	public void acquireItem() {
 		Random rand = new Random();
 		int  randNum = rand.nextInt(100) + 1;
-		if(randNum == 1) {
+		if(randNum > 41) {
 			if(this.map.getClass() == MapOne.class) {
 				trainer.getBackpack().addItem(new Axe(1));
 				itemadded = "Axe";
@@ -149,10 +183,10 @@ public class PokemonGame extends Observable implements Serializable {
 			trainer.getBackpack().addItem(new Pokeball(1));
 			itemadded = "Pokeball";
 		}
-		else {
+		/*else {
 			trainer.getBackpack().addItem(new Bait("Bait",1));
 			itemadded = "Bait";
-		}
+		}*/
 
 	}
 	

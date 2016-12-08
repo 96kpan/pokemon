@@ -7,7 +7,7 @@ public class Axe extends Item{
 
 		@Override
 		public String toString() {
-			return "HealthPot";
+			return "Axe";
 		}
 	
 

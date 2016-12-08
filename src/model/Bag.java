@@ -38,6 +38,7 @@ public class Bag implements Serializable {
 		this.addItem(new HealthPot("Health Pot", 1));
 		this.addItem(new Bait("Bait", 1));
 		this.addItem(new Axe(1));
+		this.addItem(new Axe(1));
 	}
 
 	// Adds item passed through parameters to the backpack

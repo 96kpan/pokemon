@@ -59,7 +59,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private int ycoor = 0;
 
 	private boolean begin = true;
-	private List<Frame> frames;
+	public List<Frame> frames;
 
 	JButton statsButton;
 

@@ -279,7 +279,7 @@ public class BattleView extends JPanel {
 		repaint();
 		revalidate();
 	}
-
+	
 	private class ButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {

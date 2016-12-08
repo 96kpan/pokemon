@@ -206,27 +206,23 @@ public class GameController extends JFrame implements Observer {
 
 	}
 
-	public void showBattle() {
+	private void showBattle() {
 		battle = new TrainerBattle(theGame);
 		battleView = new BattleView(battle);
 		layeredPane.add(battleView);
 		layeredPane.setLayer(battleView, 1);
 		battleView.setVisible(true);
 		graphicViewMapTwo.setFocusable(false);
-
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		if (theGame.shouldLaunchBattle) {
-			if (!theGame.getInstance().isMoving()) {
-				showBattle();
-				theGame.shouldLaunchBattle = false;
-				graphicViewMapTwo.setFocusable(true);
-				graphicViewMapTwo.setVisible(true);
-			}
-		}
-
+			showBattle();
+			theGame.shouldLaunchBattle = false;
+			graphicViewMapTwo.setFocusable(true);
+			graphicViewMapTwo.setVisible(true);
+		} 
 	}
 
 }

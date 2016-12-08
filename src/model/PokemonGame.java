@@ -23,7 +23,7 @@ public class PokemonGame extends Observable implements Serializable {
 	public int winCondition;
 	public int whichMap;
 	public boolean shouldLaunchBattle;
-	private static final int TOTAL_MOVES = 500;
+	private static final int TOTAL_MOVES = 20;
 	private int movesLeft;
 	private String itemadded;
 	public int battleType;
@@ -231,8 +231,8 @@ public class PokemonGame extends Observable implements Serializable {
 	}
 	
 	public void gameOverMessage() {
-		JOptionPane.showMessageDialog(null, "Thanks for playing here are your stats: \n +"
-				+ "Pokemon Caught: " + trainer.getPokemons().toString() + "\n + Item counts: +"
+		JOptionPane.showMessageDialog(null, "Thanks for playing here are your stats: \n "
+				+ "Pokemon Caught: " + trainer.getPokemons().toString() + "\n  Item counts:\n "
 						+ trainer.getBackpack().toString());
 		
 	}

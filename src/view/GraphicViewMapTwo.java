@@ -42,12 +42,17 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private transient BufferedImage emptyGround;
 	private transient BufferedImage grass;
 	private transient BufferedImage tree;
-	private transient BufferedImage trainer_sheet;
-	
-	private List<Image> f;
-	
-	private boolean drawMove;
 
+	private transient BufferedImage trainer_sheet;
+	private transient Image[] trainer_front;
+	private transient Image[] trainer_back;
+	private transient Image[] trainer_left;
+	private transient Image[] trainer_right;
+	
+	private List<Image> frames;
+	
+	private static Direction d = Direction.South;
+	
 	JButton statsButton;
 
 	private BufferedImage terrain_sheet;
@@ -55,7 +60,29 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private BufferedImage tile;
 
 	public GraphicViewMapTwo(PokemonGame game) {
-		f = new LinkedList<Image>();
+		frames = new LinkedList<Image>();
+		try {
+			trainer_sheet = ImageIO.read(new File("images/trainerSprite.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		}
+		
+		trainer_front = new Image[4];
+		trainer_back = new Image[4];
+		trainer_left = new Image[4];
+		trainer_right = new Image[4];
+		Image scaledImage;
+		for(int x = 0; x < 4; x++) {
+			scaledImage = trainer_sheet.getSubimage(0*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+			trainer_front[x] = scaledImage;
+			scaledImage = trainer_sheet.getSubimage(1*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+			trainer_back[x] = scaledImage;
+			scaledImage = trainer_sheet.getSubimage(2*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+			trainer_right[x] = scaledImage;
+			scaledImage = trainer_sheet.getSubimage(3*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+			trainer_left[x] = scaledImage;
+		} 
 		
 		try {
 			fire = ImageIO.read(new File("images/fire.png"));
@@ -72,25 +99,19 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		this.theGame = game;
 		initJPanel();
 
-		drawMove = false;
-		
 		Timer timer = new Timer(40, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				while (theGame.getInstance().isMoving()) {
 					for (int x = 0; x < 4; x++) {
 						System.out.println("Hhere?");
-						f.add(theGame.getInstance().getFrame().img[x]);
 						try {
 							Thread.sleep(100);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						f.removeAll(f);
-						drawMove = true;
 						repaint();
 					}
-					drawMove = false;
 					theGame.getInstance().setMoving(false);
 				}
 			}
@@ -185,13 +206,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				if (curTile.getHasTrainer()) {
 					g.drawImage(Trainer.getInstance().getImage(), j * 32, i * 32, null);
 				}
-				if(!f.isEmpty()) {
-					System.out.println("test");
-					g.drawImage(f.get(0), j*32, i*32, 32, 32, null);
-				}
-
 			}
-
 		}
 	}
 
@@ -250,6 +265,15 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 			JOptionPane.showMessageDialog(null, theGame.trainer.getBackpack().toString());
 			statsButton.setFocusable(false);
 			return;
+		}
+	}
+
+	public static void move(Direction dir) {
+		d = dir;
+		if(d == Direction.South) {
+			for(int x = 0; x < 4; x++) {
+				frames.add(trainer_front)
+			}
 		}
 	}
 }

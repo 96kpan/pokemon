@@ -26,7 +26,6 @@ public class MovementListener implements KeyListener {
 		if (e.getKeyCode() == 38) {
 			theGame.moveTrainer(Direction.North);
 			theGame.trainer.getInstance().setImage(Direction.North);
-			theGame.getInstance().addFrame(Direction.North);
 			theGame.getInstance().setMoving(true);
 		} else if (e.getKeyCode() == 39) {
 			theGame.moveTrainer(Direction.East);

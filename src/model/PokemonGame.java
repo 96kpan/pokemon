@@ -20,6 +20,7 @@ import item.Pokeball;
 import pokemons.Pokemon;
 import pokemons.PokemonModel;
 import view.BattleView;
+import view.GraphicViewMapTwo;
 
 public class PokemonGame extends Observable implements Serializable {
 	static PokemonMap map;
@@ -33,39 +34,9 @@ public class PokemonGame extends Observable implements Serializable {
 	private int movesLeft;
 	private static PokemonGame game;
 	
-	private transient BufferedImage trainer_sheet;
-	private transient Image[] trainer_front;
-	private transient Image[] trainer_back;
-	private transient Image[] trainer_left;
-	private transient Image[] trainer_right;
 	private boolean moving = false;
 	
-	private Frames f;
-
-
 	public PokemonGame(PokemonMap m)  {
-		try {
-			trainer_sheet = ImageIO.read(new File("images/trainerSprite.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		}
-		
-		trainer_front = new Image[4];
-		trainer_back = new Image[4];
-		trainer_left = new Image[4];
-		trainer_right = new Image[4];
-		Image scaledImage;
-		for(int x = 0; x < 4; x++) {
-			scaledImage = trainer_sheet.getSubimage(0*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
-			trainer_front[x] = scaledImage;
-			scaledImage = trainer_sheet.getSubimage(1*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
-			trainer_back[x] = scaledImage;
-			scaledImage = trainer_sheet.getSubimage(2*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
-			trainer_right[x] = scaledImage;
-			scaledImage = trainer_sheet.getSubimage(3*32, x*32, 32, 32).getScaledInstance(128, 128, Image.SCALE_SMOOTH);
-			trainer_left[x] = scaledImage;
-		} 
 		map = m;
 	
 		trainer = new Trainer("ASH KETCHUP");
@@ -73,7 +44,6 @@ public class PokemonGame extends Observable implements Serializable {
 		map.getTile(trainer.getLocation().x, trainer.getLocation().y)
 		.setHasTrainer(true);
 		this.movesLeft = TOTAL_MOVES;
-		addFrame(Direction.South);
 	}
 
 	//singleton OODP to only have one instance throughout the game
@@ -85,25 +55,6 @@ public class PokemonGame extends Observable implements Serializable {
 		return game;
 	}
 	
-	public void addFrame(Direction d) {
-		if(d == Direction.North) {
-			f = new Frames(trainer_back, trainer.getLocation().x, trainer.getLocation().y);
-		}
-		if(d == Direction.South) {
-			f = new Frames(trainer_front, trainer.getLocation().x, trainer.getLocation().y);
-		}
-		if(d == Direction.East) {
-			f = new Frames(trainer_right, trainer.getLocation().x, trainer.getLocation().y);
-		}
-		if(d == Direction.West) {
-			f = new Frames(trainer_left, trainer.getLocation().x, trainer.getLocation().y);
-		}
-	}
-	
-	public Frames getFrame() {
-		return f;
-	}
-	
 	public boolean isMoving() {
 		return moving;
 	}
@@ -111,32 +62,6 @@ public class PokemonGame extends Observable implements Serializable {
 	public void setMoving(boolean m) {
 		moving = m;
 	}
-	
-	public class Frames {
-		public Image[] img;
-		int index = 0;
-		int x = 0;
-		int y = 0;
-		public Frames(Image[] image, int j, int i) {
-			img = image;
-			index = 0;
-			x = j;
-			y = i;
-		}
-		
-		public void drawFrame(Graphics g) {
-			g.drawImage(img[index], x, y, null);
-		}
-		
-		public int getIndex() {
-			return index;
-		}
-		
-		public void setIndex(int i) {
-			index = i;
-		}
-	}
-
 
 	//returns the Game's Map
 	public PokemonMap getMap() {
@@ -173,7 +98,7 @@ public class PokemonGame extends Observable implements Serializable {
 				map.getTile(currX + 1, currY).setHasTrainer(true);
 				trainer.setLocation(new Point(currX + 1, currY));
 				movesLeft--;
-
+				GraphicViewMapTwo.move(Direction.South);
 			}
 			break;
 		case North:

@@ -897,6 +897,7 @@ public class itemTest {
 		Direction.North.valueOf(Direction.North.toString());
 		Direction.South.valueOf(Direction.South.toString());
 		Direction.West.valueOf(Direction.West.toString());
+		TrainerBattle tb = new TrainerBattle(new PokemonGame(new MapOne()), new pokemons.Charmander());
 	}
 	
 	@Test

@@ -16,7 +16,7 @@ public class BossTile extends Tile {
 
 	@Override
 	public void playerIsOnTile(PokemonGame game) {
-		game.launchBattle();
+		game.launchBattle(2);
 		
 	}
 

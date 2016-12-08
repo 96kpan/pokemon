@@ -35,6 +35,7 @@ import model.MapTwo;
 import model.PokemonGame;
 import model.PokemonMap;
 import model.TrainerBattle;
+import pokemons.Lugia;
 import songplayer.AudioFilePlayer;
 import songplayer.EndOfSongEvent;
 import songplayer.EndOfSongListener;
@@ -214,8 +215,11 @@ public class GameController extends JFrame implements Observer {
 
 	}
 	
-	private void showBattle() {
-		battle = new TrainerBattle(theGame);
+	public void showBattle(int mode) {
+		if(mode == 1)
+			battle = new TrainerBattle(theGame);
+		else if(mode == 2) 
+			battle = new TrainerBattle(theGame,new Lugia());
 		battleView = new BattleView(battle);
 		layeredPane.add(battleView);
 		layeredPane.setLayer(battleView,1);
@@ -232,7 +236,7 @@ public class GameController extends JFrame implements Observer {
 	public void update(Observable o, Object arg) {
 		if(theGame.shouldLaunchBattle) {
 			
-			showBattle();
+			showBattle(theGame.battleType);
 			theGame.shouldLaunchBattle = false;
 			graphicViewMapTwo.setFocusable(true);
 			graphicViewMapTwo.setVisible(true);

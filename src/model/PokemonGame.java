@@ -26,6 +26,7 @@ public class PokemonGame extends Observable implements Serializable {
 	private static final int TOTAL_MOVES = 500;
 	private int movesLeft;
 	private String itemadded;
+	public int battleType;
 
 
 	public PokemonGame(PokemonMap m)  {
@@ -162,7 +163,8 @@ public class PokemonGame extends Observable implements Serializable {
 		
 	}
 
-	public void launchBattle() {
+	public void launchBattle(int mode) {
+		battleType = mode;
 		shouldLaunchBattle = true;
 	}
 

@@ -183,12 +183,14 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 				}
 
 				// trainer
-				if (curTile.getHasTrainer()) {
-					g.drawImage(theGame.trainer.getImage(), j * 32, i * 32, null);
-				}
+				
 				
 				if(curTile.toString().equals("B")) {
 					g.drawImage(gymLeader, j * 32, i * 32, null);
+				}
+				
+				if (curTile.getHasTrainer()) {
+					g.drawImage(theGame.trainer.getImage(), j * 32, i * 32, null);
 				}
 				
 				if(i == 15 && j == 3){

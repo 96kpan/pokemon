@@ -155,6 +155,7 @@ public class PokemonGame extends Observable implements Serializable {
 		if(trainer.getBackpack().getCountOfItems("Axe") > 0) {
 			map.map[xPos][yPos] = new GrassTile(null);
 			JOptionPane.showMessageDialog(null, "You chopped the tree!!");
+			trainer.getBackpack().removeItem("Axe");
 			
 		}
 		else {

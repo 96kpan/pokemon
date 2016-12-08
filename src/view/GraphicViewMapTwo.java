@@ -100,7 +100,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		this.setFocusable(true);
 		this.addKeyListener(new MovementListener(theGame));
 
-		messageText = new JLabel("Steps left 500");
+		messageText = new JLabel("Steps left " + theGame.TOTAL_MOVES);
 		messageText.setLocation(750, 100);
 		messageText.setSize(150, 25);
 		this.add(messageText);

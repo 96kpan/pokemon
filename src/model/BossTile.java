@@ -18,8 +18,8 @@ public class BossTile extends Tile {
 
 	@Override
 	public void playerIsOnTile(PokemonGame game) {
-		int response = JOptionPane.showConfirmDialog(null, "Would you like to battle the trainer? He has an extremeyly rare pokemon"
-				+ "beware he is spooked easily if you dont battle him now he will run");
+		int response = JOptionPane.showConfirmDialog(null, "Would you like to battle the trainer? He has an extremeyly rare pokemon. "
+				+ "Beware he is spooked easily; if you dont battle him now he will run!");
 		if(response == JOptionPane.YES_OPTION) {
 			game.launchBattle(2);
 			

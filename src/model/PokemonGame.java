@@ -142,7 +142,7 @@ public class PokemonGame extends Observable implements Serializable {
 
 	}
 	
-	private void movingIntoTree(int xPos, int yPos) {
+	public void movingIntoTree(int xPos, int yPos) {
 		int result = JOptionPane.showConfirmDialog(
 				null, "You have run into a tree would you like to try and chop it?");
 		if(result == JOptionPane.YES_OPTION) {
@@ -151,7 +151,7 @@ public class PokemonGame extends Observable implements Serializable {
 		
 	}
 	
-	private void chopTree(int xPos, int yPos) {
+	public void chopTree(int xPos, int yPos) {
 		if(trainer.getBackpack().getCountOfItems("Axe") > 0) {
 			map.map[xPos][yPos] = new GrassTile(null);
 			JOptionPane.showMessageDialog(null, "You chopped the tree!!");

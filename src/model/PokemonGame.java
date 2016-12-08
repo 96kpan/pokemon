@@ -23,7 +23,7 @@ public class PokemonGame extends Observable implements Serializable {
 	public int winCondition;
 	public int whichMap;
 	public boolean shouldLaunchBattle;
-	private static final int TOTAL_MOVES = 500;
+	private static final int TOTAL_MOVES = 20;
 	private int movesLeft;
 	private String itemadded;
 	public int battleType;
@@ -200,7 +200,7 @@ public class PokemonGame extends Observable implements Serializable {
 	public boolean isGameOver(){
 		
 		
-			this.map.map[9][1] = new EmptyTile(null);
+			//this.map.map[9][1] = new EmptyTile(null);
 	
 			
 		//Win Condition 1: Finite steps condition -> WORKS

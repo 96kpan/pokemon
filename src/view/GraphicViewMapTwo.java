@@ -50,6 +50,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	
 	JButton statsButton;
 	JButton pokemonCaught;
+	JButton forfeit;
 
 	private BufferedImage terrain_sheet;
 	private final int size = 32;
@@ -130,6 +131,14 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		pokemonCaught.setVisible(true);
 		pokemonCaught.setFocusable(false);
 		this.add(pokemonCaught);
+		
+		forfeit = new JButton("Forfeit");
+		forfeit.setLocation(750, 400);
+		forfeit.setSize(190, 25);
+		ForfeitListener forfeitListener = new ForfeitListener();
+		forfeit.addActionListener(forfeitListener);
+		forfeit.setVisible(true);
+		this.add(forfeit);
 		
 
 
@@ -269,6 +278,16 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(null,theGame.trainer.getPokemons().toString());
 			pokemonCaught.setFocusable(false);
+			
+		}
+	}
+	
+	private class ForfeitListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(null,"Thanks for playing!");
+			pokemonCaught.setFocusable(false);
+			System.exit(0);
 			
 		}
 	}

@@ -284,7 +284,7 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	private class ForfeitListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(null,"Thanks for playing!");
+			theGame.gameOverMessage();
 			pokemonCaught.setFocusable(false);
 			System.exit(0);
 			

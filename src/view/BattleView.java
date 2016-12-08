@@ -311,22 +311,17 @@ public class BattleView extends JPanel {
 			} else if (buttonClicked.getText().equals("POKEBALL")) {
 				th.add(new Throwables(ball.getScaledInstance(128, 128, Image.SCALE_SMOOTH)));
 				((TrainerBattle) theBattle).throwPokeball();
-
+				
 				if (!theBattle.battleOver()) {
 					JOptionPane.showMessageDialog(null, "Thrwowing pokeball...... not this time!");
 				}
+				if(theGame.trainer.getBackpack().getNumOfPokeballs() <= 0 && theGame.winCondition == 1) {
+					theGame.gameOverMessage();
+					System.exit(0);
+				}
 
-				// } else if(buttonClicked.getText().equals("STRENGTHEN")){
 
-			} // else if(buttonClicked.getText().equals("STRENGTHEN")){
-
-			// ((PokemonBattle) theBattle).strengthen();
-			// if(!theBattle.battleOver()){
-			// JOptionPane.showMessageDialog(null, "Strengthen was not effective
-			// enough");
-			// }
-
-			// }
+			} 
 
 			update();
 		}

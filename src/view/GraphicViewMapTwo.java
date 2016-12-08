@@ -210,9 +210,8 @@ public class GraphicViewMapTwo extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		this.messageText.setText(theGame.toStringNoOfSteps());
-		if(this.theGame.isGameOver()){
-			JOptionPane.showMessageDialog(null, "You won through WIN CONDITION " + (this.theGame.winCondition+1));
-			return;
+		if(theGame.isGameOver()) {
+			System.exit(0);
 		}
 		if(theGame.trainer.getLocation().equals(new Point(15, 3))){
 			theGame.toggleMap();

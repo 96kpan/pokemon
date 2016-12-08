@@ -23,7 +23,7 @@ public class PokemonGame extends Observable implements Serializable {
 	public int winCondition;
 	public int whichMap;
 	public boolean shouldLaunchBattle;
-	private static final int TOTAL_MOVES = 20;
+	private static final int TOTAL_MOVES = 500;
 	private int movesLeft;
 	private String itemadded;
 	public int battleType;
@@ -200,35 +200,41 @@ public class PokemonGame extends Observable implements Serializable {
 	public boolean isGameOver(){
 		
 		
-			//this.map.map[9][1] = new EmptyTile(null);
+			
 	
 			
 		//Win Condition 1: Finite steps condition -> WORKS
 		if(this.winCondition == 0){
 			if(movesLeft <= 0){
-				return true;
+				JOptionPane.showMessageDialog(null, "You've reached the maximum number of steps");
+				gameOverMessage();
+				System.exit(0);
+				
+				
 			}
-		}
-		
-		//Win Condition 2: Finite balls condition
-		else if(this.winCondition == 1){
-			System.out.println("HOW MANY BALLS ARE THERE " + this.trainer.getBackpack().getNumOfPokeballs() );
-			System.out.println("HOW MANY BALLS ARE THERE " + (this.trainer.getBackpack().getNumOfPokeballs() == 0) );
-			if(this.trainer.getBackpack().getNumOfPokeballs() == 0)
-				return true;
 		}
 		
 		//Win Condition 3: Finite number of pokemons condition -> works
 		//hits 5 pokemons, game is over
 		else if(this.winCondition == 2){
-			if(this.trainer.getPokemons().size() == 5){
+			if(this.trainer.getPokemons().size() >= 5){
+				gameOverMessage();
 				return true;
+				
+				
 			}
 
 		}
 
 		return false;
 
+	}
+	
+	public void gameOverMessage() {
+		JOptionPane.showMessageDialog(null, "Thanks for playing here are your stats: \n +"
+				+ "Pokemon Caught: " + trainer.getPokemons().toString() + "\n + Item counts: +"
+						+ trainer.getBackpack().toString());
+		
 	}
 
 

@@ -98,7 +98,6 @@ public class PokemonGame extends Observable implements Serializable {
 				map.getTile(currX + 1, currY).setHasTrainer(true);
 				trainer.setLocation(new Point(currX + 1, currY));
 				movesLeft--;
-				GraphicViewMapTwo.move(Direction.South);
 			}
 			break;
 		case North:

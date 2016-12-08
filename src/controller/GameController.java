@@ -53,14 +53,12 @@ public class GameController extends JFrame implements Observer {
 
 	private MapTwo secondMap;
 
-
 	private PokemonMap currentMap;
 	private PokemonTextView textView;
 	private BattleView battleView;
 	private GraphicViewMapTwo graphicViewMapTwo;
 	AudioFilePlayer player;
 	Battle battle;
-	
 
 	public GameController() {
 		player = new AudioFilePlayer("./songfiles/Walking.mp3");
@@ -75,52 +73,48 @@ public class GameController extends JFrame implements Observer {
 		setUpLayeredFrame();
 		theGame.addObserver(this);
 		graphicViewMapTwo = new GraphicViewMapTwo(theGame);
-		layeredPane.add(graphicViewMapTwo,0);
+		layeredPane.add(graphicViewMapTwo, 0);
 		graphicViewMapTwo.setVisible(true);
 		theGame.addObserver(graphicViewMapTwo);
 		player.start();
 	}
 
-	
+	// firstMap = new MapOne();
+	// currentMap = firstMap;
+	// theGame = new PokemonGame();
+	// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	// this.setSize(1000, 1000);
+	// this.setLocation(0, 0);
+	// this.setTitle("Pokemon Safari Zone");
+	// textView = new PokemonTextView(theGame);
+	// this.add(textView);
+	// textView.setVisible(true);
+	// theGame.addObserver(textView);
 
-//	firstMap = new MapOne();
-//	currentMap = firstMap;
-//	theGame = new PokemonGame();
-//	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	this.setSize(1000, 1000);
-//	this.setLocation(0, 0);
-//	this.setTitle("Pokemon Safari Zone");
-//	textView = new PokemonTextView(theGame);
-//	this.add(textView);
-//	textView.setVisible(true);
-//	theGame.addObserver(textView);
-	
-	
-//	 firstMap = new MapOne();
-//	 currentMap = firstMap;
-//	 theGame = setUpGame(theGame);
-//	 setUpFrame();
-//	 theGame.addObserver(this);
-//	
-//	 this.setTitle("Pokemon Safari Zone");
-//	 battleView = new BattleView(new Battle());
-//	 this.add(battleView);
-//	 battleView.setVisible(true);
+	// firstMap = new MapOne();
+	// currentMap = firstMap;
+	// theGame = setUpGame(theGame);
+	// setUpFrame();
+	// theGame.addObserver(this);
+	//
+	// this.setTitle("Pokemon Safari Zone");
+	// battleView = new BattleView(new Battle());
+	// this.add(battleView);
+	// battleView.setVisible(true);
 
 	public static void main(String[] args) {
 		GameController gameController = new GameController();
 		gameController.setVisible(true);
-	
 
 	}
-	
+
 	private void setUpLayeredFrame() {
 		this.layeredPane = new JLayeredPane();
-		layeredPane.setLocation(0,0);
+		layeredPane.setLocation(0, 0);
 		layeredPane.setSize(1000, 1000);
 		layeredPane.setVisible(true);
 		this.add(layeredPane);
-		
+
 	}
 
 	private void setUpFrame() {
@@ -142,9 +136,6 @@ public class GameController extends JFrame implements Observer {
 		});
 	}
 
-	
-	
-	
 	private void saveGameState(PokemonGame theGame) {
 		try {
 			FileOutputStream bytesToDisk = new FileOutputStream("Pokemon_Saved_Data");
@@ -174,19 +165,19 @@ public class GameController extends JFrame implements Observer {
 			JRadioButton[] rb = new JRadioButton[2];
 			JPanel p = new JPanel(new GridLayout(2, 1));
 			for (int x = 0; x < 2; x++) {
-				rb[x] = new JRadioButton("Map " + (x+1));
+				rb[x] = new JRadioButton("Map " + (x + 1));
 				bg.add(rb[x]);
 				p.add(rb[x]);
 			}
 			JOptionPane.showMessageDialog(null, p);
-			if(rb[0].isSelected()){
+			if (rb[0].isSelected()) {
 				this.theGame.whichMap = 1;
 				this.theGame = new PokemonGame(new MapOne());
-			}else{
+			} else {
 				this.theGame.whichMap = 2;
 				this.theGame = new PokemonGame(new MapTwo());
 			}
-			
+
 			ButtonGroup bg2 = new ButtonGroup();
 			JRadioButton[] rb2 = new JRadioButton[3];
 			JPanel p2 = new JPanel(new GridLayout(3, 1));
@@ -199,53 +190,43 @@ public class GameController extends JFrame implements Observer {
 			rb2[2] = new JRadioButton("Win Condition 3: Finite number of pokemons condition");
 			bg2.add(rb2[2]);
 			p2.add(rb2[2]);
-			
-			for(int i = 0; i < 3; i++){
-				if(rb2[i].isSelected()){
+
+			for (int i = 0; i < 3; i++) {
+				if (rb2[i].isSelected()) {
 					theGame.winCondition = i;
 				}
 			}
-			
+
 			JOptionPane.showMessageDialog(null, p2);
-		
+
 		} else {
 			System.exit(0);
 		}
 		return theGame;
 
 	}
-	
-	private void showBattle() {
+
+	public void showBattle() {
 		battle = new TrainerBattle(theGame);
 		battleView = new BattleView(battle);
 		layeredPane.add(battleView);
-		layeredPane.setLayer(battleView,1);
+		layeredPane.setLayer(battleView, 1);
 		battleView.setVisible(true);
 		graphicViewMapTwo.setFocusable(false);
-		
-	
-		
-		
+
 	}
-	
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(theGame.shouldLaunchBattle) {
-			
-			showBattle();
-			theGame.shouldLaunchBattle = false;
-			graphicViewMapTwo.setFocusable(true);
-			graphicViewMapTwo.setVisible(true);
+		if (theGame.shouldLaunchBattle) {
+			if (!theGame.getInstance().isMoving()) {
+				showBattle();
+				theGame.shouldLaunchBattle = false;
+				graphicViewMapTwo.setFocusable(true);
+				graphicViewMapTwo.setVisible(true);
+			}
 		}
-		
-		
-		
+
 	}
-	
-	
-	
-	
-	
 
 }

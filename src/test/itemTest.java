@@ -6,8 +6,11 @@ package test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import controller.GameController;
 import model.*;
 import pokemons.*;
+import view.BattleView;
 import item.*;
 
 public class itemTest {
@@ -873,8 +876,13 @@ public class itemTest {
 	@Test
 	public void testwinConditions2() {
 		PokemonGame g = new PokemonGame(new MapOne());
+		BossTile b = new BossTile(null);
+		b.playerIsOnTile(g);
 		Trainer t = new Trainer("Alex please give us an A");
-
+		g.toggleMap();
+		g.toggleMap();
+		for(int x = 0; x < 20; x++)
+			g.moveTrainer(Direction.North);
 	}
 
 	// step count
@@ -885,12 +893,24 @@ public class itemTest {
 		int x = b.numItems();
 		b.useItem(new Pokeball(1));
 		int y = b.numItems();
-
+		Direction.East.valueOf(Direction.East.toString());
+		Direction.North.valueOf(Direction.North.toString());
+		Direction.South.valueOf(Direction.South.toString());
+		Direction.West.valueOf(Direction.West.toString());
+		TrainerBattle tb = new TrainerBattle(new PokemonGame(new MapOne()), new pokemons.Charmander());
+	}
+	
+	@Test
+	public void testBag2() {
+		Bag b = new Bag();
+		b.addItem(new Pokeball(-31));
 	}
 
-	
+	@Test
 	public void testAttack2() {
 		Battle b = new TrainerBattle(new PokemonGame(new MapOne()));
+		BattleView bv = new BattleView(b);
+		b.getMyTrainer();
 		b.attack();
 		b.attack();
 		b.attack();
@@ -900,9 +920,31 @@ public class itemTest {
 		b.attack();
 		b.attack();
 		
-
+		b.getRandomPokemon();
+		for(int x = 0; x < 10000; x++)
+			b.pokemonShouldRun();
+		b.throwBait();
+		b.runAway();
+		b.getMyTrainer();
+		b.getCaughtPokemon();
+		b.battlePokemonToString();
+		b.myTrainerToString();
+		b.getName();
+		b.getHP();
+		b.chosenHP();
+		b.chosenName();
 	}
 	
-	
+	@Test
+	public void testMovement() {
+		PokemonGame pg = new PokemonGame(new MapOne());
+		for(int x = 0; x < 1000; x++) {
+			pg.moveTrainer(Direction.South);
+			pg.moveTrainer(Direction.East);
+			pg.moveTrainer(Direction.North);
+			pg.moveTrainer(Direction.West);
+		}
+		
+	}
 	
 }
